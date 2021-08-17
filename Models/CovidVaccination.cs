@@ -19,16 +19,10 @@ namespace Epicentre.Models
         [StringLength(55,ErrorMessage ="Please enter a value with a maximum of 55 characters")]
         public string VACCINATION_DATE { get; set; }
 
-        [Required(ErrorMessage ="Please enter next date")]
-        [StringLength(55,ErrorMessage ="Please enter a value with a maximum of 55 characters")]
         public string VACCINATION_NEXT_DATE { get; set; }
 
-        [Required(ErrorMessage = "Please enter status")]
-        [StringLength(55, ErrorMessage = "Please enter a value with a maximum of 55 characters")]
         public string VACCINATION_STATUS { get; set; }
-        
-        [Required(ErrorMessage = "Please enter user id date")]
-        [StringLength(55, ErrorMessage = "Please enter a value with a maximum of 55 characters")]
+
         public string USER_ID { get; set; }
 
     }

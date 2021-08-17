@@ -19,17 +19,10 @@ namespace Epicentre.Models
         [StringLength(55, ErrorMessage = "Please enter a value with a maximum of 55 characters")]
         public string TEST_DATE { get; set; }
 
-        [Required(ErrorMessage = "Please input test status")]
-        [StringLength(55, ErrorMessage = "Please enter a value with a maximum of 55 characters")]
-
         public string TEST_STATUS { get; set; }
 
-        [Required(ErrorMessage = "Please input test result")]
-        [StringLength(55, ErrorMessage = "Please enter a value with a maximum of 55 characters")]
         public string TEST_RESULT { get; set; }
 
-        [Required(ErrorMessage = "Please enter user ID")]
-        [StringLength(55, ErrorMessage = "Please enter a value with a maximum of 55 characters")]
         public string USER_ID { get; set; }
         
     }
