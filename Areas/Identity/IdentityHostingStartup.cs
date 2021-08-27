@@ -18,7 +18,7 @@ namespace Epicentre.Areas.Identity
             builder.ConfigureServices((context, services) => {
                 services.AddDbContext<EpicentreAuthenticationContext>(options =>
                     options.UseSqlServer(
-                        context.Configuration.GetConnectionString("EpicentreAuthenticationContextConnection")));
+                        context.Configuration.GetConnectionString("EpicentreConnection")));
 
                 services.AddDefaultIdentity<EpicentreUser>(options => options.SignIn.RequireConfirmedAccount = true)
                     .AddEntityFrameworkStores<EpicentreAuthenticationContext>();

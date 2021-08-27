@@ -30,8 +30,6 @@ namespace Epicentre
 
             services.AddDbContext<EpicentreDataContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("EpicentreConnection")));
-            services.AddDbContext<EpicentreAuthenticationContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("EpicentreAuthenticationConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

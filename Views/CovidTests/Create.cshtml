@@ -9,77 +9,172 @@
 
     <div class="card">
         <div class="card-header card-header-primary">
-            <h4 class="card-title">Register for a COVID-19 Test</h4>
+            <h4 class="card-title">Register for a COVID-19 Test (TEST DATA)</h4>
             <p class="card-category">Please fill out the details below, and register for a COVID-19 Test</p>
         </div>
-        <div class="card-body">
-            <form asp-action="Create">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div style="padding-top: 2%;" class="card-body">
+            <form>
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group">
                             @* Get value from user table *@
                             <label class="bmd-label-floating">Fist Name</label>
-                            <input type="text" class="form-control" disabled>
+                            <input value="John" type="text" class="form-control" disabled>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group">
+                            @* Get value from user table *@
                             <label class="bmd-label-floating">Last Name</label>
-                            <input type="text" class="form-control" disabled>
+                            <input value="Doe" type="text" class="form-control" disabled>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            @* Get value from user table *@
+                            <label class="bmd-label-floating">RSA Identification Number</label>
+                            <input value="0123456789" type="text" class="form-control" disabled>
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div style="padding-top: 1%;" class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            @* Get value from user table *@
+                            <label class="bmd-label-floating">Contact Number</label>
+                            <input value="0123456789" type="text" class="form-control" disabled>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            @* Get value from user table *@
+                            <label class="bmd-label-floating">Email Address</label>
+                            <input value="johndoe@gmail.com" type="text" class="form-control" disabled>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            @* Get value from user table - use if statement to display correct gender *@
+                            @if (1 == 1)
+                            {
+                                <div style="padding-left: 20%;" class="form-check form-check-radio form-check-inline disabled">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="radio" id="inlineRadio1" value="Male" checked> Male
+                                        <span class="circle">
+                                            <span class="check"></span>
+                                        </span>
+                                    </label>
+                                </div>
+                                <div style="padding-left: 10%;" class="form-check form-check-radio form-check-inline disabled">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="radio" id="inlineRadio2" value="Female" disabled> Female
+                                        <span class="circle">
+                                            <span class="check"></span>
+                                        </span>
+                                    </label>
+                                </div>
+                            }
+                            else
+                            {
+                                <div style="padding-left: 20%;" class="form-check form-check-radio form-check-inline disabled">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="radio" id="inlineRadio1" value="Male" disabled> Male
+                                        <span class="circle">
+                                            <span class="check"></span>
+                                        </span>
+                                    </label>
+                                </div>
+                                <div style="padding-left: 10%;" class="form-check form-check-radio form-check-inline disabled">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="radio" id="inlineRadio2" value="Female" checked> Female
+                                        <span class="circle">
+                                            <span class="check"></span>
+                                        </span>
+                                    </label>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div style="padding-top: 1%;" class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="bmd-label-floating">Medical Aid</label>
+                            <input value="My Medical Aid" type="text" class="form-control" disabled>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="bmd-label-floating">Membership Number</label>
+                            <input value="123456789" type="text" class="form-control" disabled>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="bmd-label-floating">Authorization Number</label>
+                            <input value="1234" type="text" class="form-control" disabled>
+                        </div>
+                    </div>
+                </div>
+                <div style="padding-top: 1%; text-align: center;" class="row">
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label class="bmd-label-floating">Adress</label>
-                            <input type="text" class="form-control">
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label class="bmd-label-floating">City</label>
-                            <input type="text" class="form-control">
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label class="bmd-label-floating">Country</label>
-                            <input type="text" class="form-control">
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Action
+                            <div class="form-check form-check-radio form-check-inline">
+                                <label class="form-check-label">
+                                    <input onclick="testTypeClicked()" class="form-check-input" type="radio" name="inlineRadioOptions" id="pcr-swab-test" value="Male"> PCR Swab Test
+                                    <span class="circle">
+                                        <span class="check"></span>
+                                    </span>
+                                </label>
+                            </div>
+                            <div style="padding-left: 10%;" class="form-check form-check-radio form-check-inline">
+                                <label class="form-check-label">
+                                    <input onclick="testTypeClicked()" class="form-check-input" type="radio" name="inlineRadioOptions" id="rapid-antigen-test" value="Female"> Rapid Antigen Test
+                                    <span class="circle">
+                                        <span class="check"></span>
+                                    </span>
+                                </label>
+                            </div>
+                            <div style="padding-left: 10%;" class="form-check form-check-radio form-check-inline">
+                                <label class="form-check-label">
+                                    <input onclick="testTypeClicked()" class="form-check-input" type="radio" name="inlineRadioOptions" id="antibody-test" value="Female"> Antibody Test
+                                    <span class="circle">
+                                        <span class="check"></span>
+                                    </span>
+                                </label>
+                            </div>
+                            <br />
+                        <span id="test-type-validation" style="color: red; font-weight: bold; visibility: hidden;" class="text-danger">Please select a test type</span>
+                            <!--<div style="margin-left: 10%;" class="btn-group">
+                                <button id="button-value" style="background-color: red;" type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Testing Site
                                 </button>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <a class="dropdown-item" href="#">Something else here</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">Separated link</a>
-                                </div>
-                            </div>
+                                    <a onclick="clicked('Stellenbosch, Cape Town')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">Stellenbosch, Cape Town</a>
+                                    <a onclick="clicked('Bellville, Cape Town')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">Bellville, Cape Town</a>
+                                    <a onclick="clicked('Rondebosch, Cape Town')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">Rondebosch, Cape Town</a>-->
+                                    @*<a class="dropdown-item" href="#">Hillcrest, KwaZulu-Natal</a>
+                                    <a class="dropdown-item" href="#">Pitermaritzburg, KwaZulu-Natal</a>
+                                    <a class="dropdown-item" href="#">Durban Central, KwaZulu-Natal</a>
+                                    <a class="dropdown-item" href="#">Randburg, Gauteng</a>
+                                    <a class="dropdown-item" href="#">Midrand, Gauteng</a>*@
+                                <!--</div>
+                            </div>-->
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div style="padding-top: 1%;" class="row">
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label>About Me</label>
+                            <label>Additional Information</label>
                             <div class="form-group">
-                                <label class="bmd-label-floating"> Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.</label>
+                                <label class="bmd-label-floating">Any additional information, such as medication, medical history, anything concerning that we need to know about</label>
                                 <textarea class="form-control" rows="5"></textarea>
                             </div>
                         </div>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary pull-right">Update Profile</button>
+                <button onclick="checkForm()" type="button" style="background-color: red;" class="btn btn-primary">Next</button>
                 <div class="clearfix"></div>
             </form>
         </div>
@@ -94,7 +189,7 @@
                 <div class="form-group">
                     <label asp-for="TEST_TYPE" class="control-label"></label>
                     <input class="form-control" />
-                    <span asp-validation-for="TEST_TYPE" class="text-danger"></span>
+                    
                 </div>
                 <div class="form-group">
                     <label asp-for="TEST_DATE" class="control-label"></label>
@@ -124,6 +219,43 @@
     </div>
 
 </div>
+
+<script type="text/javascript">
+
+    if (!document.getElementById('pcr-swab-test').checked) {
+        //alert('Checked');
+    } else if (document.getElementById('inlineRadio2').checked) {
+        //Female radio button is checked
+    }
+
+    function testTypeClicked() {
+        
+    }
+
+    function nextClicked() {
+        //alert('Next clicked');
+        //window.location.href = '@Url.Action("EditProject", "Project")';
+    }
+
+    function checkForm() {
+
+        if (!document.getElementById('pcr-swab-test').checked && !document.getElementById('rapid-antigen-test').checked && !document.getElementById('antibody-test').checked) {
+            document.getElementById('test-type-validation').style.visibility = "visible";
+        }
+    }
+
+    // all good
+    function clicked(text) {
+        var display = document.getElementById('button-value');
+        if (text == 'Stellenbosch, Cape Town') {
+            display.innerText = text;
+        } else if (text == 'Bellville, Cape Town') {
+            display.innerText = text;
+        } else if (text == 'Rondebosch, Cape Town') {
+            display.innerText = text;
+        }
+    }
+</script>
 
     @section Scripts {
         @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

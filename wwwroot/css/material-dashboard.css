@@ -3705,7 +3705,7 @@ tbody.collapse.show {
   padding: 0.625rem 1.25rem;
   clear: both;
   font-weight: 400;
-  color: #212529;
+  color: black;
   text-align: inherit;
   white-space: nowrap;
   background-color: transparent;
@@ -3714,16 +3714,16 @@ tbody.collapse.show {
 
 .dropdown-item:hover,
 .dropdown-item:focus {
-  color: #16181b;
+  color: black;
   text-decoration: none;
-  background-color: #f8f9fa;
+  background-color: red;
 }
 
 .dropdown-item.active,
 .dropdown-item:active {
-  color: #ffffff;
+  color: black;
   text-decoration: none;
-  background-color: #2196f3;
+  background-color: red;
 }
 
 .dropdown-item.disabled,
@@ -13723,7 +13723,7 @@ fieldset[disabled] .form-group .form-control {
 .navbar .dropdown-item:hover,
 .navbar .dropdown-item:focus {
   box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(255, 255, 255, 0.4);
-  background-color: #fff;
+  background-color: red;
   color: #555;
 }
 
@@ -14789,7 +14789,7 @@ h2.title {
   display: flex;
   flex-flow: nowrap;
   align-items: center;
-  color: #333;
+  color: black;
   font-weight: normal;
   text-decoration: none;
   font-size: .8125rem;
@@ -14823,8 +14823,8 @@ h2.title {
 .dropdown-menu a:focus,
 .dropdown-menu a:active {
   box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(156, 39, 176, 0.4);
-  background-color: #9c27b0;
-  color: #FFFFFF;
+  background-color: red;
+  color: white;
 }
 
 a[data-toggle="collapse"][aria-expanded="true"] .caret,
@@ -15284,7 +15284,7 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
 .sidebar .nav li .dropdown-menu a:focus,
 .sidebar .nav li.active>[data-toggle="collapse"] {
   background-color: rgba(200, 200, 200, 0.2);
-  color: #3C4858;
+  color: white;
   box-shadow: none;
 }
 
