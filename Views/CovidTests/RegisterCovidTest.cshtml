@@ -1,6 +1,4 @@
-﻿@model Epicentre.Models.CovidTest
-
-@{
+﻿@{
     ViewData["Title"] = "Create";
 }
 
@@ -144,26 +142,34 @@
                                 </label>
                             </div>
                             <br />
-                        <span id="test-type-validation" style="color: red; font-weight: bold; visibility: hidden;" class="text-danger">Please select a test type</span>
-                            <!--<div style="margin-left: 10%;" class="btn-group">
+                            <span id="test-type-validation" style="color: red; font-weight: bold; visibility: hidden;" class="text-danger">Please select a test type</span>
+                        </div>
+                    </div>
+                </div>
+                <div id="dropdown" style="margin-top: -2.5%; text-align: center;" class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <div class="btn-group">
                                 <button id="button-value" style="background-color: red;" type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Testing Site
                                 </button>
                                 <div class="dropdown-menu">
-                                    <a onclick="clicked('Stellenbosch, Cape Town')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">Stellenbosch, Cape Town</a>
-                                    <a onclick="clicked('Bellville, Cape Town')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">Bellville, Cape Town</a>
-                                    <a onclick="clicked('Rondebosch, Cape Town')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">Rondebosch, Cape Town</a>-->
-                                    @*<a class="dropdown-item" href="#">Hillcrest, KwaZulu-Natal</a>
-                                    <a class="dropdown-item" href="#">Pitermaritzburg, KwaZulu-Natal</a>
-                                    <a class="dropdown-item" href="#">Durban Central, KwaZulu-Natal</a>
-                                    <a class="dropdown-item" href="#">Randburg, Gauteng</a>
-                                    <a class="dropdown-item" href="#">Midrand, Gauteng</a>*@
-                                <!--</div>
-                            </div>-->
+                                    <a onclick="clickedLocation('Stellenbosch, Western Cape')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">Stellenbosch, Western Cape</a>
+                                    <a onclick="clickedLocation('Bellville, Western Cape')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">Bellville, Western Cape</a>
+                                    <a onclick="clickedLocation('Rondebosch, Western Cape')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">Rondebosch, Western Cape</a>
+                                    <a onclick="clickedLocation('Hillcrest, KwaZulu-Natal')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">Hillcrest, KwaZulu-Natal</a>
+                                    <a onclick="clickedLocation('Pitermaritzburg, KwaZulu-Natal')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">Pitermaritzburg, KwaZulu-Natal</a>
+                                    <a onclick="clickedLocation('Durban Central, KwaZulu-Natal')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">Durban Central, KwaZulu-Natal</a>
+                                    <a onclick="clickedLocation('Randburg, Gauteng')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">Randburg, Gauteng</a>
+                                    <a onclick="clickedLocation('Midrand, Gauteng')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">Midrand, Gauteng</a>
+                                </div>
+                            </div>
+                            <br />
+                            <span id="test-site-validation" style="color: red; font-weight: bold; visibility: hidden;" class="text-danger">Please select a testing site</span>
                         </div>
                     </div>
                 </div>
-                <div style="padding-top: 1%;" class="row">
+                <div id="additional-info" style="margin-top: -2%;" class="row">
                     <div class="col-md-12">
                         <div class="form-group">
                             <label>Additional Information</label>
@@ -179,82 +185,56 @@
             </form>
         </div>
     </div>
-
-
-
-    <div class="row">
-        <div class="col-md-4">
-            <form asp-action="Create">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="TEST_TYPE" class="control-label"></label>
-                    <input class="form-control" />
-                    
-                </div>
-                <div class="form-group">
-                    <label asp-for="TEST_DATE" class="control-label"></label>
-                    <input asp-for="TEST_DATE" class="form-control" />
-                    <span asp-validation-for="TEST_DATE" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="TEST_STATUS" class="control-label"></label>
-                    <input asp-for="TEST_STATUS" class="form-control" />
-                    <span asp-validation-for="TEST_STATUS" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="TEST_RESULT" class="control-label"></label>
-                    <input asp-for="TEST_RESULT" class="form-control" />
-                    <span asp-validation-for="TEST_RESULT" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="USER_ID" class="control-label"></label>
-                    <input asp-for="USER_ID" class="form-control" />
-                    <span asp-validation-for="USER_ID" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-primary" />
-                </div>
-            </form>
-        </div>
-    </div>
-
 </div>
 
 <script type="text/javascript">
 
-    if (!document.getElementById('pcr-swab-test').checked) {
-        //alert('Checked');
-    } else if (document.getElementById('inlineRadio2').checked) {
-        //Female radio button is checked
-    }
+    var testingSiteChosen = false;
+    var testingLocation = null;
 
     function testTypeClicked() {
-        
+        if (document.getElementById('test-type-validation').style.visibility == "visible") {
+            document.getElementById('test-type-validation').style.visibility = "hidden";
+            document.getElementById('dropdown').style.marginTop = "-2.5%";
+        }
     }
 
-    function nextClicked() {
-        //alert('Next clicked');
-        //window.location.href = '@Url.Action("EditProject", "Project")';
+    function clickedLocation(location) {
+        var display = document.getElementById('button-value');
+        display.innerText = location;
+        testingSiteChosen = true;
+        document.getElementById('test-site-validation').style.visibility = "hidden";
+        document.getElementById('additional-info').style.marginTop = "-2%";
+        testingLocation = location;
     }
 
     function checkForm() {
-
         if (!document.getElementById('pcr-swab-test').checked && !document.getElementById('rapid-antigen-test').checked && !document.getElementById('antibody-test').checked) {
             document.getElementById('test-type-validation').style.visibility = "visible";
+            document.getElementById('dropdown').style.marginTop = "-1%";
+        } if (!testingSiteChosen) {
+            document.getElementById('test-site-validation').style.visibility = "visible";
+            document.getElementById('additional-info').style.marginTop = "0%";
+        } else {
+            var testTypeUrl = null;
+            var testLocationUrl = null;
+
+            if (document.getElementById('pcr-swab-test').checked) {
+                testTypeUrl = 'dZr9RcABjq';
+            } if (document.getElementById('rapid-antigen-test').checked) {
+                testTypeUrl = 'SkwFaATkYv';
+            } if (document.getElementById('antibody-test').checked) {
+                testTypeUrl = 'hcYPmydyWZ';
+            } if (testingLocation == 'Hillcrest, KwaZulu-Natal') {
+                testLocationUrl = 'Hillcrest';
+            } if (testingLocation == 'Durban Central, KwaZulu-Natal') {
+                testLocationUrl = 'Durban Central';
+            }
+            window.location.href = '@Url.Action("TimeBooking", "CovidTests")' + '?testType=' + testTypeUrl + '&testLocation=' + testLocationUrl;
         }
     }
 
-    // all good
-    function clicked(text) {
-        var display = document.getElementById('button-value');
-        if (text == 'Stellenbosch, Cape Town') {
-            display.innerText = text;
-        } else if (text == 'Bellville, Cape Town') {
-            display.innerText = text;
-        } else if (text == 'Rondebosch, Cape Town') {
-            display.innerText = text;
-        }
-    }
+
 </script>
 
     @section Scripts {

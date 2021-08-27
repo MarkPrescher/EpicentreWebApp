@@ -15283,7 +15283,7 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
 .sidebar .nav li .dropdown-menu a:hover,
 .sidebar .nav li .dropdown-menu a:focus,
 .sidebar .nav li.active>[data-toggle="collapse"] {
-  background-color: rgba(200, 200, 200, 0.2);
+  background-color: red;
   color: white;
   box-shadow: none;
 }
@@ -19631,7 +19631,7 @@ Copyright (c) 2015 Daniel Eden
   [class*="navbar-"] .navbar-nav .open .dropdown-menu>li>a:hover,
   [class*="navbar-"] .navbar-nav .open .dropdown-menu>li>a:focus,
   [class*="navbar-"] .navbar-nav .navbar-nav .open .dropdown-menu>li>a:active {
-    color: white;
+    color: red;
   }
 
   [class*="navbar-"] .navbar-nav>li>a,

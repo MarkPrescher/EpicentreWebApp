@@ -19,13 +19,11 @@ namespace Epicentre.Controllers
             _context = context;
         }
 
-        // GET: CovidTests
         public async Task<IActionResult> Index()
         {
             return View(await _context.CovidTest.ToListAsync());
         }
 
-        // GET: CovidTests/Details/5
         public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null)
@@ -43,15 +41,13 @@ namespace Epicentre.Controllers
             return View(covidTest);
         }
 
-        // GET: CovidTests/Create
+        // !!! *** OBSOLETE *** !!!
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: CovidTests/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // !!! *** OBSOLETE *** !!!
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("TEST_ID,TEST_TYPE,TEST_DATE,TEST_STATUS,TEST_RESULT,USER_ID")] CovidTest covidTest)
@@ -66,7 +62,6 @@ namespace Epicentre.Controllers
             return View(covidTest);
         }
 
-        // GET: CovidTests/Edit/5
         public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null)
@@ -82,9 +77,6 @@ namespace Epicentre.Controllers
             return View(covidTest);
         }
 
-        // POST: CovidTests/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id, [Bind("TEST_ID,TEST_TYPE,TEST_DATE,TEST_STATUS,TEST_RESULT,USER_ID")] CovidTest covidTest)
@@ -117,7 +109,6 @@ namespace Epicentre.Controllers
             return View(covidTest);
         }
 
-        // GET: CovidTests/Delete/5
         public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null)
@@ -135,7 +126,6 @@ namespace Epicentre.Controllers
             return View(covidTest);
         }
 
-        // POST: CovidTests/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
@@ -149,6 +139,69 @@ namespace Epicentre.Controllers
         private bool CovidTestExists(Guid id)
         {
             return _context.CovidTest.Any(e => e.TEST_ID == id);
+        }
+
+        // The original "Create" method - not inserting into database though - only inserts in the Book() method.
+        public IActionResult RegisterCovidTest()
+        {
+            return View();
+        }
+
+        // Query a table regarding time slots and availability???
+        public IActionResult TimeBooking(string testType, string testLocation)
+        {
+            ViewBag.CovidTestType = "";
+            ViewBag.TestingLocation = "";
+
+            if (testType == null || testLocation == null)
+            {
+                return NotFound();
+            }
+            if (testType.Equals("dZr9RcABjq"))
+            {
+                ViewBag.CovidTestType = "PCR Swab Test";
+            }
+            if (testType.Equals("SkwFaATkYv"))
+            {
+                ViewBag.CovidTestType = "Rapid Antigen Test";
+            }
+            if (testType.Equals("hcYPmydyWZ"))
+            {
+                ViewBag.CovidTestType = "Antibody Test";
+            }
+            if (testLocation.Equals("Hillcrest"))
+            {
+                ViewBag.TestingLocation = "Hillcrest, KwaZulu-Natal";
+            }
+            if (testLocation.Equals("Durban Central"))
+            {
+                ViewBag.TestingLocation = "Durban Central, KwaZulu-Natal";
+            }
+            return View();
+        }
+
+        // Displaying all the final details. Insertion to the database does NOT happen here, this action method will call the Book() method which will run the code to insert into database
+        public IActionResult ConfirmBooking()
+        {
+            return View();
+        }
+
+        // This is NOT a method that is related to a view! A normal method
+        [HttpPost]
+        public void Book()
+        {
+            // Logic to insert into database using EF (Entity Framework) Core, such as _context.Add(covidTest); await _context.SaveChangesAsync(); etc.
+            // Depending on the results (if statement to check successful insertion), it will return to a view (action method) that will either display a success message or a failure message
+        }
+
+        public IActionResult SuccessfulBooking()
+        {
+            return View(); // Not created
+        }
+
+        public IActionResult FailedBooking()
+        {
+            return View(); // Not created
         }
     }
 }
