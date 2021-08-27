@@ -24,8 +24,6 @@ The above copyright notice and this permission notice shall be included in all c
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
     <!-- CSS Files -->
     <link href="~/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
-    <!-- CSS Just for demo purpose, don't include it in your project -->
-    <link href="~/demo/demo.css" rel="stylesheet" />
 </head>
 
 <body class="">
@@ -41,14 +39,14 @@ The above copyright notice and this permission notice shall be included in all c
             </div>
             <div class="sidebar-wrapper">
                 <ul class="nav">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Home" asp-action="Index">
                             <i class="material-icons">dashboard</i>
                             <p>Home</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" asp-controller="CovidTests" asp-action="Index">
                             <i class="material-icons">coronavirus</i>
                             <p>Tests</p>
                         </a>
@@ -202,8 +200,7 @@ The above copyright notice and this permission notice shall be included in all c
     <script src="~/js/plugins/bootstrap-notify.js"></script>
     <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="~/js/material-dashboard.js?v=2.1.2" type="text/javascript"></script>
-    <!-- Material Dashboard DEMO methods, don't include it in your project! -->
-    <script src="~/demo/demo.js"></script>
+    @RenderSection("scripts", required: false)
     <script>
         $(document).ready(function () {
             $().ready(function () {
@@ -373,11 +370,6 @@ The above copyright notice and this permission notice shall be included in all c
 
                 });
             });
-        });
-    </script>
-    <script>
-        $(document).ready(function () {
-            md.initDashboardPageCharts();
         });
     </script>
 </body>
