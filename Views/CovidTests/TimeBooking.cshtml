@@ -19,23 +19,6 @@
                 <div style="padding-top: 1%; text-align: center;" class="row">
                     <div class="col-md-12">
                         <label>Date and time slots need to be here</label>
-                        <div class="form-group">
-                            <div style="margin-left: 10%;" class="btn-group">
-                                <button id="button-value" style="background-color: red;" type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Testing Site
-                                </button>
-                                <div class="dropdown-menu">
-                                    <a onclick="clickedLocation('Stellenbosch, Western Cape')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">Stellenbosch, Western Cape</a>
-                                    <a onclick="clickedLocation('Bellville, Western Cape')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">Bellville, Western Cape</a>
-                                    <a onclick="clickedLocation('Rondebosch, Western Cape')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">Rondebosch, Western Cape</a>
-                                    <a onclick="clickedLocation('Hillcrest, KwaZulu-Natal')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">Hillcrest, KwaZulu-Natal</a>
-                                    <a onclick="clickedLocation('Pitermaritzburg, KwaZulu-Natal')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">Pitermaritzburg, KwaZulu-Natal</a>
-                                    <a onclick="clickedLocation('Durban Central, KwaZulu-Natal')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">Durban Central, KwaZulu-Natal</a>
-                                    <a onclick="clickedLocation('Randburg, Gauteng')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">Randburg, Gauteng</a>
-                                    <a onclick="clickedLocation('Midrand, Gauteng')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">Midrand, Gauteng</a>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <button onclick="checkForm()" type="button" style="background-color: red;" class="btn btn-primary">Select Date and Time</button>
@@ -46,6 +29,10 @@
 </div>
 
 <script type="text/javascript">
+
+    function checkForm() {
+        window.location.href = '@Url.Action("ConfirmBooking", "CovidTests")';
+    }
 
 </script>
 

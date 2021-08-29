@@ -14,6 +14,8 @@ namespace Epicentre.Controllers
     {
         private readonly EpicentreDataContext _context;
 
+        CovidTest covidTest = null;
+
         public CovidTestsController(EpicentreDataContext context)
         {
             _context = context;
@@ -144,6 +146,7 @@ namespace Epicentre.Controllers
         // The original "Create" method - not inserting into database though - only inserts in the Book() method.
         public IActionResult RegisterCovidTest()
         {
+            covidTest = new CovidTest();
             return View();
         }
 
@@ -177,12 +180,15 @@ namespace Epicentre.Controllers
             {
                 ViewBag.TestingLocation = "Durban Central, KwaZulu-Natal";
             }
+            covidTest.TEST_TYPE = ViewBag.CovidTestType;
+            covidTest.TEST_LOCATION = ViewBag.TestingLocation;
             return View();
         }
 
         // Displaying all the final details. Insertion to the database does NOT happen here, this action method will call the Book() method which will run the code to insert into database
         public IActionResult ConfirmBooking()
         {
+            ViewBag.CovidTestType = covidTest.TEST_TYPE;
             return View();
         }
 
