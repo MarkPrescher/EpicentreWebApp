@@ -14,7 +14,7 @@ namespace Epicentre.Controllers
     {
         private readonly EpicentreDataContext _context;
 
-        CovidTest covidTest = null;
+        CovidTest covidTest = new CovidTest();
 
         public CovidTestsController(EpicentreDataContext context)
         {
@@ -146,7 +146,6 @@ namespace Epicentre.Controllers
         // The original "Create" method - not inserting into database though - only inserts in the Book() method.
         public IActionResult RegisterCovidTest()
         {
-            covidTest = new CovidTest();
             return View();
         }
 
@@ -180,8 +179,8 @@ namespace Epicentre.Controllers
             {
                 ViewBag.TestingLocation = "Durban Central, KwaZulu-Natal";
             }
-            covidTest.TEST_TYPE = ViewBag.CovidTestType;
-            covidTest.TEST_LOCATION = ViewBag.TestingLocation;
+            covidTest.TEST_TYPE = ViewBag.CovidTestType; // populating the model here?
+            covidTest.TEST_LOCATION = ViewBag.TestingLocation; // populating the model here?
             return View();
         }
 
@@ -198,6 +197,7 @@ namespace Epicentre.Controllers
         {
             // Logic to insert into database using EF (Entity Framework) Core, such as _context.Add(covidTest); await _context.SaveChangesAsync(); etc.
             // Depending on the results (if statement to check successful insertion), it will return to a view (action method) that will either display a success message or a failure message
+            // Populate the model here? Such that covidTest.TEST_TYPE = "XXX";
         }
 
         public IActionResult SuccessfulBooking()
