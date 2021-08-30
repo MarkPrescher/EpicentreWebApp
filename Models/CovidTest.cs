@@ -19,6 +19,8 @@ namespace Epicentre.Models
         [StringLength(55, ErrorMessage = "Please enter a value with a maximum of 55 characters")]
         public string TEST_DATE { get; set; }
 
+        public string TEST_LOCATION { get; set; }
+
         public string TEST_STATUS { get; set; }
 
         public string TEST_RESULT { get; set; }
