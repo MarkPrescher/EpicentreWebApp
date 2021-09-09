@@ -1,2 +1,110 @@
-﻿<label>Hey</label>
-<label>@ViewBag.CovidTestType</label>
+﻿@{
+    ViewData["Title"] = "Confirm Booking";
+}
+
+<div style="padding-left: 5%; padding-right: 5%; padding-bottom: 3%;" class="content">
+    <h1>Time Booking</h1>
+
+    <div class="card">
+        <div class="card-header card-header-primary">
+            <h4 class="card-title">Time for a COVID-19 Test (TEST DATA)</h4>
+            <p class="card-category">Please choose a time for a COVID-19 Test</p>
+        </div>
+        <div style="padding-top: 2%;" class="card-body">
+            <form>
+                <div id="dropdown" style="margin-top: -0.25%; text-align: center;" class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <h4>Almost done... please select a time for your @ViewBag.CovidTestType booking at @ViewBag.TestingLocation on @ViewBag.TestDate:</h4>
+                        </div>
+                    </div>
+                </div>
+                <div id="dropdown" style="margin-top: -2%; text-align: center;" class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <div class="btn-group">
+                                <button id="button-value" style="background-color: red;" type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Time Slot
+                                </button>
+                                <div class="dropdown-menu">
+                                    @if (ViewBag.TS0800 == "Fully Booked!")
+                                    {
+                                        <a style="cursor: default;" href="javascript:void(0)" class="dropdown-item">08:00 (Fully Booked)</a>
+                                    }
+                                    else
+                                    {
+                                        <a onclick="clickedTimeSlot('08:00')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">08:00</a>
+                                    }
+                                    @if (ViewBag.TS0815 == "Fully Booked!")
+                                    {
+                                        <a style="cursor: default;" href="javascript:void(0)" class="dropdown-item">08:15 (Fully Booked)</a>
+                                    }
+                                    else
+                                    {
+                                        <a onclick="clickedTimeSlot('08:15')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">08:15</a>
+                                    }
+                                    @if (ViewBag.TS0830 == "Fully Booked!")
+                                    {
+                                        <a style="cursor: default;" href="javascript:void(0)" class="dropdown-item">08:30 (Fully Booked)</a>
+                                    }
+                                    else
+                                    {
+                                        <a onclick="clickedTimeSlot('08:30')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">08:30</a>
+                                    }
+                                    @if (ViewBag.TS0845 == "Fully Booked!")
+                                    {
+                                        <a style="cursor: default;" href="javascript:void(0)" class="dropdown-item">08:45 (Fully Booked)</a>
+                                    }
+                                    else
+                                    {
+                                        <a onclick="clickedTimeSlot('08:45')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">08:45</a>
+                                    }
+                                    @if (ViewBag.TS0900 == "Fully Booked!")
+                                    {
+                                        <a style="cursor: default;" href="javascript:void(0)" class="dropdown-item">09:00 (Fully Booked)</a>
+                                    }
+                                    else
+                                    {
+                                        <a onclick="clickedTimeSlot('09:00')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">09:00</a>
+                                    }
+                                </div>
+                            </div>
+                            <br />
+                            <span id="time-slot-validation" style="color: red; font-weight: bold; visibility: hidden;" class="text-danger">Please select a time slot</span>
+                        </div>
+                    </div>
+                </div>
+                <center><button onclick="checkForm()" type="button" style="background-color: red;" class="btn btn-primary">Select Time</button></center>
+                <div class="clearfix"></div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    var testTimeSlot = null;
+    var timeSlotChosen = false;
+
+    function clickedTimeSlot(timeSlot) {
+        var display = document.getElementById('button-value');
+        display.innerText = timeSlot;
+        timeSlotChosen = true;
+        document.getElementById('time-slot-validation').style.visibility = "hidden";
+        testTimeSlot = timeSlot;
+    }
+
+    function checkForm() {
+
+        if (timeSlotChosen) {
+            window.location.href = '@Url.Action("ConfirmBooking", "CovidTests")';
+        } else {
+            document.getElementById('time-slot-validation').style.visibility = "visible";
+        }
+    }
+
+</script>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
