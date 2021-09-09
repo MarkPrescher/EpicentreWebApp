@@ -169,7 +169,18 @@
                         </div>
                     </div>
                 </div>
-                <div id="additional-info" style="margin-top: -2%;" class="row">
+                <div id="test-date" style="margin-top: -2.5%; text-align: center;" class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="label-control">Test Date</label>
+                            <br />
+                            <input onclick="clickedDate()" type="date" id="booking-date">
+                            <br />
+                            <span id="test-date-validation" style="color: red; font-weight: bold; visibility: hidden;" class="text-danger">Please select a testing date</span>
+                        </div>
+                    </div>
+                </div>
+                <div id="additional-info" class="row">
                     <div class="col-md-12">
                         <div class="form-group">
                             <label>Additional Information</label>
@@ -189,6 +200,8 @@
 
 <script type="text/javascript">
 
+    alert('Please only select Hillcrest for test location (TESTING ONLY)');
+
     var testingSiteChosen = false;
     var testingLocation = null;
 
@@ -204,20 +217,47 @@
         display.innerText = location;
         testingSiteChosen = true;
         document.getElementById('test-site-validation').style.visibility = "hidden";
-        document.getElementById('additional-info').style.marginTop = "-2%";
+        document.getElementById('test-date').style.marginTop = "-2%";
         testingLocation = location;
     }
 
+    function clickedDate() {
+        document.getElementById('test-date-validation').style.visibility = "hidden";
+        document.getElementById('booking').style.marginTop = "-2%";
+    }
+
     function checkForm() {
+
+        var testTypeFlag = true;
+        var testSiteFlag = true;
+        var testDateFlag = true;
+
+        var selectedDate = document.getElementById('booking-date').value;
+        var dateParts = selectedDate.split('-');
+        var bookingDate = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
+        var currentDate = new Date();
+        currentDate.setHours(0,0,0,0);
+
         if (!document.getElementById('pcr-swab-test').checked && !document.getElementById('rapid-antigen-test').checked && !document.getElementById('antibody-test').checked) {
             document.getElementById('test-type-validation').style.visibility = "visible";
             document.getElementById('dropdown').style.marginTop = "-1%";
+            testTypeFlag = false;
         } if (!testingSiteChosen) {
             document.getElementById('test-site-validation').style.visibility = "visible";
-            document.getElementById('additional-info').style.marginTop = "0%";
-        } else {
+            document.getElementById('test-date').style.marginTop = "0%";
+            testSiteFlag = false;
+        } if (!document.getElementById('booking-date').value) {
+            document.getElementById('test-date-validation').style.visibility = "visible";
+            document.getElementById('booking-date').style.marginTop = "-1%";
+            testDateFlag = false;
+        } if (bookingDate < currentDate) {
+            document.getElementById('test-date-validation').style.visibility = "visible";
+            document.getElementById('booking-date').style.marginTop = "-1%";
+            testDateFlag = false;
+        } if (testTypeFlag && testSiteFlag && testDateFlag) {
             var testTypeUrl = null;
             var testLocationUrl = null;
+            var testDate = null;
 
             if (document.getElementById('pcr-swab-test').checked) {
                 testTypeUrl = 'dZr9RcABjq';
@@ -226,11 +266,12 @@
             } if (document.getElementById('antibody-test').checked) {
                 testTypeUrl = 'hcYPmydyWZ';
             } if (testingLocation == 'Hillcrest, KwaZulu-Natal') {
-                testLocationUrl = 'Hillcrest';
+                testLocationUrl = 'Hillcrest, KwaZulu-Natal';
             } if (testingLocation == 'Durban Central, KwaZulu-Natal') {
                 testLocationUrl = 'Durban Central';
             }
-            window.location.href = '@Url.Action("TimeBooking", "CovidTests")' + '?testType=' + testTypeUrl + '&testLocation=' + testLocationUrl;
+            testDate = document.getElementById('booking-date').value;
+            window.location.href = '@Url.Action("TimeBooking", "CovidTests")' + '?testType=' + testTypeUrl + '&testLocation=' + testLocationUrl + '&testDate=' + testDate;
         }
     }
 

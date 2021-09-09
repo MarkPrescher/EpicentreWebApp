@@ -3712,6 +3712,19 @@ tbody.collapse.show {
   border: 0;
 }
 
+.dropdown-item-disabled {
+    display: block;
+    width: 100%;
+    padding: 0.625rem 1.25rem;
+    clear: both;
+    font-weight: 400;
+    color: black;
+    text-align: inherit;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+}
+
 .dropdown-item:hover,
 .dropdown-item:focus {
   color: black;
@@ -3719,11 +3732,23 @@ tbody.collapse.show {
   background-color: red;
 }
 
+.dropdown-item-disabled:hover,
+.dropdown-item-disabled:focus {
+    color: black;
+    text-decoration: none;
+    background-color: white;
+}
+
 .dropdown-item.active,
 .dropdown-item:active {
   color: black;
   text-decoration: none;
-  background-color: red;
+}
+
+.dropdown-item-disabled.active,
+.dropdown-item-disabled:active {
+    color: black;
+    text-decoration: none;
 }
 
 .dropdown-item.disabled,
@@ -14782,8 +14807,7 @@ h2.title {
   opacity: .5;
 }
 
-.dropdown-menu .dropdown-item,
-.dropdown-menu li>a {
+.dropdown-menu .dropdown-item {
   position: relative;
   width: auto;
   display: flex;
@@ -14808,6 +14832,32 @@ h2.title {
   word-wrap: break-word;
 }
 
+    .dropdown-menu .dropdown-item-disabled,
+    .dropdown-menu li > a {
+        position: relative;
+        width: auto;
+        display: flex;
+        flex-flow: nowrap;
+        align-items: center;
+        color: black;
+        font-weight: normal;
+        text-decoration: none;
+        font-size: .8125rem;
+        border-radius: 0.125rem;
+        margin: 0 0.3125rem;
+        -webkit-transition: all 150ms linear;
+        -moz-transition: all 150ms linear;
+        -o-transition: all 150ms linear;
+        -ms-transition: all 150ms linear;
+        transition: all 150ms linear;
+        min-width: 7rem;
+        padding: 0.625rem 1.25rem;
+        overflow: hidden;
+        line-height: 1.428571;
+        text-overflow: ellipsis;
+        word-wrap: break-word;
+    }
+
 @media (min-width: 768px) {
 
   .dropdown-menu .dropdown-item,
@@ -14815,6 +14865,11 @@ h2.title {
     padding-right: 1.5rem;
     padding-left: 1.5rem;
   }
+
+    .dropdown-menu .dropdown-item-disabled {
+        padding-right: 1.5rem;
+        padding-left: 1.5rem;
+    }
 }
 
 .dropdown-menu .dropdown-item:hover,
@@ -14825,6 +14880,15 @@ h2.title {
   box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(156, 39, 176, 0.4);
   background-color: red;
   color: white;
+}
+
+.dropdown-menu .dropdown-item-disabled:hover,
+.dropdown-menu .dropdown-item-disabled:focus,
+.dropdown-menu a:hover,
+.dropdown-menu a:focus,
+.dropdown-menu a:active {
+    box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(156, 39, 176, 0.4);
+    color: white;
 }
 
 a[data-toggle="collapse"][aria-expanded="true"] .caret,

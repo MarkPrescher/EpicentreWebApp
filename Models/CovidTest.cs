@@ -11,13 +11,11 @@ namespace Epicentre.Models
         [Key]
         public Guid TEST_ID { get; set; }
         
-        [Required(ErrorMessage = "Please enter a test type")]
-        [StringLength(25, ErrorMessage = "Please enter a value with a maximum of 25 characters")]
         public string TEST_TYPE { get; set; }
 
-        [Required(ErrorMessage = "Please enter a test date")]
-        [StringLength(55, ErrorMessage = "Please enter a value with a maximum of 55 characters")]
         public string TEST_DATE { get; set; }
+
+        public string TEST_TIME { get; set; }
 
         public string TEST_LOCATION { get; set; }
 

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Epicentre.Data;
 using Epicentre.Models;
+using Epicentre.Library;
 
 namespace Epicentre.Controllers
 {
@@ -149,45 +150,115 @@ namespace Epicentre.Controllers
             return View();
         }
 
-        // Query a table regarding time slots and availability???
-        public IActionResult TimeBooking(string testType, string testLocation)
-        {
-            ViewBag.CovidTestType = "";
-            ViewBag.TestingLocation = "";
 
-            if (testType == null || testLocation == null)
+
+
+        // ****** ATTENTION ****** ONLY USING HILLCREST, KZN FOR TESTING!!!
+        public async Task<IActionResult> TimeBooking(string testType, string testLocation, string testDate)
+        {
+            // If there are no params, we need to throw not found, otherwise user can bypass booking stage
+            if (testType == null || testLocation == null || testDate == null)
             {
                 return NotFound();
             }
-            if (testType.Equals("dZr9RcABjq"))
-            {
-                ViewBag.CovidTestType = "PCR Swab Test";
-            }
-            if (testType.Equals("SkwFaATkYv"))
-            {
-                ViewBag.CovidTestType = "Rapid Antigen Test";
-            }
-            if (testType.Equals("hcYPmydyWZ"))
-            {
-                ViewBag.CovidTestType = "Antibody Test";
-            }
-            if (testLocation.Equals("Hillcrest"))
+
+            // Converting test date to correct format
+            var date = Convert.ToDateTime(testDate);
+            testDate = date.ToString("MM/dd/yyyy");
+
+            // Checking to see what the parameter text is equal to
+            ViewBag.CovidTestType = UrlParams.GetTestType(testType);
+            ViewBag.TestDate = testDate; // Do not jumble like test type, and testing location!
+            ViewBag.TestingLocation = ""; // Read below comment
+
+            // This needs to be placed in UrlParams eventually - just like for test type
+            if (testLocation.Equals("Hillcrest, KwaZulu-Natal"))
             {
                 ViewBag.TestingLocation = "Hillcrest, KwaZulu-Natal";
             }
-            if (testLocation.Equals("Durban Central"))
+
+            // Assigning to static variables so that these values are retained and can be called to be placed in the model when inserting into DB
+            CovidTestDetails.TestType = ViewBag.CovidTestType;
+            CovidTestDetails.TestLocation = testLocation;
+            CovidTestDetails.TestDate = testDate; // we can use the parameter because its not jumbled
+
+            // Checks to see if it is weekday or weekend for the test date to filter time slots
+            bool isWeekDay = TimeSlots.CheckIfWeekDay(date);
+
+            Booking booking = new Booking(_context);
+            int timeSlotCounter = TimeSlots.timeSlotCounter;
+
+            if (isWeekDay)
             {
-                ViewBag.TestingLocation = "Durban Central, KwaZulu-Natal";
+                // Time slots - these need to be finished!
+                ViewBag.TS0800 = Booking.AVAILABLE;
+                ViewBag.TS0815 = Booking.AVAILABLE;
+                ViewBag.TS0830 = Booking.AVAILABLE;
+                ViewBag.TS0845 = Booking.AVAILABLE;
+                ViewBag.TS0900 = Booking.AVAILABLE;
+                // times finish at 16:00 (ViewBag.TS1600)
+
+                if (await booking.CheckBookingAvailability(TimeSlots.WEEKDAY_TIME_SLOTS[timeSlotCounter]))
+                    ViewBag.TS0800 = Booking.FULLY_BOOKED;
+                timeSlotCounter++;
+                if (await booking.CheckBookingAvailability(TimeSlots.WEEKDAY_TIME_SLOTS[timeSlotCounter]))
+                    ViewBag.TS0815 = Booking.FULLY_BOOKED;
+                timeSlotCounter++;
+                if (await booking.CheckBookingAvailability(TimeSlots.WEEKDAY_TIME_SLOTS[timeSlotCounter]))
+                    ViewBag.TS0830 = Booking.FULLY_BOOKED;
+                timeSlotCounter++;
+                if (await booking.CheckBookingAvailability(TimeSlots.WEEKDAY_TIME_SLOTS[timeSlotCounter]))
+                    ViewBag.TS0845 = Booking.FULLY_BOOKED;
+                timeSlotCounter++;
+                if (await booking.CheckBookingAvailability(TimeSlots.WEEKDAY_TIME_SLOTS[timeSlotCounter]))
+                    ViewBag.TS0900 = Booking.FULLY_BOOKED;
+                // finish as well please
             }
-            covidTest.TEST_TYPE = ViewBag.CovidTestType; // populating the model here?
-            covidTest.TEST_LOCATION = ViewBag.TestingLocation; // populating the model here?
+            else
+            {
+                // Time slots - these need to be finished!
+                ViewBag.TS0800 = Booking.AVAILABLE;
+                ViewBag.TS0815 = Booking.AVAILABLE;
+                ViewBag.TS0830 = Booking.AVAILABLE;
+                ViewBag.TS0845 = Booking.AVAILABLE;
+                ViewBag.TS0900 = Booking.AVAILABLE;
+                // times finish at 13:00 (ViewBag.TS1300)
+
+                if (await booking.CheckBookingAvailability(TimeSlots.WEEKEND_TIME_SLOTS[timeSlotCounter]))
+                    ViewBag.TS0800 = Booking.FULLY_BOOKED;
+                timeSlotCounter++;
+                if (await booking.CheckBookingAvailability(TimeSlots.WEEKEND_TIME_SLOTS[timeSlotCounter]))
+                    ViewBag.TS0815 = Booking.FULLY_BOOKED;
+                timeSlotCounter++;
+                if (await booking.CheckBookingAvailability(TimeSlots.WEEKEND_TIME_SLOTS[timeSlotCounter]))
+                    ViewBag.TS0830 = Booking.FULLY_BOOKED;
+                timeSlotCounter++;
+                if (await booking.CheckBookingAvailability(TimeSlots.WEEKEND_TIME_SLOTS[timeSlotCounter]))
+                    ViewBag.TS0845 = Booking.FULLY_BOOKED;
+                timeSlotCounter++;
+                if (await booking.CheckBookingAvailability(TimeSlots.WEEKEND_TIME_SLOTS[timeSlotCounter]))
+                    ViewBag.TS0900 = Booking.FULLY_BOOKED;
+                // finish as well please
+            }
+
             return View();
         }
 
+
+
+
+
+
+
+
+
+
+
+
         // Displaying all the final details. Insertion to the database does NOT happen here, this action method will call the Book() method which will run the code to insert into database
-        public IActionResult ConfirmBooking()
+        public IActionResult ConfirmBooking(string time)
         {
-            ViewBag.CovidTestType = covidTest.TEST_TYPE;
+
             return View();
         }
 
