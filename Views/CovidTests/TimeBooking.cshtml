@@ -20,14 +20,15 @@
                         </div>
                     </div>
                 </div>
-                <div id="dropdown" style="margin-top: -2%; text-align: center;" class="row">
+                <div id="dropdown" style="margin-top: -2%; text-align: center;" class="row" >
                     <div class="col-md-12">
                         <div class="form-group">
                             <div class="btn-group">
                                 <button id="button-value" style="background-color: red;" type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Time Slot
                                 </button>
-                                <div class="dropdown-menu">
+                                <div class="dropdown-menu" style="overflow-y: scroll; max-height:200px">
+
                                     @if (ViewBag.TS0800 == "Fully Booked!")
                                     {
                                         <a style="cursor: default;" href="javascript:void(0)" class="dropdown-item">08:00 (Fully Booked)</a>
@@ -60,6 +61,7 @@
                                     {
                                         <a onclick="clickedTimeSlot('08:45')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">08:45</a>
                                     }
+
                                     @if (ViewBag.TS0900 == "Fully Booked!")
                                     {
                                         <a style="cursor: default;" href="javascript:void(0)" class="dropdown-item">09:00 (Fully Booked)</a>
@@ -67,6 +69,235 @@
                                     else
                                     {
                                         <a onclick="clickedTimeSlot('09:00')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">09:00</a>
+                                    }
+                                    @if (ViewBag.TS0915 == "Fully Booked!")
+                                    {
+                                        <a style="cursor: default;" href="javascript:void(0)" class="dropdown-item">09:15 (Fully Booked)</a>
+                                    }
+                                    else
+                                    {
+                                        <a onclick="clickedTimeSlot('09:15')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">09:15</a>
+                                    }
+                                    @if (ViewBag.TS0930 == "Fully Booked!")
+                                    {
+                                        <a style="cursor: default;" href="javascript:void(0)" class="dropdown-item">09:30 (Fully Booked)</a>
+                                    }
+                                    else
+                                    {
+                                        <a onclick="clickedTimeSlot('09:30')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">09:30</a>
+                                    }
+                                    @if (ViewBag.TS0945 == "Fully Booked!")
+                                    {
+                                        <a style="cursor: default;" href="javascript:void(0)" class="dropdown-item">09:45 (Fully Booked)</a>
+                                    }
+                                    else
+                                    {
+                                        <a onclick="clickedTimeSlot('09:45')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">09:45</a>
+                                    }
+
+                                    @if (ViewBag.TS1000 == "Fully Booked!")
+                                    {
+                                        <a style="cursor: default;" href="javascript:void(0)" class="dropdown-item">10:00 (Fully Booked)</a>
+                                    }
+                                    else
+                                    {
+                                        <a onclick="clickedTimeSlot('10:00')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">10:00</a>
+                                    }
+                                    @if (ViewBag.TS1015 == "Fully Booked!")
+                                    {
+                                        <a style="cursor: default;" href="javascript:void(0)" class="dropdown-item">10:15 (Fully Booked)</a>
+                                    }
+                                    else
+                                    {
+                                        <a onclick="clickedTimeSlot('10:15')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">10:15</a>
+                                    }
+                                    @if (ViewBag.TS1030 == "Fully Booked!")
+                                    {
+                                        <a style="cursor: default;" href="javascript:void(0)" class="dropdown-item">10:30 (Fully Booked)</a>
+                                    }
+                                    else
+                                    {
+                                        <a onclick="clickedTimeSlot('10:30')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">10:30</a>
+                                    }
+                                    @if (ViewBag.TS1045 == "Fully Booked!")
+                                    {
+                                        <a style="cursor: default;" href="javascript:void(0)" class="dropdown-item">10:45 (Fully Booked)</a>
+                                    }
+                                    else
+                                    {
+                                        <a onclick="clickedTimeSlot('10:45')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">10:45</a>
+                                    }
+
+                                    @if (ViewBag.TS1100 == "Fully Booked!")
+                                    {
+                                        <a style="cursor: default;" href="javascript:void(0)" class="dropdown-item">11:00 (Fully Booked)</a>
+                                    }
+                                    else
+                                    {
+                                        <a onclick="clickedTimeSlot('11:00')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">11:00</a>
+                                    }
+                                    @if (ViewBag.TS1115 == "Fully Booked!")
+                                    {
+                                        <a style="cursor: default;" href="javascript:void(0)" class="dropdown-item">11:15 (Fully Booked)</a>
+                                    }
+                                    else
+                                    {
+                                        <a onclick="clickedTimeSlot('11:15')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">11:15</a>
+                                    }
+                                    @if (ViewBag.TS1130 == "Fully Booked!")
+                                    {
+                                        <a style="cursor: default;" href="javascript:void(0)" class="dropdown-item">11:30 (Fully Booked)</a>
+                                    }
+                                    else
+                                    {
+                                        <a onclick="clickedTimeSlot('11:30')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">11:30</a>
+                                    }
+                                    @if (ViewBag.TS1145 == "Fully Booked!")
+                                    {
+                                        <a style="cursor: default;" href="javascript:void(0)" class="dropdown-item">11:45 (Fully Booked)</a>
+                                    }
+                                    else
+                                    {
+                                        <a onclick="clickedTimeSlot('11:45')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">11:45</a>
+                                    }
+                                    @if (ViewBag.TS1200 == "Fully Booked!")
+                                    {
+                                        <a style="cursor: default;" href="javascript:void(0)" class="dropdown-item">12:00 (Fully Booked)</a>
+                                    }
+                                    else
+                                    {
+                                        <a onclick="clickedTimeSlot('12:00')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">12:00</a>
+                                    }
+                                    @if (ViewBag.TS1215 == "Fully Booked!")
+                                    {
+                                        <a style="cursor: default;" href="javascript:void(0)" class="dropdown-item">12:15 (Fully Booked)</a>
+                                    }
+                                    else
+                                    {
+                                        <a onclick="clickedTimeSlot('12:15')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">12:15</a>
+                                    }
+                                    @if (ViewBag.TS1230 == "Fully Booked!")
+                                    {
+                                        <a style="cursor: default;" href="javascript:void(0)" class="dropdown-item">12:30 (Fully Booked)</a>
+                                    }
+                                    else
+                                    {
+                                        <a onclick="clickedTimeSlot('12:30')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">12:30</a>
+                                    }
+                                    @if (ViewBag.TS1245 == "Fully Booked!")
+                                    {
+                                        <a style="cursor: default;" href="javascript:void(0)" class="dropdown-item">12:45 (Fully Booked)</a>
+                                    }
+                                    else
+                                    {
+                                        <a onclick="clickedTimeSlot('12:45')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">12:45</a>
+                                    }
+
+                                    @if (ViewBag.TS1300 == "Fully Booked!")
+                                    {
+                                        <a style="cursor: default;" href="javascript:void(0)" class="dropdown-item">13:00 (Fully Booked)</a>
+                                    }
+                                    else
+                                    {
+                                        <a onclick="clickedTimeSlot('13:00')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">13:00</a>
+                                    }
+                                    @if (ViewBag.TS1315 == "Fully Booked!")
+                                    {
+                                        <a style="cursor: default;" href="javascript:void(0)" class="dropdown-item">13:15 (Fully Booked)</a>
+                                    }
+                                    else
+                                    {
+                                        <a onclick="clickedTimeSlot('13:15')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">13:15</a>
+                                    }
+                                    @if (ViewBag.TS1330 == "Fully Booked!")
+                                    {
+                                        <a style="cursor: default;" href="javascript:void(0)" class="dropdown-item">13:30 (Fully Booked)</a>
+                                    }
+                                    else
+                                    {
+                                        <a onclick="clickedTimeSlot('13:30')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">13:30</a>
+                                    }
+                                    @if (ViewBag.TS1345 == "Fully Booked!")
+                                    {
+                                        <a style="cursor: default;" href="javascript:void(0)" class="dropdown-item">13:45 (Fully Booked)</a>
+                                    }
+                                    else
+                                    {
+                                        <a onclick="clickedTimeSlot('13:45')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">13:45</a>
+                                    }
+
+                                    @if (ViewBag.TS1400 == "Fully Booked!")
+                                    {
+                                        <a style="cursor: default;" href="javascript:void(0)" class="dropdown-item">14:00 (Fully Booked)</a>
+                                    }
+                                    else
+                                    {
+                                        <a onclick="clickedTimeSlot('14:00')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">14:00</a>
+                                    }
+                                    @if (ViewBag.TS1415 == "Fully Booked!")
+                                    {
+                                        <a style="cursor: default;" href="javascript:void(0)" class="dropdown-item">14:15 (Fully Booked)</a>
+                                    }
+                                    else
+                                    {
+                                        <a onclick="clickedTimeSlot('14:15')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">14:15</a>
+                                    }
+                                    @if (ViewBag.TS1430 == "Fully Booked!")
+                                    {
+                                        <a style="cursor: default;" href="javascript:void(0)" class="dropdown-item">14:30 (Fully Booked)</a>
+                                    }
+                                    else
+                                    {
+                                        <a onclick="clickedTimeSlot('14:30')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">14:30</a>
+                                    }
+                                    @if (ViewBag.TS1445 == "Fully Booked!")
+                                    {
+                                        <a style="cursor: default;" href="javascript:void(0)" class="dropdown-item">14:45 (Fully Booked)</a>
+                                    }
+                                    else
+                                    {
+                                        <a onclick="clickedTimeSlot('14:45')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">14:45</a>
+                                    }
+
+                                    @if (ViewBag.TS1500 == "Fully Booked!")
+                                    {
+                                        <a style="cursor: default;" href="javascript:void(0)" class="dropdown-item">15:00 (Fully Booked)</a>
+                                    }
+                                    else
+                                    {
+                                        <a onclick="clickedTimeSlot('15:00')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">15:00</a>
+                                    }
+                                    @if (ViewBag.TS1515 == "Fully Booked!")
+                                    {
+                                        <a style="cursor: default;" href="javascript:void(0)" class="dropdown-item">15:15 (Fully Booked)</a>
+                                    }
+                                    else
+                                    {
+                                        <a onclick="clickedTimeSlot('15:15')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">15:15</a>
+                                    }
+                                    @if (ViewBag.TS1530 == "Fully Booked!")
+                                    {
+                                        <a style="cursor: default;" href="javascript:void(0)" class="dropdown-item">15:30 (Fully Booked)</a>
+                                    }
+                                    else
+                                    {
+                                        <a onclick="clickedTimeSlot('15:30')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">15:30</a>
+                                    }
+                                    @if (ViewBag.TS1545 == "Fully Booked!")
+                                    {
+                                        <a style="cursor: default;" href="javascript:void(0)" class="dropdown-item">15:45 (Fully Booked)</a>
+                                    }
+                                    else
+                                    {
+                                        <a onclick="clickedTimeSlot('15:45')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">15:45</a>
+                                    }
+                                    @if (ViewBag.TS1600 == "Fully Booked!")
+                                    {
+                                        <a style="cursor: default;" href="javascript:void(0)" class="dropdown-item">16:00 (Fully Booked)</a>
+                                    }
+                                    else
+                                    {
+                                        <a onclick="clickedTimeSlot('16:00')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">16:00</a>
                                     }
                                 </div>
                             </div>
