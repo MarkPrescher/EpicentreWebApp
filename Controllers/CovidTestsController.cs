@@ -184,12 +184,13 @@ namespace Epicentre.Controllers
 
             // Checks to see if it is weekday or weekend for the test date to filter time slots
             bool isWeekDay = TimeSlots.CheckIfWeekDay(date);
-
             Booking booking = new Booking(_context);
             int timeSlotCounter = TimeSlots.timeSlotCounter;
 
             if (isWeekDay)
             {
+                //Used to determine what timeslots are shown to user
+                ViewBag.Day = "Weekday";
                 // Time slots - these need to be finished! 
                 // DONE!!!
                 ViewBag.TS0800 = Booking.AVAILABLE;
@@ -350,6 +351,9 @@ namespace Epicentre.Controllers
             }
             else
             {
+                //Used to determine what timeslots are shown to user
+                ViewBag.Day = "Weekend";
+
                 // Time slots - these need to be finished!
                 // DONE!!!
                 ViewBag.TS0800 = Booking.AVAILABLE;
