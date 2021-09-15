@@ -10,5 +10,6 @@ namespace Epicentre.Library
         public static string TestType { get; set; }
         public static string TestLocation { get; set; }
         public static string TestDate { get; set; }
+        public static string TestTime { get; set; }
     }
 }

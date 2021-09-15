@@ -24,6 +24,5 @@ namespace Epicentre.Models
         public string TEST_RESULT { get; set; }
 
         public string USER_ID { get; set; }
-        
     }
 }
