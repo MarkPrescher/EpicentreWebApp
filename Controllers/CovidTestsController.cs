@@ -15,8 +15,6 @@ namespace Epicentre.Controllers
     {
         private readonly EpicentreDataContext _context;
 
-        CovidTest covidTest = new CovidTest();
-
         public CovidTestsController(EpicentreDataContext context)
         {
             _context = context;
@@ -169,17 +167,11 @@ namespace Epicentre.Controllers
             // Checking to see what the parameter text is equal to
             ViewBag.CovidTestType = UrlParams.GetTestType(testType);
             ViewBag.TestDate = testDate; // Do not jumble like test type, and testing location!
-            ViewBag.TestingLocation = ""; // Read below comment
-
-            // This needs to be placed in UrlParams eventually - just like for test type
-            if (testLocation.Equals("Hillcrest, KwaZulu-Natal"))
-            {
-                ViewBag.TestingLocation = "Hillcrest, KwaZulu-Natal";
-            }
+            ViewBag.TestingLocation = UrlParams.GetTestLocation(testLocation); // Read below comment
 
             // Assigning to static variables so that these values are retained and can be called to be placed in the model when inserting into DB
             CovidTestDetails.TestType = ViewBag.CovidTestType;
-            CovidTestDetails.TestLocation = testLocation;
+            CovidTestDetails.TestLocation = ViewBag.TestingLocation;
             CovidTestDetails.TestDate = testDate; // we can use the parameter because its not jumbled
 
             // Checks to see if it is weekday or weekend for the test date to filter time slots
@@ -465,27 +457,57 @@ namespace Epicentre.Controllers
         // Displaying all the final details. Insertion to the database does NOT happen here, this action method will call the Book() method which will run the code to insert into database
         public IActionResult ConfirmBooking(string time)
         {
+            if (time == null)
+            {
+                return NotFound();
+            }
+            CovidTestDetails.TestTime = time;
+
+            ViewBag.TestType = CovidTestDetails.TestType;
+            ViewBag.TestLocation = CovidTestDetails.TestLocation;
+            ViewBag.TestDate = CovidTestDetails.TestDate;
+            ViewBag.TestTime = time;
 
             return View();
         }
 
-        // This is NOT a method that is related to a view! A normal method
-        [HttpPost]
-        public void Book()
+        public async Task<IActionResult> Book()
         {
-            // Logic to insert into database using EF (Entity Framework) Core, such as _context.Add(covidTest); await _context.SaveChangesAsync(); etc.
-            // Depending on the results (if statement to check successful insertion), it will return to a view (action method) that will either display a success message or a failure message
-            // Populate the model here? Such that covidTest.TEST_TYPE = "XXX";
+            CovidTest covidTest = new CovidTest();
+            covidTest.TEST_ID = Guid.NewGuid();
+            covidTest.TEST_TYPE = CovidTestDetails.TestType;
+            covidTest.TEST_DATE = CovidTestDetails.TestDate;
+            covidTest.TEST_TIME = CovidTestDetails.TestTime;
+            covidTest.TEST_LOCATION = CovidTestDetails.TestLocation;
+            covidTest.TEST_STATUS = "Awaiting...";
+            covidTest.TEST_RESULT = "Awaiting...";
+            covidTest.USER_ID = "1"; // must eventually get user id
+
+            try
+            {
+                await _context.CovidTest.AddAsync(covidTest);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(SuccessfulBooking));
+            }
+            catch (Exception exception)
+            {
+                return RedirectToAction(nameof(FailedBooking));
+            }
         }
 
         public IActionResult SuccessfulBooking()
         {
-            return View(); // Not created
+            ViewBag.TestType = CovidTestDetails.TestType;
+            ViewBag.TestLocation = CovidTestDetails.TestLocation;
+            ViewBag.TestDate = CovidTestDetails.TestDate;
+            ViewBag.TestTime = CovidTestDetails.TestTime;
+
+            return View();
         }
 
         public IActionResult FailedBooking()
         {
-            return View(); // Not created
+            return View();
         }
     }
 }

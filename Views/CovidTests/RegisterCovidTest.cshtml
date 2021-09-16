@@ -3,14 +3,14 @@
 }
 
 <div style="padding-left: 5%; padding-right: 5%; padding-bottom: 3%;" class="content">
-    <h1>Register Covid Test</h1>
+    <h1>COVID-19 Test Booking</h1>
 
     <div class="card">
         <div class="card-header card-header-primary">
-            <h4 class="card-title">Register for a COVID-19 Test (TEST DATA)</h4>
-            <p class="card-category">Please fill out the details below, and register for a COVID-19 Test</p>
+            <h4 class="card-title">Register for a COVID-19 Test</h4>
+            <p class="card-category">Please fill out the form below to book for a COVID-19 Test</p>
         </div>
-        <div style="padding-top: 2%;" class="card-body">
+        <div style="padding-top: 3.5%;" class="card-body">
             <form>
                 <div class="row">
                     <div class="col-md-4">
@@ -158,7 +158,7 @@
                                     <a onclick="clickedLocation('Bellville, Western Cape')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">Bellville, Western Cape</a>
                                     <a onclick="clickedLocation('Rondebosch, Western Cape')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">Rondebosch, Western Cape</a>
                                     <a onclick="clickedLocation('Hillcrest, KwaZulu-Natal')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">Hillcrest, KwaZulu-Natal</a>
-                                    <a onclick="clickedLocation('Pitermaritzburg, KwaZulu-Natal')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">Pitermaritzburg, KwaZulu-Natal</a>
+                                    <a onclick="clickedLocation('Pietermaritzburg, KwaZulu-Natal')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">Pitermaritzburg, KwaZulu-Natal</a>
                                     <a onclick="clickedLocation('Durban Central, KwaZulu-Natal')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">Durban Central, KwaZulu-Natal</a>
                                     <a onclick="clickedLocation('Randburg, Gauteng')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">Randburg, Gauteng</a>
                                     <a onclick="clickedLocation('Midrand, Gauteng')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">Midrand, Gauteng</a>
@@ -180,18 +180,7 @@
                         </div>
                     </div>
                 </div>
-                <div id="additional-info" class="row">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label>Additional Information</label>
-                            <div class="form-group">
-                                <label class="bmd-label-floating">Any additional information, such as medication, medical history, anything concerning that we need to know about</label>
-                                <textarea class="form-control" rows="5"></textarea>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <button onclick="checkForm()" type="button" style="background-color: red;" class="btn btn-primary">Next</button>
+                <center><button onclick="checkForm()" type="button" style="background-color: red; margin-top: 1%;" class="btn btn-primary">Next</button></center>
                 <div class="clearfix"></div>
             </form>
         </div>
@@ -199,8 +188,6 @@
 </div>
 
 <script type="text/javascript">
-
-    alert('Please only select Hillcrest for test location (TESTING ONLY)');
 
     var testingSiteChosen = false;
     var testingLocation = null;
@@ -265,10 +252,22 @@
                 testTypeUrl = 'SkwFaATkYv';
             } if (document.getElementById('antibody-test').checked) {
                 testTypeUrl = 'hcYPmydyWZ';
+            } if (testingLocation == 'Stellenbosch, Western Cape') {
+                testLocationUrl = 'JZjKyupGXO';
+            } if (testingLocation == 'Bellville, Western Cape') {
+                testLocationUrl = 'eC4LdaFsWu';
+            } if (testingLocation == 'Rondebosch, Western Cape') {
+                testLocationUrl = 'ABIf3LMQ4l';
             } if (testingLocation == 'Hillcrest, KwaZulu-Natal') {
-                testLocationUrl = 'Hillcrest, KwaZulu-Natal';
+                testLocationUrl = 'WH2fbXxIdU';
+            } if (testingLocation == 'Pietermaritzburg, KwaZulu-Natal') {
+                testLocationUrl = 'UQLsvizNLJ';
             } if (testingLocation == 'Durban Central, KwaZulu-Natal') {
-                testLocationUrl = 'Durban Central';
+                testLocationUrl = 'NmCGgsAEnZ';
+            } if (testingLocation == 'Randburg, Gauteng') {
+                testLocationUrl = '2464QfRQfc';
+            } if (testingLocation == 'Midrand, Gauteng') {
+                testLocationUrl = 'gqoz3cT0jA';
             }
             testDate = document.getElementById('booking-date').value;
             window.location.href = '@Url.Action("TimeBooking", "CovidTests")' + '?testType=' + testTypeUrl + '&testLocation=' + testLocationUrl + '&testDate=' + testDate;

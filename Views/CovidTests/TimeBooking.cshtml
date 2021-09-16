@@ -4,19 +4,19 @@
 }
 
 <div style="padding-left: 5%; padding-right: 5%; padding-bottom: 3%;" class="content">
-    <h1>Time Booking</h1>
+    <h1>Time Slot Allocation</h1>
 
     <div class="card">
         <div class="card-header card-header-primary">
-            <h4 class="card-title">Time for a COVID-19 Test (TEST DATA)</h4>
-            <p class="card-category">Please choose a time for a COVID-19 Test</p>
+            <h4 class="card-title">Time Slot Allocation for your COVID-19 Test</h4>
+            <p class="card-category">Please select a time slot allocation for your COVID-19 Test</p>
         </div>
-        <div style="padding-top: 2%;" class="card-body">
+        <div style="padding-top: 3.5%;" class="card-body">
             <form>
                 <div id="dropdown" style="margin-top: -0.25%; text-align: center;" class="row">
                     <div class="col-md-12">
                         <div class="form-group">
-                            <h4>Almost done... please select a time for your @ViewBag.CovidTestType booking at @ViewBag.TestingLocation on @ViewBag.TestDate:</h4>
+                            <h4>Almost done... please select a time for your <span style="color: red; font-weight: bold;">@ViewBag.CovidTestType</span> booking at <span style="color: red; font-weight: bold;">@ViewBag.TestingLocation</span> on <span style="color: red; font-weight: bold;">@ViewBag.TestDate</span>:</h4>
                         </div>
                     </div>
                 </div>
@@ -309,7 +309,7 @@
                         </div>
                     </div>
                 </div>
-                <center><button onclick="checkForm()" type="button" style="background-color: red;" class="btn btn-primary">Select Time</button></center>
+                <center><button onclick="checkForm()" type="button" style="background-color: red;" class="btn btn-primary">Select Time Slot</button></center>
                 <div class="clearfix"></div>
             </form>
         </div>
@@ -332,7 +332,7 @@
     function checkForm() {
 
         if (timeSlotChosen) {
-            window.location.href = '@Url.Action("ConfirmBooking", "CovidTests")' + '?time=' + timeSlot;
+            window.location.href = '@Url.Action("ConfirmBooking", "CovidTests")' + '?time=' + testTimeSlot;
         } else {
             document.getElementById('time-slot-validation').style.visibility = "visible";
         }
