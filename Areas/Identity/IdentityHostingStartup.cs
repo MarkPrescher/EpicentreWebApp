@@ -21,7 +21,8 @@ namespace Epicentre.Areas.Identity
                         context.Configuration.GetConnectionString("EpicentreConnection")));
 
                 services.AddDefaultIdentity<EpicentreUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                    .AddEntityFrameworkStores<EpicentreAuthenticationContext>();
+                .AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<EpicentreAuthenticationContext>();
             });
         }
     }
