@@ -78,7 +78,6 @@ namespace Epicentre.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = new EpicentreUser { UserName = Input.Email, Email = Input.Email };
-                user.EmailConfirmed = true;
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 await _userManager.AddToRoleAsync(user, "User");
 
@@ -86,20 +85,21 @@ namespace Epicentre.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User created a new account with password.");
 
-                    //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    //code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-                    //var callbackUrl = Url.Page(
-                    //    "/Account/ConfirmEmail",
-                    //    pageHandler: null,
-                    //    values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
-                    //    protocol: Request.Scheme);
+                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                    code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+                    var callbackUrl = Url.Page(
+                        "/Account/ConfirmEmail",
+                        pageHandler: null,
+                        values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
+                        protocol: Request.Scheme);
 
-                    //MailMessage mailMessage = new MailMessage("msprescher@gmail.com", Input.Email.ToString()/*Recipient email*/, "Confirm Account", $"Please confirm your account:\n {callbackUrl}");
-                    //SmtpClient smtpClient = new SmtpClient("smtp.gmail.com");
-                    //smtpClient.Port = 587;
-                    //smtpClient.Credentials = new NetworkCredential("msprescher@gmail.com", "51Flatcrown");
-                    //smtpClient.EnableSsl = false;
-                    //await smtpClient.SendMailAsync(mailMessage);
+                    MailMessage mailMessage = new MailMessage("noreplyepicentertest@gmail.com", Input.Email.ToString()/*Recipient email*/, "Confirm Account", $"Please confirm your account:\n {callbackUrl}");
+                    SmtpClient smtpClient = new SmtpClient("smtp.gmail.com");
+                    smtpClient.Port = 587;
+                    smtpClient.UseDefaultCredentials = false;
+                    smtpClient.Credentials = new NetworkCredential("noreplyepicentertest@gmail.com", "TestingPassword1");
+                    smtpClient.EnableSsl = true;
+                    await smtpClient.SendMailAsync(mailMessage);
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
