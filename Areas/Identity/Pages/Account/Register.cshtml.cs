@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using System.Net.Mail;
 using System.Net;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Epicentre.Areas.Identity.Pages.Account
 {
@@ -48,20 +49,21 @@ namespace Epicentre.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
-            [EmailAddress]
+            [Required(ErrorMessage = "Please enter an email address")]
+            [EmailAddress(ErrorMessage = "Please enter a valid email address")]
             [Display(Name = "Email")]
             public string Email { get; set; }
 
-            [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [Required(ErrorMessage = "Please enter a password")]
+            [StringLength(55, ErrorMessage = "Your password must be at least {2} and at {1} characters long", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
             public string Password { get; set; }
 
+            [Required(ErrorMessage = "Please confirm your password")]
             [DataType(DataType.Password)]
             [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            [Compare("Password", ErrorMessage = "The password and confirmation password do not match")]
             public string ConfirmPassword { get; set; }
         }
 
@@ -96,9 +98,9 @@ namespace Epicentre.Areas.Identity.Pages.Account
                     MailMessage mailMessage = new MailMessage("noreplyepicentertest@gmail.com", Input.Email.ToString()/*Recipient email*/, "Confirm Account", $"Please confirm your account:\n {callbackUrl}");
                     SmtpClient smtpClient = new SmtpClient("smtp.gmail.com");
                     smtpClient.Port = 587;
+                    smtpClient.EnableSsl = true;
                     smtpClient.UseDefaultCredentials = false;
                     smtpClient.Credentials = new NetworkCredential("noreplyepicentertest@gmail.com", "TestingPassword1");
-                    smtpClient.EnableSsl = true;
                     await smtpClient.SendMailAsync(mailMessage);
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
@@ -113,7 +115,14 @@ namespace Epicentre.Areas.Identity.Pages.Account
                 }
                 foreach (var error in result.Errors)
                 {
-                    ModelState.AddModelError(string.Empty, error.Description);
+                    if (error.Code == "DuplicateEmail" || error.Code == "DuplicateUserName")
+                    {
+                        ModelState.AddModelError("", "This email is already in use");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, error.Description);
+                    }
                 }
             }
 
