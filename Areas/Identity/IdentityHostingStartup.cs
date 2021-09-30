@@ -20,7 +20,14 @@ namespace Epicentre.Areas.Identity
                     options.UseSqlServer(
                         context.Configuration.GetConnectionString("EpicentreConnection")));
 
-                services.AddDefaultIdentity<EpicentreUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                services.AddDefaultIdentity<EpicentreUser>(options =>
+                {
+                    options.SignIn.RequireConfirmedAccount = true;
+                    options.Password.RequireDigit = false;
+                    options.Password.RequireLowercase = false;
+                    options.Password.RequireNonAlphanumeric = false;
+                    options.Password.RequireUppercase = false;
+                })
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<EpicentreAuthenticationContext>();
             });

@@ -1,14 +1,24 @@
 ﻿@page
-@model RegisterModel
+@model ResendEmailConfirmationModel
 @{
-    ViewData["Title"] = "Register";
+    ViewData["Title"] = "Resend email confirmation";
     Layout = null;
 }
+
+@*<form method="post">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Input.Email"></label>
+            <input asp-for="Input.Email" class="form-control" />
+            <span asp-validation-for="Input.Email" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Resend</button>
+    </form>*@
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Epicentre Register</title>
+    <title>Epicentre Resend Email Confirmation</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--===============================================================================================-->
@@ -33,21 +43,29 @@
     <div class="limiter">
         <div class="container-login100">
             <div class="wrap-login100">
-                <div class="login100-pic js-tilt" data-tilt>
+                <div style="margin-top: -15%;" class="login100-pic js-tilt" data-tilt>
                     <img src="~/img/logo.png" alt="IMG">
                 </div>
 
-                <form style="margin-top: -18%;" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="login100-form validate-form">
-                    <span class="login100-form-title">
-                        Create an Epicentre Account
+                <form style="margin-top: -18%;" method="post" class="login100-form validate-form">
+                    <span style="margin-bottom: -10%;" class="login100-form-title">
+                        Resend Confirmation Email
                     </span>
-                    
-                    <div class="text-center" style="color: red;" asp-validation-summary="ModelOnly"></div>
 
-                    <div style="text-align: center;">
+                    @if (ViewData["EmailSent"] != null)
+                    {
+                        <div class="text-center" style="color: green;" asp-validation-summary="ModelOnly"></div>
+                    }
+                    else
+                    {
+                        <div class="text-center" style="color: red;" asp-validation-summary="ModelOnly"></div>
+                    }
+
+
+                    <div style="text-align: center; padding-bottom: 5%;">
                         <span style="color: red;" asp-validation-for="Input.Email"></span>
                     </div>
-                    <div class="wrap-input100 validate-input">
+                    <div style="margin-top: -5%;" class="wrap-input100 validate-input">
                         <input asp-for="Input.Email" class="input100" type="text" placeholder="Email">
                         <span class="focus-input100"></span>
                         <span class="symbol-input100">
@@ -55,31 +73,9 @@
                         </span>
                     </div>
 
-                    <div style="text-align: center;">
-                        <span style="color: red;" asp-validation-for="Input.Password"></span>
-                    </div>
-                    <div class="wrap-input100 validate-input">
-                        <input asp-for="Input.Password" class="input100" type="password" placeholder="Password">
-                        <span class="focus-input100"></span>
-                        <span class="symbol-input100">
-                            <i class="fa fa-lock" aria-hidden="true"></i>
-                        </span>
-                    </div>
-
-                    <div style="text-align: center;">
-                        <span style="color: red;" asp-validation-for="Input.ConfirmPassword"></span>
-                    </div>
-                    <div class="wrap-input100 validate-input">
-                        <input asp-for="Input.ConfirmPassword" class="input100" type="password" placeholder="Confirm Password">
-                        <span class="focus-input100"></span>
-                        <span class="symbol-input100">
-                            <i class="fa fa-lock" aria-hidden="true"></i>
-                        </span>
-                    </div>
-
                     <div class="container-login100-form-btn">
                         <button type="submit" class="login100-form-btn">
-                            Create Account
+                            Resend Email
                         </button>
                     </div>
                 </form>
@@ -106,6 +102,8 @@
 
 </body>
 </html>
+
+
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
