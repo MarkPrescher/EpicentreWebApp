@@ -119,9 +119,9 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <div class="btn-group">
-                                <button id="button-value" style="background-color: red;" type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Vaccination Site
-                                </button>
+                               <button id="button-value" style="background-color: red;"type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                   Vaccination Site
+                               </button>
                                 <div class="dropdown-menu">
                                     <a onclick="clickedLocation('Stellenbosch, Western Cape')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">Stellenbosch, Western Cape</a>
                                     <a onclick="clickedLocation('Bellville, Western Cape')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">Bellville, Western Cape</a>
@@ -155,30 +155,24 @@
         </div>
     </div>
 </div>
-
 <script type="text/javascript">
-
     var vaccinationSiteChosen = false;
     var vaccinationLocation = null;
-
- 
 
     function clickedLocation(location) {
         var display = document.getElementById('button-value');
         display.innerText = location;
+
         vaccinationSiteChosen = true;
         document.getElementById('vaccination-date-validation').style.visibility = "hidden";
         document.getElementById('vaccination-date').style.marginTop = "-2%";
         vaccinationLocation = location;
     }
-
     function clickedDate() {
         document.getElementById('vaccination-date-validation').style.visibility = "hidden";
         document.getElementById('booking').style.marginTop = "-2%";
     }
-
     function checkForm() {
-
         var vaccinationSiteFlag = true;
         var vaccinationDateFlag = true;
 
@@ -186,12 +180,12 @@
         var dateParts = selectedDate.split('-');
         var bookingDate = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
         var currentDate = new Date();
-        currentDate.setHours(0,0,0,0);
+        currentDate.setHours(0, 0, 0, 0);
 
         if (!vaccinationSiteChosen) {
-          document.getElementById('vaccination-site-validation').style.visibility = "visible";
-          document.getElementById('vaccination-date').style.marginTop = "0%";
-          vaccinationSiteFlag = false;
+            document.getElementById('vaccination-site-validation').style.visibility = "visible";
+            document.getElementById('vaccination-date').style.marginTop = "0%";
+            vaccinationSiteFlag = false;
         } if (!document.getElementById('booking-date').value) {
             document.getElementById('vaccination-date-validation').style.visibility = "visible";
             document.getElementById('booking-date').style.marginTop = "-1%";
@@ -203,7 +197,6 @@
         } if (vaccinationSiteFlag && vaccinationDateFlag) {
             var vaccinationLocationUrl = null;
             var vaccinationDate = null;
-
         } if (vaccinationLocation == 'Stellenbosch, Western Cape') {
             vaccinationLocationUrl = 'JZjKyupGXO';
         } if (vaccinationLocation == 'Bellville, Western Cape') {
@@ -220,13 +213,10 @@
             vaccinationLocationUrl = '2464QfRQfc';
         } if (vaccinationLocation == 'Midrand, Gauteng') {
             vaccinationLocationUrl = 'gqoz3cT0jA';
-            }
+        }
         vaccinationDate = document.getElementById('booking-date').value;
         window.location.href = '@Url.Action("TimeBookingVaccination", "CovidVaccinations")' + '?vaccinationLocation=' + vaccinationLocationUrl + '&vaccinationDate=' + vaccinationDate;
-        }
     }
-
-
 </script>
 
 @section Scripts {
