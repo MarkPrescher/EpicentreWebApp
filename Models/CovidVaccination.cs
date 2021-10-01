@@ -17,9 +17,14 @@ namespace Epicentre.Models
 
         [Required(ErrorMessage ="Please enter a date")]
         [StringLength(55,ErrorMessage ="Please enter a value with a maximum of 55 characters")]
+
+        public string VACCINATION_LOCATION { get; set; }
+
         public string VACCINATION_DATE { get; set; }
 
         public string VACCINATION_NEXT_DATE { get; set; }
+
+        public string VACCINATION_TIME { get; set; }
 
         public string VACCINATION_STATUS { get; set; }
 
