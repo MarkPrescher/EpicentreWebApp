@@ -30,6 +30,9 @@ namespace Epicentre.Areas.Identity
                 })
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<EpicentreAuthenticationContext>();
+
+                services.Configure<DataProtectionTokenProviderOptions>(options =>
+                options.TokenLifespan = TimeSpan.FromHours(1));
             });
         }
     }
