@@ -471,9 +471,10 @@ namespace Epicentre.Controllers
             return View();
         }
 
-        public async Task<IActionResult> BookVaccination()
+        public async Task<IActionResult> Book()
         {
             CovidVaccination covidVaccination = new CovidVaccination();
+
 
             covidVaccination.VACCINATION_ID = Guid.NewGuid();
             covidVaccination.VACCINATION_DATE = CovidVaccinationDetails.VaccinationDate;
