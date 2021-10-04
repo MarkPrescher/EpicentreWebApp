@@ -24,7 +24,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <div class="btn-group">
-                                <button id="button-value" style="background-color: red;" type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <button id="button-value" style="background-color: red;"type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Time Slot
                                 </button>
                                 <div class="dropdown-menu" style="overflow-y: scroll; max-height:200px">
@@ -332,7 +332,7 @@
     function checkForm() {
 
         if (timeSlotChosen) {
-            window.location.href = '@Url.Action("ConfirmBooking", "CovidTests")' + '?time=' + testTimeSlot;
+            window.location.href = '@Url.Action("ConfirmBookingVaccination", "CovidVaccinations")' + '?time=' + vaccinationTimeSlot;
         } else {
             document.getElementById('time-slot-validation').style.visibility = "visible";
         }

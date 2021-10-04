@@ -174,7 +174,7 @@ namespace Epicentre.Controllers
             vaccinationDate = date.ToString("MM/dd/yyyy");
 
             // Checking to see what the parameter text is equal to
-            ViewBag.VaccinationDate = vaccinationDate; 
+            ViewBag.VaccinationDate = vaccinationDate;
             ViewBag.VaccinationLocation = UrlParams.GetVaccinationLocation(vaccinationLocation);
 
             // Assigning to static variables so that these values are retained and can be called to be placed in the model when inserting into DB
@@ -190,7 +190,7 @@ namespace Epicentre.Controllers
             {
                 //Used to determine what timeslots are shown to user
                 ViewBag.Day = "Weekday";
-               
+
                 ViewBag.TS0800 = BookingVaccination.AVAILABLE;
                 ViewBag.TS0815 = BookingVaccination.AVAILABLE;
                 ViewBag.TS0830 = BookingVaccination.AVAILABLE;
@@ -234,7 +234,7 @@ namespace Epicentre.Controllers
                 ViewBag.TS1600 = BookingVaccination.AVAILABLE;
 
 
-                
+
 
                 if (await booking.CheckBookingAvailability(TimeSlots.WEEKDAY_TIME_SLOTS[timeSlotCounter]))
                     ViewBag.TS0800 = BookingVaccination.FULLY_BOOKED;
@@ -378,7 +378,7 @@ namespace Epicentre.Controllers
 
                 ViewBag.TS1300 = BookingVaccination.AVAILABLE;
 
-               
+
 
                 if (await booking.CheckBookingAvailability(TimeSlots.WEEKEND_TIME_SLOTS[timeSlotCounter]))
                     ViewBag.TS0800 = BookingVaccination.FULLY_BOOKED;
@@ -448,7 +448,7 @@ namespace Epicentre.Controllers
 
                 if (await booking.CheckBookingAvailability(TimeSlots.WEEKEND_TIME_SLOTS[timeSlotCounter]))
                     ViewBag.TS1300 = BookingVaccination.FULLY_BOOKED;
-               
+
             }
 
             return View();
@@ -474,11 +474,13 @@ namespace Epicentre.Controllers
         public async Task<IActionResult> BookVaccination()
         {
             CovidVaccination covidVaccination = new CovidVaccination();
+
             covidVaccination.VACCINATION_ID = Guid.NewGuid();
             covidVaccination.VACCINATION_DATE = CovidVaccinationDetails.VaccinationDate;
             covidVaccination.VACCINATION_TIME = CovidVaccinationDetails.VaccinationTime;
             covidVaccination.VACCINATION_LOCATION = CovidVaccinationDetails.VaccinationLocation;
             covidVaccination.USER_ID = "1"; // must eventually get user id
+
 
             try
             {
@@ -509,3 +511,4 @@ namespace Epicentre.Controllers
 
     }
 }
+
