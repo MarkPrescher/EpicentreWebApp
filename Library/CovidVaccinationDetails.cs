@@ -10,5 +10,7 @@ namespace Epicentre.Library
         public static string VaccinationLocation { get; set; }
         public static string VaccinationDate { get; set; }
         public static string VaccinationTime { get; set; }
+
+        public static string VaccinationNextDate { get; set; }
     }
 }

@@ -480,6 +480,11 @@ namespace Epicentre.Controllers
             covidVaccination.VACCINATION_DATE = CovidVaccinationDetails.VaccinationDate;
             covidVaccination.VACCINATION_TIME = CovidVaccinationDetails.VaccinationTime;
             covidVaccination.VACCINATION_LOCATION = CovidVaccinationDetails.VaccinationLocation;
+            
+            //this must be changed later
+            covidVaccination.VACCINATION_NEXT_DATE = "Temp";
+            covidVaccination.VACCINATION_STATUS = "Temp";
+            covidVaccination.VACCINATION_TYPE = "Temp";
             covidVaccination.USER_ID = "1"; // must eventually get user id
 
 
@@ -490,7 +495,7 @@ namespace Epicentre.Controllers
                 return RedirectToAction(nameof(SuccessfulBookingVaccination));
             }
             catch (Exception exception)
-            {
+            { 
                 return RedirectToAction(nameof(FailedBookingVaccination));
             }
         }
