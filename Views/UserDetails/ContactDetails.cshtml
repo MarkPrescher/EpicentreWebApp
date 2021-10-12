@@ -1,0 +1,159 @@
+﻿
+@{
+    ViewData["Title"] = "ContactDetails";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Epicentre User Information Contact</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="images/icons/favicon.ico" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/vendor/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/css/util.css">
+    <link rel="stylesheet" type="text/css" href="~/css/register.css">
+    <link rel="stylesheet" type="text/css" href="~/css/material-dashboard.css">
+    <!--===============================================================================================-->
+</head>
+<body>
+
+    <div class="limiter">
+        <div class="container-login100">
+            <div class="wrap-login100">
+                <div class="login100-pic js-tilt" data-tilt>
+                    <img src="~/img/logo.png" alt="IMG">
+                </div>
+
+                <form style="margin-top: -18%;" class="login100-form validate-form">
+                    <span class="login100-form-title">
+                        @ViewBag.FirstName, we just need some more details from you
+                    </span>
+
+                    <div style="text-align: center;">
+                        <span id="contact-number-validation" style="color: red; visibility: hidden;">Please provide your contact number</span>
+                    </div>
+                    <div class="wrap-input100 validate-input">
+                        <input id="contactNumber" name="contactNumber" class="input100" type="tel" placeholder="Contact Number">
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+                            <i class="fa fa-phone" aria-hidden="true"></i>
+                        </span>
+                    </div>
+
+                    <div style="text-align: center; margin-top: 7.5%;">
+                        <span style="color: red;"></span>
+                    </div>
+                    <div class="wrap-input100 validate-input">
+                        <input disabled value="@ViewBag.EmailAddress" class="input100" type="text">
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                        </span>
+                    </div>
+
+                    <div id="gender-div" style="text-align: center; margin-top: -2%;">
+                        <span id="gender-validation" style="color: red; visibility: hidden;">Please provide your gender</span>
+                    </div>
+                    <div style="padding-left: 20%;" class="form-check form-check-radio form-check-inline">
+                        <label style="color: black;" class="form-check-label">
+                            <input class="form-check-input" name="radios" type="radio" id="male-radio" value="Male"> Male
+                            <span class="circle">
+                                <span class="check"></span>
+                            </span>
+                        </label>
+                    </div>
+                    <div style="padding-left: 10%;" class="form-check form-check-radio form-check-inline">
+                        <label style="color: black;" class="form-check-label">
+                            <input class="form-check-input" name="radios" type="radio" id="female-radio" value="Female"> Female
+                            <span class="circle">
+                                <span class="check"></span>
+                            </span>
+                        </label>
+                    </div>
+
+                    <div class="container-login100-form-btn">
+                        <button onclick="clickedNext()" type="button" class="login100-form-btn">
+                            Next
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+
+        function clickedNext() {
+
+            var gender = "";
+
+            document.getElementById('contact-number-validation').style.visibility = "hidden";
+            document.getElementById('gender-validation').style.visibility = "hidden";
+
+            if (document.getElementById('contactNumber').value.length == 0) {
+                document.getElementById('contact-number-validation').style.visibility = "visible";
+            } if (!document.getElementById('male-radio').checked && !document.getElementById('female-radio').checked) {
+               document.getElementById('gender-validation').style.visibility = "visible";
+                document.getElementById('gender-div').style.marginTop = "5%";
+            }
+
+            if (document.getElementById('male-radio')) {
+                gender = "Male";
+            } else {
+                gender = "Female";
+            }
+
+            String.prototype.isNumber = function () { return /^\d+$/.test(this); }
+            var contactNumber = document.getElementById('contactNumber').value;
+            if (!contactNumber.isNumber() && document.getElementById('contactNumber').value.length == 0) {
+                document.getElementById('contact-number-validation').textContent = "Please provide your contact number";
+                document.getElementById('contact-number-validation').style.visibility = "visible";
+            } else if (!contactNumber.isNumber()) {
+                document.getElementById('contact-number-validation').textContent = "Please enter a valid contact number";
+                document.getElementById('contact-number-validation').style.visibility = "visible";
+            } else if (contactNumber.isNumber()) {
+                var number = contactNumber.toString();
+                if (number.length == 10) {
+                    var contactNumber = document.getElementById('contactNumber').value;
+                    window.location.href = '@Url.Action("MedicalAidDetailsHelper", "UserDetails")' + '?contactNumber=' + contactNumber + '&gender=' + gender;
+                } else {
+                    document.getElementById('contact-number-validation').textContent = "Please enter a valid contact number";
+                    document.getElementById('contact-number-validation').style.visibility = "visible";
+                }
+            }
+        }
+
+    </script>
+
+    <!--===============================================================================================-->
+    <script src="~/vendor/jquery/jquery-3.2.1.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/vendor/bootstrap/js/popper.js"></script>
+    <script src="~/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/vendor/select2/select2.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/vendor/tilt/tilt.jquery.min.js"></script>
+    <script>
+        $('.js-tilt').tilt({
+            scale: 1.1
+        })
+    </script>
+    <!--===============================================================================================-->
+    <script src="~/js/register.js"></script>
+
+</body>
+</html>
