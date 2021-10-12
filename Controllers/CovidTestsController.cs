@@ -8,9 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using Epicentre.Data;
 using Epicentre.Models;
 using Epicentre.Library;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Epicentre.Controllers
 {
+    [Authorize]
     public class CovidTestsController : Controller
     {
         private readonly EpicentreDataContext _context;
@@ -148,10 +150,7 @@ namespace Epicentre.Controllers
             return View();
         }
 
-
-
-
-        // ****** ATTENTION ****** ONLY USING HILLCREST, KZN FOR TESTING!!!
+        // !!!!!!!! Check to see if these can be passed as hidden parameter using POST, instead of JavaScript !!!!!!!!
         public async Task<IActionResult> TimeBooking(string testType, string testLocation, string testDate)
         {
             // If there are no params, we need to throw not found, otherwise user can bypass booking stage
@@ -451,7 +450,6 @@ namespace Epicentre.Controllers
 
             return View();
         }
-
 
 
         // Displaying all the final details. Insertion to the database does NOT happen here, this action method will call the Book() method which will run the code to insert into database

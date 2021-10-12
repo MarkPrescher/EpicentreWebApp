@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using Epicentre.Library;
 
 namespace Epicentre.Areas.Identity.Pages.Account
 {
@@ -86,6 +87,7 @@ namespace Epicentre.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
+                    UserActions.UserEmail = Input.Email;
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)

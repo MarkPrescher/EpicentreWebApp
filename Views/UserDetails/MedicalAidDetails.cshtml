@@ -1,0 +1,169 @@
+﻿
+@{
+    ViewData["Title"] = "MedicalAidDetails";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Epicentre User Information Medical Aid</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="images/icons/favicon.ico" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/vendor/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/css/util.css">
+    <link rel="stylesheet" type="text/css" href="~/css/register.css">
+    <!--===============================================================================================-->
+</head>
+<body>
+
+    <div class="limiter">
+        <div class="container-login100">
+            <div class="wrap-login100">
+                <div class="login100-pic js-tilt" data-tilt>
+                    <img src="~/img/logo.png" alt="IMG">
+                </div>
+
+                <form style="margin-top: -18%;" class="login100-form validate-form">
+                    <span class="login100-form-title">
+                        Almost there, we just need your medical aid details
+                    </span>
+
+                    <div style="text-align: center;">
+                        <span id="medical-aid-validation" style="color: red; visibility: hidden;">Please provide your</span>
+                    </div>
+                    <div class="wrap-input100 validate-input">
+                        <input id="medicalAid" name="medicalAid" class="input100" type="text" placeholder="Medical Aid Name">
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+                            <i class="fa fa-heart" aria-hidden="true"></i>
+                        </span>
+                    </div>
+
+                    <div id="membership-number-div" style="text-align: center; margin-top: -5%;">
+                        <span id="membership-number-validation" style="color: red; visibility: hidden;">Please provide your</span>
+                    </div>
+                    <div class="wrap-input100 validate-input">
+                        <input id="membershipNumber" name="membershipNumber" class="input100" type="text" placeholder="Membership Number">
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+                            <i class="fa fa-user-md" aria-hidden="true"></i>
+                        </span>
+                    </div>
+
+                    <div id="auth-number-div" style="text-align: center; margin-top: -5%;">
+                        <span id="auth-number-validation" style="color: red; visibility: hidden;">Please provide your</span>
+                    </div>
+                    <div class="wrap-input100 validate-input">
+                        <input id="authNumber" name="authNumber" class="input100" placeholder="Authorization Number">
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+                            <i class="fa fa-key" aria-hidden="true"></i>
+                        </span>
+                    </div>
+
+                    <div class="container-login100-form-btn">
+                        <button onclick="clickedNext()" type="button" class="login100-form-btn">
+                            Save
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+
+        function clickedNext() {
+
+            var medicalAidCheck = true;
+            var membershipNumberCheck = true;
+            var authNumberCheck = true;
+
+            document.getElementById('medical-aid-validation').style.visibility = "hidden";
+            document.getElementById('membership-number-validation').style.visibility = "hidden";
+            document.getElementById('auth-number-validation').style.visibility = "hidden";
+            document.getElementById('membership-number-div').style.marginTop = "-5%";
+            document.getElementById('auth-number-div').style.marginTop = "-5%";
+
+            if (document.getElementById('medicalAid').value.length == 0) {
+                document.getElementById('medical-aid-validation').style.visibility = "visible";
+                medicalAidCheck = false;
+            } if (document.getElementById('membershipNumber').value.length == 0) {
+                document.getElementById('membership-number-validation').style.visibility = "visible";
+                document.getElementById('membership-number-div').style.marginTop = "5%";
+                membershipNumberCheck = false;
+            } if (document.getElementById('authNumber').value.length == 0) {
+                document.getElementById('auth-number-validation').style.visibility = "visible";
+                document.getElementById('auth-number-div').style.marginTop = "5%";
+                authNumberCheck = false;
+            }
+
+            String.prototype.isNumber = function () { return /^\d+$/.test(this); }
+            var membershipNumber = document.getElementById('membershipNumber').value;
+            if (!membershipNumber.isNumber() && document.getElementById('membershipNumber').value.length == 0) {
+                document.getElementById('membership-number-validation').textContent = "Please provide your";
+                document.getElementById('membership-number-validation').style.visibility = "visible";
+                document.getElementById('membership-number-div').style.marginTop = "5%";
+                membershipNumberCheck = false;
+            } else if (!membershipNumber.isNumber()) {
+                document.getElementById('membership-number-validation').textContent = "Please enter a valid";
+                document.getElementById('membership-number-validation').style.visibility = "visible";
+                document.getElementById('membership-number-div').style.marginTop = "5%";
+                membershipNumberCheck = false;
+            }
+
+            var authNumber = document.getElementById('authNumber').value;
+            if (!authNumber.isNumber() && document.getElementById('authNumber').value.length == 0) {
+                document.getElementById('auth-number-validation').textContent = "Please provide your";
+                document.getElementById('auth-number-validation').style.visibility = "visible";
+                document.getElementById('auth-number-div').style.marginTop = "5%";
+                authNumberCheck = false;
+            } else if (!authNumber.isNumber()) {
+                document.getElementById('auth-number-validation').textContent = "Please enter a valid";
+                document.getElementById('auth-number-validation').style.visibility = "visible";
+                document.getElementById('auth-number-div').style.marginTop = "5%";
+                authNumberCheck = false;
+            }
+
+            if (membershipNumberCheck == true && authNumberCheck == true && medicalAidCheck == true) {
+                var medicalAid = document.getElementById('medicalAid').value;
+                var membershipNumber = document.getElementById('membershipNumber').value;
+                var authNumber = document.getElementById('authNumber').value;
+                window.location.href = '@Url.Action("SaveUserDetails", "UserDetails")' + '?medicalAid=' + medicalAid + '&membershipNumber=' + membershipNumber + '&authNumber=' + authNumber;
+             }
+        }
+
+    </script>
+
+    <!--===============================================================================================-->
+    <script src="~/vendor/jquery/jquery-3.2.1.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/vendor/bootstrap/js/popper.js"></script>
+    <script src="~/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/vendor/select2/select2.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/vendor/tilt/tilt.jquery.min.js"></script>
+    <script>
+        $('.js-tilt').tilt({
+            scale: 1.1
+        })
+    </script>
+    <!--===============================================================================================-->
+    <script src="~/js/register.js"></script>
+
+</body>
+</html>

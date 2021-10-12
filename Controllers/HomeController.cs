@@ -1,4 +1,9 @@
-﻿using Epicentre.Models;
+﻿using Epicentre.Areas.Identity.Data;
+using Epicentre.Data;
+using Epicentre.Library;
+using Epicentre.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -9,17 +14,22 @@ using System.Threading.Tasks;
 
 namespace Epicentre.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly EpicentreDataContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(EpicentreDataContext context)
         {
-            _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
         {
+            if (!UserActions.UserExists(_context))
+            {
+                return RedirectToAction("Index", "UserDetails");
+            }
             return View();
         }
 
