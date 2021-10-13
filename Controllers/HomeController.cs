@@ -18,10 +18,14 @@ namespace Epicentre.Controllers
     public class HomeController : Controller
     {
         private readonly EpicentreDataContext _context;
+        private readonly UserManager<EpicentreUser> userManager;
+        private readonly SignInManager<EpicentreUser> signInManager;
 
-        public HomeController(EpicentreDataContext context)
+        public HomeController(UserManager<EpicentreUser> userManager, SignInManager<EpicentreUser> signInManager, EpicentreDataContext context)
         {
             _context = context;
+            this.userManager = userManager;
+            this.signInManager = signInManager;
         }
 
         public IActionResult Index()
@@ -46,6 +50,12 @@ namespace Epicentre.Controllers
         public IActionResult Contact()
         {
             return View();
+        }
+
+        public async Task<IActionResult> Logout()
+        {
+            await signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
