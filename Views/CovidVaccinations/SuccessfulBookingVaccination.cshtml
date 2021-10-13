@@ -1,0 +1,11 @@
+﻿
+@{
+    ViewData["Title"] = "SuccessfulBookingVaccination";
+}
+
+<div style="text-align: center;" class="content">
+    <h1 style="color: green;">You have successfully booked!</h1>
+    <h2>An email to confirm your booking has been sent to you.</h2>
+    <h3 style="margin-top: 4%;">We'll see you for your COVID-19 <span style="color: red; font-weight: bold;"></span> at <span style="color: red; font-weight: bold;">@ViewBag.VaccinationLocation</span> on <span style="color: red; font-weight: bold;">@ViewBag.VaccinationDate</span> at <span style="color: red; font-weight: bold;">@ViewBag.VaccinationTime</span>.</h3>
+    <a style="color: red;" asp-controller="CovidVaccinations" asp-action="Index"><h3>Done</h3></a>
+</div>
