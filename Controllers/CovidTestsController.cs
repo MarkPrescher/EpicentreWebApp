@@ -9,6 +9,7 @@ using Epicentre.Data;
 using Epicentre.Models;
 using Epicentre.Library;
 using Microsoft.AspNetCore.Authorization;
+using System.Net.Mail;
 
 namespace Epicentre.Controllers
 {
@@ -145,8 +146,19 @@ namespace Epicentre.Controllers
         }
 
         // The original "Create" method - not inserting into database though - only inserts in the Book() method.
-        public IActionResult RegisterCovidTest()
+        public async Task<IActionResult> RegisterCovidTest()
         {
+            var details = await _context.UserDetail.FirstOrDefaultAsync(m => m.EMAIL_ADDRESS == UserActions.UserEmail);
+
+            ViewBag.FirstName = details.FIRST_NAME;
+            ViewBag.LastName = details.LAST_NAME;
+            ViewBag.ID = details.ID_NUMBER;
+            ViewBag.Contact = details.CONTACT_NUMBER;
+            ViewBag.Email = details.EMAIL_ADDRESS;
+            ViewBag.Gender = details.GENDER;
+            ViewBag.Medical = details.MEDICAL_AID;
+            ViewBag.Membership = details.MEMBERSHIP_NUMBER;
+            ViewBag.Auth = details.AUTH_NUMBER;
             return View();
         }
 
@@ -485,6 +497,22 @@ namespace Epicentre.Controllers
             {
                 await _context.CovidTest.AddAsync(covidTest);
                 await _context.SaveChangesAsync();
+
+                string Data;
+                SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
+                smtpClient.Credentials = new System.Net.NetworkCredential("noreplyepicentertest@gmail.com", "TestingPassword1");
+                smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+                smtpClient.EnableSsl = true;
+                MailMessage mail = new MailMessage();
+
+                mail.From = new MailAddress("noreplyepicentertest@gmail.com", "Epicenter");
+                mail.To.Add(new MailAddress(UserActions.UserEmail));
+                mail.Subject = "Covid Test Details";
+                Data = "First Name: " + UserInformationDetails.FirstName+ "\n" + "Last Name: " + UserInformationDetails.LastName +"\n" +  
+                    "Location : " + covidTest.TEST_LOCATION + "\n" + "Type: " + covidTest.TEST_TYPE + "\n" + "Date: " + covidTest.TEST_DATE + "\n"
+                    + "Time: " + covidTest.TEST_TIME;
+                mail.Body = Data;
+                smtpClient.Send(mail);
                 return RedirectToAction(nameof(SuccessfulBooking));
             }
             catch (Exception exception)

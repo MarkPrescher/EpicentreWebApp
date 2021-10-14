@@ -14,26 +14,26 @@
             <h4 class="card-title">@ViewData["Title"]</h4>
         </div>
         <div style="padding-top: 3.5%;" class="card-body">
-            <form>
+            <form action ="save">
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
                             <label class="bmd-label-floating">Fist Name</label>
-                            <input value="@ViewData["FirstName"]" type="text" class="form-control">
+                            <input value=@ViewData["FirstName"] type="text" class="form-control" name="first">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             @* Get value from user table *@
                             <label class="bmd-label-floating">Last Name</label>
-                            <input value="Doe" type="text" class="form-control">
+                            <input value=@ViewData["Last"] type="text" class="form-control">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             @* Get value from user table *@
                             <label class="bmd-label-floating">RSA Identification Number</label>
-                            <input value="0123456789" type="text" class="form-control">
+                            <input value=@ViewData["ID"] type="text" class="form-control">
                         </div>
                     </div>
                 </div>
@@ -42,20 +42,20 @@
                         <div class="form-group">
                             @* Get value from user table *@
                             <label class="bmd-label-floating">Contact Number</label>
-                            <input value="0123456789" type="text" class="form-control">
+                            <input value=@ViewData["Contact"] type="text" class="form-control">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             @* Get value from user table *@
                             <label class="bmd-label-floating">Email Address</label>
-                            <input value="johndoe@gmail.com" type="text" class="form-control">
+                            <input value=@ViewData["Email"] type="text" class="form-control">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             @* Get value from user table - use if statement to display correct gender *@
-                            @if (1 == 1)
+                            @if (ViewData["Gender"].ToString() == "Male")
                             {
                                 <div style="padding-left: 7.5%;" class="form-check form-check-radio form-check-inline">
                                     <label class="form-check-label">
@@ -100,23 +100,23 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label class="bmd-label-floating">Medical Aid</label>
-                            <input value="My Medical Aid" type="text" class="form-control" disabled>
+                            <input value=@ViewData["Medical"] type="text" class="form-control">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label class="bmd-label-floating">Membership Number</label>
-                            <input value="123456789" type="text" class="form-control" disabled>
+                            <input value=@ViewData["Member"] type="text" class="form-control" >
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label class="bmd-label-floating">Authorization Number</label>
-                            <input value="1234" type="text" class="form-control" disabled>
+                            <input value=@ViewData["Auth"] type="text" class="form-control">
                         </div>
                     </div>
                 </div>
-                <center><button onclick="saveForm()" type="button" style="background-color: red; margin-top: 1%;" class="btn btn-primary">Update Profile</button></center>
+                <center><button type="submit" style="background-color: red; margin-top: 1%;" class="btn btn-primary">Update Profile</button></center>
                 <div class="clearfix"></div>
             </form>
         </div>
@@ -124,7 +124,12 @@
 
 
 </div>
-
+@{ if (TempData["Test"]==null)
+    {
+        <script>
+            alert('@TempData["Test"]')
+        </script>
+    }}
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }

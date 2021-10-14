@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Epicentre.Areas.Identity.Data;
 using Epicentre.Data;
 using Epicentre.Models;
+using Epicentre.Library;
+
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -51,7 +53,21 @@ namespace Epicentre.Areas.Identity.Pages.Account.Manage
             // query here
             //ViewData["FirstName"] = "";
 
+            var details =  _context.UserDetail.FirstOrDefault(m => m.EMAIL_ADDRESS == UserActions.UserEmail);
+
+            ViewData["FirstName"] = details.FIRST_NAME;
+            ViewData["Last"] = details.LAST_NAME;
+            ViewData["ID"] = details.ID_NUMBER;
+            ViewData["Contact"] = details.CONTACT_NUMBER;
+            ViewData["Email"] = details.EMAIL_ADDRESS;
+            ViewData["Gender"] = details.GENDER;
+            ViewData["Medical"] = details.MEDICAL_AID;
+            ViewData["Member"] = details.MEMBERSHIP_NUMBER;
+            ViewData["Auth"] = details.AUTH_NUMBER;
+
+
             Username = userName;
+
 
             Input = new InputModel
             {
@@ -99,6 +115,18 @@ namespace Epicentre.Areas.Identity.Pages.Account.Manage
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";
             return RedirectToPage();
+        }
+
+        public async Task <IActionResult> save(string first)
+        {
+            var details = _context.UserDetail.FirstOrDefault(m => m.EMAIL_ADDRESS == UserActions.UserEmail);
+
+
+            details.FIRST_NAME = "F";
+             _context.UserDetail.Update(details);
+            await _context.SaveChangesAsync();
+            return RedirectToPage("/Identity/Account/Manage");
+
         }
     }
 }
