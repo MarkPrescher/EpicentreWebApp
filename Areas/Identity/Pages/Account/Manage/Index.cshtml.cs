@@ -4,6 +4,8 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using Epicentre.Areas.Identity.Data;
+using Epicentre.Data;
+using Epicentre.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -12,15 +14,18 @@ namespace Epicentre.Areas.Identity.Pages.Account.Manage
 {
     public partial class IndexModel : PageModel
     {
+        private readonly EpicentreDataContext _context;
         private readonly UserManager<EpicentreUser> _userManager;
         private readonly SignInManager<EpicentreUser> _signInManager;
 
         public IndexModel(
             UserManager<EpicentreUser> userManager,
-            SignInManager<EpicentreUser> signInManager)
+            SignInManager<EpicentreUser> signInManager,
+            EpicentreDataContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _context = context;
         }
 
         public string Username { get; set; }
@@ -42,6 +47,9 @@ namespace Epicentre.Areas.Identity.Pages.Account.Manage
         {
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+
+            // query here
+            //ViewData["FirstName"] = "";
 
             Username = userName;
 

@@ -10,18 +10,19 @@
 }
 
 <div style="padding-left: 5%; padding-right: 5%; padding-bottom: 3%; margin-top: 0%;" class="content">
-    <h1>Manage your account</h1>
+    <h1>My Profile</h1>
 
     <div>
-        <h4>Change your account settings</h4>
-        <hr />
-        <div class="col-md-3">
+        <h3 style="margin-top: 0%;">Manage your account</h3>
+        <hr style="background-color: dimgrey;" />
+        <div style="text-align: center;">
             <partial name="_ManageNav" />
+            <hr style="background-color: dimgrey; margin-top: 0%;" />
+            <div>
+                @RenderBody()
+            </div>
         </div>
-        <div class="col-md-9">
-            @RenderBody()
         </div>
-    </div>
 </div>
 
     @section Scripts {
