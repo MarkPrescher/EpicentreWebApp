@@ -16,22 +16,22 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             @* Get value from user table *@
-                            <label class="bmd-label-floating">Fist Name</label>
-                            <input value="John" type="text" class="form-control" disabled>
+                            <label class="bmd-label-floating">First Name</label>
+                            <input value="@ViewBag.FirstName" type="text" class="form-control" disabled>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             @* Get value from user table *@
                             <label class="bmd-label-floating">Last Name</label>
-                            <input value="Doe" type="text" class="form-control" disabled>
+                            <input value="@ViewBag.LastName" type="text" class="form-control" disabled>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             @* Get value from user table *@
                             <label class="bmd-label-floating">RSA Identification Number</label>
-                            <input value="0123456789" type="text" class="form-control" disabled>
+                            <input value="@ViewBag.ID" type="text" class="form-control" disabled>
                         </div>
                     </div>
                 </div>
@@ -40,20 +40,20 @@
                         <div class="form-group">
                             @* Get value from user table *@
                             <label class="bmd-label-floating">Contact Number</label>
-                            <input value="0123456789" type="text" class="form-control" disabled>
+                            <input value="@ViewBag.Contact" type="text" class="form-control" disabled>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             @* Get value from user table *@
                             <label class="bmd-label-floating">Email Address</label>
-                            <input value="johndoe@gmail.com" type="text" class="form-control" disabled>
+                            <input value="@ViewBag.Email" type="text" class="form-control" disabled>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             @* Get value from user table - use if statement to display correct gender *@
-                            @if (1 == 1)
+                            @if (ViewBag.Gender == "Male")
                             {
                                 <div style="padding-left: 20%;" class="form-check form-check-radio form-check-inline disabled">
                                     <label class="form-check-label">
@@ -98,19 +98,19 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label class="bmd-label-floating">Medical Aid</label>
-                            <input value="My Medical Aid" type="text" class="form-control" disabled>
+                            <input value="@ViewBag.Medical" type="text" class="form-control">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label class="bmd-label-floating">Membership Number</label>
-                            <input value="123456789" type="text" class="form-control" disabled>
+                            <input value="@ViewBag.Membership" type="text" class="form-control">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label class="bmd-label-floating">Authorization Number</label>
-                            <input value="1234" type="text" class="form-control" disabled>
+                            <input value="@ViewBag.Auth" type="text" class="form-control">
                         </div>
                     </div>
                 </div>
