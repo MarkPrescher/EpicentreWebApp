@@ -505,12 +505,12 @@ namespace Epicentre.Controllers
 
                 string Data;
                 SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
-                smtpClient.Credentials = new System.Net.NetworkCredential("noreplyepicentrevac@gmail.com", "TestingPassword1");
+                smtpClient.Credentials = new System.Net.NetworkCredential("noreplyepicentertest@gmail.com", "TestingPassword1");
                 smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
                 smtpClient.EnableSsl = true;
                 MailMessage mail = new MailMessage();
 
-                mail.From = new MailAddress("noreplyepicentrevac@gmail.com", "Epicentre");
+                mail.From = new MailAddress("noreplyepicentertest@gmail.com", "Epicentre");
                 mail.To.Add(new MailAddress(UserActions.UserEmail));
                 mail.Subject = "COVID-19 Vaccination Details";
                 Data = "First Name: " + UserInformationDetails.FirstName + "\n" + "Last Name: " + UserInformationDetails.LastName + "\n" +
@@ -521,7 +521,7 @@ namespace Epicentre.Controllers
                 return RedirectToAction(nameof(SuccessfulBookingVaccination));
             }
             catch (Exception exception)
-            { 
+            {
                 return RedirectToAction(nameof(FailedBookingVaccination));
             }
         }
