@@ -42,7 +42,7 @@
                     </span>
 
                     <div style="text-align: center;">
-                        <span id="medical-aid-validation" style="color: red; visibility: hidden;">Please provide your</span>
+                        <span id="medical-aid-validation" style="color: red; visibility: hidden;">Please provide your medical aid</span>
                     </div>
                     <div class="wrap-input100 validate-input">
                         <input id="medicalAid" name="medicalAid" class="input100" type="text" placeholder="Medical Aid Name">
@@ -53,7 +53,7 @@
                     </div>
 
                     <div id="membership-number-div" style="text-align: center; margin-top: -5%;">
-                        <span id="membership-number-validation" style="color: red; visibility: hidden;">Please provide your</span>
+                        <span id="membership-number-validation" style="color: red; visibility: hidden;">Please provide your membership number</span>
                     </div>
                     <div class="wrap-input100 validate-input">
                         <input id="membershipNumber" name="membershipNumber" class="input100" type="text" placeholder="Membership Number">
@@ -64,7 +64,7 @@
                     </div>
 
                     <div id="auth-number-div" style="text-align: center; margin-top: -5%;">
-                        <span id="auth-number-validation" style="color: red; visibility: hidden;">Please provide your</span>
+                        <span id="auth-number-validation" style="color: red; visibility: hidden;">Please provide your authorization number</span>
                     </div>
                     <div class="wrap-input100 validate-input">
                         <input id="authNumber" name="authNumber" class="input100" placeholder="Authorization Number">
@@ -114,12 +114,12 @@
             String.prototype.isNumber = function () { return /^\d+$/.test(this); }
             var membershipNumber = document.getElementById('membershipNumber').value;
             if (!membershipNumber.isNumber() && document.getElementById('membershipNumber').value.length == 0) {
-                document.getElementById('membership-number-validation').textContent = "Please provide your";
+                document.getElementById('membership-number-validation').textContent = "Please provide your membership number";
                 document.getElementById('membership-number-validation').style.visibility = "visible";
                 document.getElementById('membership-number-div').style.marginTop = "5%";
                 membershipNumberCheck = false;
             } else if (!membershipNumber.isNumber()) {
-                document.getElementById('membership-number-validation').textContent = "Please enter a valid";
+                document.getElementById('membership-number-validation').textContent = "Please enter a valid number";
                 document.getElementById('membership-number-validation').style.visibility = "visible";
                 document.getElementById('membership-number-div').style.marginTop = "5%";
                 membershipNumberCheck = false;
@@ -127,12 +127,12 @@
 
             var authNumber = document.getElementById('authNumber').value;
             if (!authNumber.isNumber() && document.getElementById('authNumber').value.length == 0) {
-                document.getElementById('auth-number-validation').textContent = "Please provide your";
+                document.getElementById('auth-number-validation').textContent = "Please provide your authorization number";
                 document.getElementById('auth-number-validation').style.visibility = "visible";
                 document.getElementById('auth-number-div').style.marginTop = "5%";
                 authNumberCheck = false;
             } else if (!authNumber.isNumber()) {
-                document.getElementById('auth-number-validation').textContent = "Please enter a valid";
+                document.getElementById('auth-number-validation').textContent = "Please enter a valid number";
                 document.getElementById('auth-number-validation').style.visibility = "visible";
                 document.getElementById('auth-number-div').style.marginTop = "5%";
                 authNumberCheck = false;

@@ -88,18 +88,22 @@
 
         function clickedNext() {
 
+            var namesCorrect = true;
+            var idNumberCorrect = true;
+
             document.getElementById('first-name-validation').style.visibility = "hidden";
             document.getElementById('last-name-validation').style.visibility = "hidden";
             document.getElementById('id-validation').style.visibility = "hidden";
             document.getElementById('last-name-div').style.marginTop = "-5%";
             document.getElementById('id-div').style.marginTop = "-5%";
-            
 
             if (document.getElementById('firstName').value.length == 0) {
                 document.getElementById('first-name-validation').style.visibility = "visible";
+                namesCorrect = false;;
             } if (document.getElementById('lastName').value.length == 0) {
                 document.getElementById('last-name-validation').style.visibility = "visible";
                 document.getElementById('last-name-div').style.marginTop = "5%";
+                namesCorrect = false;
             }
 
             String.prototype.isNumber = function () { return /^\d+$/.test(this); }
@@ -108,22 +112,29 @@
                 document.getElementById('id-validation').textContent = "Please provide your ID Number";
                 document.getElementById('id-validation').style.visibility = "visible";
                 document.getElementById('id-div').style.marginTop = "5%";
+                idNumberCorrect = false;
             } else if (!idNumber.isNumber()) {
                 document.getElementById('id-validation').textContent = "Please enter a valid ID Number";
                 document.getElementById('id-validation').style.visibility = "visible";
                 document.getElementById('id-div').style.marginTop = "5%";
+                idNumberCorrect = false;
             } else if (idNumber.isNumber()) {
                 var id = idNumber.toString();
                 if (id.length == 13) {
-                    var firstName = document.getElementById('firstName').value;
-                    var lastName = document.getElementById('lastName').value;
-                    var idNumber = document.getElementById('idNumber').value;
-                    window.location.href = '@Url.Action("ContactDetailsHelper", "UserDetails")' + '?firstName=' + firstName + '&lastName=' + lastName + '&idNumber=' + idNumber;
+                    idNumberCorrect = true;
                 } else {
                     document.getElementById('id-validation').textContent = "Please enter a valid ID Number";
                     document.getElementById('id-validation').style.visibility = "visible";
                     document.getElementById('id-div').style.marginTop = "5%";
+                    idNumberCorrect = false;
                 }
+            }
+
+            if (namesCorrect && idNumberCorrect) {
+                var firstName = document.getElementById('firstName').value;
+                var lastName = document.getElementById('lastName').value;
+                var idNumber = document.getElementById('idNumber').value;
+                window.location.href = '@Url.Action("ContactDetailsHelper", "UserDetails")' + '?firstName=' + firstName + '&lastName=' + lastName + '&idNumber=' + idNumber;
             }
         }
 

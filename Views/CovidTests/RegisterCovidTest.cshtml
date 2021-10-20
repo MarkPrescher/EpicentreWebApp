@@ -16,7 +16,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             @* Get value from user table *@
-                            <label class="bmd-label-floating">Fist Name</label>
+                            <label class="bmd-label-floating">First Name</label>
                             <input value= @ViewBag.FirstName type="text" class="form-control" disabled>
                         </div>
                     </div>
@@ -273,8 +273,6 @@
             window.location.href = '@Url.Action("TimeBooking", "CovidTests")' + '?testType=' + testTypeUrl + '&testLocation=' + testLocationUrl + '&testDate=' + testDate;
         }
     }
-
-
 </script>
 
     @section Scripts {
