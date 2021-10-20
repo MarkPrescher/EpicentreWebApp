@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Epicentre.Data;
 using Epicentre.Models;
 using Epicentre.Library;
+using System.Net.Mail;
 
 namespace Epicentre.Controllers
 {
@@ -154,8 +155,22 @@ namespace Epicentre.Controllers
 
 
         // The original "Create" method - not inserting into database though - only inserts in the Book() method.
-        public IActionResult RegisterCovidVaccination()
+        public async Task<IActionResult> RegisterCovidVaccination()
         {
+            var details = await _context.UserDetail.FirstOrDefaultAsync(m => m.EMAIL_ADDRESS == UserActions.UserEmail);
+
+            ViewBag.FirstName = details.FIRST_NAME;
+            ViewBag.LastName = details.LAST_NAME;
+            ViewBag.ID = details.ID_NUMBER;
+            ViewBag.Contact = details.CONTACT_NUMBER;
+            ViewBag.Email = details.EMAIL_ADDRESS;
+            ViewBag.Gender = details.GENDER;
+            ViewBag.Medical = details.MEDICAL_AID;
+            ViewBag.Membership = details.MEMBERSHIP_NUMBER;
+            ViewBag.Auth = details.AUTH_NUMBER;
+
+            UserInformationDetails.FirstName = details.FIRST_NAME;
+            UserInformationDetails.LastName = details.LAST_NAME;
             return View();
         }
 
@@ -474,8 +489,6 @@ namespace Epicentre.Controllers
         public async Task<IActionResult> Book()
         {
             CovidVaccination covidVaccination = new CovidVaccination();
-
-
             covidVaccination.VACCINATION_ID = Guid.NewGuid();
             covidVaccination.VACCINATION_DATE = CovidVaccinationDetails.VaccinationDate;
             covidVaccination.VACCINATION_TIME = CovidVaccinationDetails.VaccinationTime;
@@ -484,7 +497,7 @@ namespace Epicentre.Controllers
             //this must be changed later
             covidVaccination.VACCINATION_NEXT_DATE = "Temp";
             covidVaccination.VACCINATION_STATUS = "Temp";
-            covidVaccination.VACCINATION_TYPE = "Temp";
+            covidVaccination.VACCINATION_TYPE = "Unknown";
             covidVaccination.USER_ID = "1"; // must eventually get user id
 
 
@@ -492,10 +505,26 @@ namespace Epicentre.Controllers
             {
                 await _context.CovidVaccination.AddAsync(covidVaccination);
                 await _context.SaveChangesAsync();
+
+                string Data;
+                SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
+                smtpClient.Credentials = new System.Net.NetworkCredential("noreplyepicentertest@gmail.com", "TestingPassword1");
+                smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+                smtpClient.EnableSsl = true;
+                MailMessage mail = new MailMessage();
+
+                mail.From = new MailAddress("noreplyepicentertest@gmail.com", "Epicentre");
+                mail.To.Add(new MailAddress(UserActions.UserEmail));
+                mail.Subject = "COVID-19 Vaccination Details";
+                Data = "First Name: " + UserInformationDetails.FirstName + "\n" + "Last Name: " + UserInformationDetails.LastName + "\n" +
+                    "Location : " + covidVaccination.VACCINATION_LOCATION + "\n" + "Type: " + covidVaccination.VACCINATION_TYPE + "\n" + "Date: " + covidVaccination.VACCINATION_DATE + "\n"
+                    + "Time: " + covidVaccination.VACCINATION_TIME;
+                mail.Body = Data;
+                smtpClient.Send(mail);
                 return RedirectToAction(nameof(SuccessfulBookingVaccination));
             }
             catch (Exception exception)
-            { 
+            {
                 return RedirectToAction(nameof(FailedBookingVaccination));
             }
         }

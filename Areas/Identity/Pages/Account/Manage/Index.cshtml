@@ -8,56 +8,54 @@
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 <div style="text-align: center;" class="row">
 
-
     <div class="card">
         <div class="card-header card-header-primary">
             <h4 class="card-title">@ViewData["Title"]</h4>
         </div>
         <div style="padding-top: 3.5%;" class="card-body">
             <form>
-                <div class="row">
+                <div id="first-row" style="margin-bottom: -2%;" class="row">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label class="bmd-label-floating">Fist Name</label>
-                            <input value="@ViewData["FirstName"]" type="text" class="form-control">
+                            <label class="bmd-label-floating">First Name</label>
+                            <input id="firstName" value=@ViewData["FirstName"] type="text" class="form-control">
                         </div>
+                        <span id="first-name-validation" style="color: red; font-weight: bold; visibility: hidden;" class="text-danger">Please enter your first name</span>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            @* Get value from user table *@
                             <label class="bmd-label-floating">Last Name</label>
-                            <input value="Doe" type="text" class="form-control">
+                            <input id="lastName" value=@ViewData["LastName"] type="text" class="form-control">
                         </div>
+                        <span id="last-name-validation" style="color: red; font-weight: bold; visibility: hidden;" class="text-danger">Please enter your last name</span>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            @* Get value from user table *@
                             <label class="bmd-label-floating">RSA Identification Number</label>
-                            <input value="0123456789" type="text" class="form-control">
+                            <input id="idNumber" value=@ViewData["IDNumber"] type="text" class="form-control">
                         </div>
+                        <span id="id-number-validation" style="color: red; font-weight: bold; visibility: hidden;" class="text-danger">Please enter your ID Number</span>
                     </div>
                 </div>
-                <div style="padding-top: 1%;" class="row">
+                <div id="second-row" style="margin-bottom: -2%; padding-top: 1%;" class="row">
                     <div class="col-md-4">
                         <div class="form-group">
-                            @* Get value from user table *@
                             <label class="bmd-label-floating">Contact Number</label>
-                            <input value="0123456789" type="text" class="form-control">
+                            <input id="contactNumber" value=@ViewData["ContactNumber"] type="text" class="form-control">
                         </div>
+                        <span id="contact-number-validation" style="color: red; font-weight: bold; visibility: hidden;" class="text-danger">Please enter your contact number</span>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            @* Get value from user table *@
                             <label class="bmd-label-floating">Email Address</label>
-                            <input value="johndoe@gmail.com" type="text" class="form-control">
+                            <input disabled readonly value=@ViewData["EmailAddress"] type="text" class="form-control">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            @* Get value from user table - use if statement to display correct gender *@
-                            @if (1 == 1)
+                            @if (ViewData["Gender"].ToString() == "Male")
                             {
-                                <div style="padding-left: 7.5%;" class="form-check form-check-radio form-check-inline">
+                                <div style="padding-left: 2%;" class="form-check form-check-radio form-check-inline">
                                     <label class="form-check-label">
                                         <input class="form-check-input" name="radios" type="radio" id="male-radio" value="Male" checked> Male
                                         <span class="circle">
@@ -76,7 +74,7 @@
                             }
                             else
                             {
-                                <div style="padding-left: 7.5%;" class="form-check form-check-radio form-check-inline">
+                                <div style="padding-left: 2%;" class="form-check form-check-radio form-check-inline">
                                     <label class="form-check-label">
                                         <input class="form-check-input" name="radios" type="radio" id="male-radio" value="Male"> Male
                                         <span class="circle">
@@ -94,36 +92,157 @@
                                 </div>
                             }
                         </div>
+                        <span id="gender-validation" style="color: red; visibility: hidden;">Please provide your gender</span>
                     </div>
                 </div>
-                <div style="padding-top: 1%;" class="row">
+                <div id="third-row" style="margin-bottom: -2%; padding-top: 1%;" class="row">
                     <div class="col-md-4">
                         <div class="form-group">
                             <label class="bmd-label-floating">Medical Aid</label>
-                            <input value="My Medical Aid" type="text" class="form-control" disabled>
+                            <input id="medicalAid" value=@ViewData["MedicalAid"] type="text" class="form-control">
                         </div>
+                        <span id="medical-aid-validation" style="color: red; font-weight: bold; visibility: hidden;" class="text-danger">Please enter your medical aid</span>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label class="bmd-label-floating">Membership Number</label>
-                            <input value="123456789" type="text" class="form-control" disabled>
+                            <input id="membershipNumber" value=@ViewData["MembershipNumber"] type="text" class="form-control">
                         </div>
+                        <span id="membership-number-validation" style="color: red; font-weight: bold; visibility: hidden;" class="text-danger">Please enter your membership number</span>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label class="bmd-label-floating">Authorization Number</label>
-                            <input value="1234" type="text" class="form-control" disabled>
+                            <input id="authorizationNumber" value=@ViewData["AuthorizationNumber"] type="text" class="form-control">
                         </div>
+                        <span id="authorization-number-validation" style="color: red; font-weight: bold; visibility: hidden;" class="text-danger">Please provide your authorization number</span>
                     </div>
                 </div>
-                <center><button onclick="saveForm()" type="button" style="background-color: red; margin-top: 1%;" class="btn btn-primary">Update Profile</button></center>
+                <center><button onclick="updateProfile()" type="button" style="background-color: red; margin-top: 2.5%;" class="btn btn-primary">Update Profile</button></center>
                 <div class="clearfix"></div>
             </form>
         </div>
     </div>
-
-
 </div>
+
+<script type="text/javascript">
+
+    function updateProfile() {
+
+        String.prototype.isNumber = function () { return /^\d+$/.test(this); }
+
+        var gender = "";
+
+        var firstRowValid = true;
+        var secondRowValid = true;
+        var thirdRowValid = true;
+
+        document.getElementById('first-name-validation').style.visibility = "hidden";
+        document.getElementById('last-name-validation').style.visibility = "hidden";
+        document.getElementById('id-number-validation').style.visibility = "hidden";
+        document.getElementById('contact-number-validation').style.visibility = "hidden";
+        document.getElementById('gender-validation').style.visibility = "hidden";
+        document.getElementById('medical-aid-validation').style.visibility = "hidden";
+        document.getElementById('membership-number-validation').style.visibility = "hidden";
+        document.getElementById('authorization-number-validation').style.visibility = "hidden";
+
+        var firstName = document.getElementById('firstName').value;
+        var lastName = document.getElementById('lastName').value;
+        var idNumber = document.getElementById('idNumber').value;
+        var contactNumber = document.getElementById('contactNumber').value;
+        var medicalAid = document.getElementById('medicalAid').value;
+        var membershipNumber = document.getElementById('membershipNumber').value;
+        var authorizationNumber = document.getElementById('authorizationNumber').value;
+
+        document.getElementById('first-row').style.marginBottom = "-2%";
+        document.getElementById('second-row').style.marginBottom = "-2%";
+        document.getElementById('third-row').style.marginBottom = "-2%";
+
+        if (firstName.length == 0) {
+            document.getElementById('first-name-validation').style.visibility = "visible";
+            document.getElementById('first-row').style.marginBottom = "0%";
+            firstRowValid = false;
+        } if (lastName.length == 0) {
+            document.getElementById('last-name-validation').style.visibility = "visible";
+            document.getElementById('first-row').style.marginBottom = "0%";
+            firstRowValid = false;
+        } if (idNumber.length == 0) {
+            document.getElementById('id-number-validation').style.visibility = "visible";
+            document.getElementById('first-row').style.marginBottom = "0%";
+            firstRowValid = false;
+        } else if (!idNumber.isNumber()) {
+            document.getElementById('id-number-validation').textContent = "Please enter a valid ID Number"
+            document.getElementById('id-number-validation').style.visibility = "visible";
+            document.getElementById('first-row').style.marginBottom = "0%";
+            firstRowValid = false;
+        } else if (idNumber.length > 13 || idNumber.length < 13) {
+            document.getElementById('id-number-validation').textContent = "Please enter a valid ID Number"
+            document.getElementById('id-number-validation').style.visibility = "visible";
+            document.getElementById('first-row').style.marginBottom = "0%";
+            firstRowValid = false;
+        }
+
+        if (contactNumber.length == 0) {
+            document.getElementById('contact-number-validation').style.visibility = "visible";
+            document.getElementById('second-row').style.marginBottom = "0%";
+            secondRowValid = false;
+        } else if (!contactNumber.isNumber()) {
+            document.getElementById('contact-number-validation').textContent = "Please enter a valid contact number";
+            document.getElementById('contact-number-validation').style.visibility = "visible";
+            document.getElementById('second-row').style.marginBottom = "0%";
+            secondRowValid = false;
+        } else if (contactNumber.length > 10 || contactNumber.length < 10) {
+            document.getElementById('contact-number-validation').textContent = "Please enter a valid contact number";
+            document.getElementById('contact-number-validation').style.visibility = "visible";
+            document.getElementById('second-row').style.marginBottom = "0%";
+            secondRowValid = false;
+        }
+
+        if (!document.getElementById('male-radio').checked && !document.getElementById('female-radio').checked) {
+            document.getElementById('gender-validation').style.visibility = "visible";
+            document.getElementById('second-row').style.marginBottom = "0%";
+            secondRowValid = false;
+        } else {
+            if (document.getElementById('male-radio').checked) {
+                gender = "Male";
+            } else if (document.getElementById('female-radio').checked) {
+                gender = "Female";
+            }
+        }
+
+        if (medicalAid.length == 0) {
+            document.getElementById('medical-aid-validation').style.visibility = "visible";
+            document.getElementById('third-row').style.marginBottom = "0%";
+            thirdRowValid = false;
+        } if (membershipNumber.length == 0) {
+            document.getElementById('membership-number-validation').style.visibility = "visible";
+            document.getElementById('third-row').style.marginBottom = "0%";
+            thirdRowValid = false;
+        } if (authorizationNumber.length == 0) {
+            document.getElementById('authorization-number-validation').style.visibility = "visible";
+            document.getElementById('third-row').style.marginBottom = "0%";
+            thirdRowValid = false;
+        }
+
+        if (!membershipNumber.isNumber()) {
+            document.getElementById('membership-number-validation').textContent = "Please provide your membership number";
+            document.getElementById('membership-number-validation').style.visibility = "visible";
+            document.getElementById('third-row').style.marginBottom = "0%";
+            thirdRowValid = false;
+        } if (!authorizationNumber.isNumber()) {
+            document.getElementById('authorization-number-validation').textContent = "Please provide your authorization number";
+            document.getElementById('authorization-number-validation').style.visibility = "visible";
+            document.getElementById('third-row').style.marginBottom = "0%";
+            thirdRowValid = false;
+        }
+
+        if (firstRowValid && secondRowValid && thirdRowValid) {
+            window.location.href = '@Url.Action("UpdateProfile", "AccountHelper")' + '?firstName=' + firstName + '&lastName=' + lastName + '&idNumber=' + idNumber + '&contactNumber=' + contactNumber + '&gender=' + gender + '&medicalAid=' + medicalAid + '&membershipNumber=' + membershipNumber + '&authorizationNumber=' + authorizationNumber;
+        }
+    }
+
+
+</script>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

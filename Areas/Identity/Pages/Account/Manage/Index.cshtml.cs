@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Epicentre.Areas.Identity.Data;
 using Epicentre.Data;
 using Epicentre.Models;
+using Epicentre.Library;
+
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -48,8 +50,27 @@ namespace Epicentre.Areas.Identity.Pages.Account.Manage
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
 
-            // query here
-            //ViewData["FirstName"] = "";
+            if (UserActions.UserEmail == null)
+            {
+                var url = Url.Page(
+                    "/Account/Login",
+                    pageHandler: null,
+                    values: new { area = "Identity" },
+                    protocol: Request.Scheme);
+                Response.Redirect(url);
+            }
+
+            var details = _context.UserDetail.FirstOrDefault(m => m.EMAIL_ADDRESS == UserActions.UserEmail);
+
+            ViewData["FirstName"] = details.FIRST_NAME;
+            ViewData["LastName"] = details.LAST_NAME;
+            ViewData["IDNumber"] = details.ID_NUMBER;
+            ViewData["ContactNumber"] = details.CONTACT_NUMBER;
+            ViewData["EmailAddress"] = details.EMAIL_ADDRESS;
+            ViewData["Gender"] = details.GENDER;
+            ViewData["MedicalAid"] = details.MEDICAL_AID;
+            ViewData["MembershipNumber"] = details.MEMBERSHIP_NUMBER;
+            ViewData["AuthorizationNumber"] = details.AUTH_NUMBER;
 
             Username = userName;
 
@@ -69,36 +90,6 @@ namespace Epicentre.Areas.Identity.Pages.Account.Manage
 
             await LoadAsync(user);
             return Page();
-        }
-
-        public async Task<IActionResult> OnPostAsync()
-        {
-            var user = await _userManager.GetUserAsync(User);
-            if (user == null)
-            {
-                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
-            }
-
-            if (!ModelState.IsValid)
-            {
-                await LoadAsync(user);
-                return Page();
-            }
-
-            var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
-            if (Input.PhoneNumber != phoneNumber)
-            {
-                var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
-                if (!setPhoneResult.Succeeded)
-                {
-                    StatusMessage = "Unexpected error when trying to set phone number.";
-                    return RedirectToPage();
-                }
-            }
-
-            await _signInManager.RefreshSignInAsync(user);
-            StatusMessage = "Your profile has been updated";
-            return RedirectToPage();
         }
     }
 }

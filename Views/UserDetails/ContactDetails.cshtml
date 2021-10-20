@@ -110,9 +110,9 @@
                 document.getElementById('gender-div').style.marginTop = "5%";
             }
 
-            if (document.getElementById('male-radio')) {
+            if (document.getElementById('male-radio').checked) {
                 gender = "Male";
-            } else {
+            } else if (document.getElementById('female-radio').checked) {
                 gender = "Female";
             }
 
