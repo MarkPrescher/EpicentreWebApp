@@ -500,12 +500,12 @@ namespace Epicentre.Controllers
 
                 string Data;
                 SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
-                smtpClient.Credentials = new System.Net.NetworkCredential("noreplyepicentretest@gmail.com", "TestingPassword1");
+                smtpClient.Credentials = new System.Net.NetworkCredential("noreplyepicentertest@gmail.com", "TestingPassword1");
                 smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
                 smtpClient.EnableSsl = true;
                 MailMessage mail = new MailMessage();
 
-                mail.From = new MailAddress("noreplyepicentretest@gmail.com", "Epicentre");
+                mail.From = new MailAddress("noreplyepicentertest@gmail.com", "Epicentre");
                 mail.To.Add(new MailAddress(UserActions.UserEmail));
                 mail.Subject = "COVID-19 Test Details";
                 Data = "First Name: " + UserInformationDetails.FirstName+ "\n" + "Last Name: " + UserInformationDetails.LastName +"\n" +  
