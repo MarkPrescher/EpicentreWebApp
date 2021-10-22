@@ -13,7 +13,6 @@ namespace Epicentre.Controllers
     public class AccountHelperController : Controller
     {
         private readonly EpicentreDataContext _context;
-
         public AccountHelperController(EpicentreDataContext context)
         {
             _context = context;
@@ -37,6 +36,7 @@ namespace Epicentre.Controllers
                     pageHandler: null,
                     values: new { area = "Identity" },
                     protocol: Request.Scheme);
+            Status.StatusCode = 1;
             return Redirect(url);
         }
     }

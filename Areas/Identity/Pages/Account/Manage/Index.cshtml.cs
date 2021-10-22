@@ -11,6 +11,7 @@ using Epicentre.Library;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Epicentre.Controllers;
 
 namespace Epicentre.Areas.Identity.Pages.Account.Manage
 {
@@ -72,6 +73,13 @@ namespace Epicentre.Areas.Identity.Pages.Account.Manage
             ViewData["MembershipNumber"] = details.MEMBERSHIP_NUMBER;
             ViewData["AuthorizationNumber"] = details.AUTH_NUMBER;
 
+            ViewData["StatusCode"] = Status.StatusCode.ToString();
+            if (Status.StatusCode == 1)
+            {
+                ViewData["StatusMessage"] = "Your account has been updated";
+            }
+            Status.StatusCode = 0;
+
             Username = userName;
 
             Input = new InputModel
@@ -87,7 +95,6 @@ namespace Epicentre.Areas.Identity.Pages.Account.Manage
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
-
             await LoadAsync(user);
             return Page();
         }

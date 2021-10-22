@@ -15,18 +15,6 @@
 
  */
 
-(function() {
-  isWindows = navigator.platform.indexOf('Win') > -1 ? true : false;
-
-  if (isWindows) {
-    // if we are on windows OS we activate the perfectScrollbar function
-    $('.sidebar .sidebar-wrapper, .main-panel, .main').perfectScrollbar();
-
-    $('html').addClass('perfect-scrollbar-on');
-  } else {
-    $('html').addClass('perfect-scrollbar-off');
-  }
-})();
 
 
 var breakCards = true;
@@ -164,17 +152,15 @@ md = {
     }
   },
 
-  showNotification: function(from, align) {
+  showNotification: function(from, align, message) {
     type = ['', 'info', 'danger', 'success', 'warning', 'rose', 'primary'];
 
-    color = Math.floor((Math.random() * 6) + 1);
-
     $.notify({
-      icon: "add_alert",
-      message: "Welcome to <b>Material Dashboard Pro</b> - a beautiful admin panel for every web developer."
+        icon: "add_alert",
+        message: message
 
     }, {
-      type: type[color],
+      type: type[3],
       timer: 3000,
       placement: {
         from: from,
