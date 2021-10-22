@@ -7,7 +7,14 @@
 
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 <div style="text-align: center;" class="row">
-
+    @if (ViewData["StatusCode"].ToString() == "0")
+    {
+        <h1 id="status-message" hidden></h1>
+    }
+    else
+    {
+        <h1 id="status-message" hidden>@ViewData["StatusMessage"]</h1>
+    }
     <div class="card">
         <div class="card-header card-header-primary">
             <h4 class="card-title">@ViewData["Title"]</h4>
@@ -126,6 +133,13 @@
 </div>
 
 <script type="text/javascript">
+
+    if (document.getElementById('status-message').textContent != "") {
+        window.onload = function () {
+            var message = document.getElementById('status-message').textContent.toString();
+            md.showNotification('top', 'center', message);
+        };
+    }
 
     function updateProfile() {
 
