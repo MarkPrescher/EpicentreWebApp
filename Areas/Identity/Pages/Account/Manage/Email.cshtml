@@ -26,14 +26,13 @@ else
                         <label class="bmd-label-floating">Email Address</label>
                         <input disabled asp-for="Email" type="text" class="form-control">
                     </div>
-                    <span id="first-name-validation" style="color: red; font-weight: bold; visibility: hidden;" class="text-danger">Please enter your first name</span>
                 </div>
-                <div class="col-md-6">
+                <div style="margin-bottom: 2%;" class="col-md-6">
                     <div class="form-group">
                         <label class="bmd-label-floating">New Email Address</label>
                         <input asp-for="Input.NewEmail" type="text" class="form-control">
                     </div>
-                    <span id="last-name-validation" style="color: red; font-weight: bold; visibility: hidden;" class="text-danger">Please enter your last name</span>
+                    <span style="color: red; font-weight: bold;" class="text-danger" asp-validation-for="Input.NewEmail"></span>
                 </div>
             </div>
             <center><button type="submit" asp-page-handler="ChangeEmail" style="background-color: red; margin-top: 2.5%;" class="btn btn-primary">Update Email</button></center>
