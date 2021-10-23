@@ -47,8 +47,8 @@ namespace Epicentre.Areas.Identity.Pages.Account.Manage
 
         public class InputModel
         {
-            [Required]
-            [EmailAddress]
+            [Required(ErrorMessage = "Please enter a new email address")]
+            [EmailAddress(ErrorMessage = "Please enter a valid email address")]
             [Display(Name = "New email")]
             public string NewEmail { get; set; }
         }
