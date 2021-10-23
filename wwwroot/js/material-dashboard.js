@@ -156,8 +156,8 @@ md = {
     type = ['', 'info', 'danger', 'success', 'warning', 'rose', 'primary'];
 
     $.notify({
-        icon: "add_alert",
-        message: message
+        icon: "info",
+        message: '<center>' + message + '</center>'
 
     }, {
       type: type[3],

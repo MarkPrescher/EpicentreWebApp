@@ -51,7 +51,7 @@ namespace Epicentre.Areas.Identity.Pages.Account.Manage
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
 
-            if (UserActions.UserEmail == null)
+            if (UserActions.UserEmail == "")
             {
                 var url = Url.Page(
                     "/Account/Login",
