@@ -159,6 +159,9 @@ namespace Epicentre.Controllers
             ViewBag.Medical = details.MEDICAL_AID;
             ViewBag.Membership = details.MEMBERSHIP_NUMBER;
             ViewBag.Auth = details.AUTH_NUMBER;
+
+            UserInformationDetails.FirstName = details.FIRST_NAME;
+            UserInformationDetails.LastName = details.LAST_NAME;
             return View();
         }
 
