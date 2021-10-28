@@ -25,7 +25,12 @@ namespace Epicentre.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View(await _context.CovidTest.ToListAsync());
+            var user = await _context.UserDetail.FirstOrDefaultAsync(m => m.EMAIL_ADDRESS == UserActions.UserEmail);
+            string id;
+            id = user.ID.ToString();
+            id = id.ToUpper();
+            var covidTest =  _context.CovidTest.Where(m => m.USER_ID == id).ToList();
+            return View(covidTest);
         }
 
         public async Task<IActionResult> Details(Guid? id)
@@ -34,14 +39,13 @@ namespace Epicentre.Controllers
             {
                 return NotFound();
             }
-
+            
             var covidTest = await _context.CovidTest
                 .FirstOrDefaultAsync(m => m.TEST_ID == id);
             if (covidTest == null)
             {
                 return NotFound();
             }
-
             return View(covidTest);
         }
 
