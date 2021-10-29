@@ -534,17 +534,17 @@ namespace Epicentre.Controllers
                         Data = Data + "Location : " + covidTest.TEST_LOCATION + "(43a Old Main Rd, Hillcrest)";
                         break;
                     case "Pietermaritzburg, KwaZulu-Natal":
-                        Data = Data + "Location : " + covidTest.TEST_LOCATION + "(43a Old Main Rd, Hillcrest)";
+                        Data = Data + "Location : " + covidTest.TEST_LOCATION + "(Temp)";
                         break;
                     case "Durban Central, KwaZulu-Natal":
-                        Data = Data + "Location : " + covidTest.TEST_LOCATION + "(43a Old Main Rd, Hillcrest)";
+                        Data = Data + "Location : " + covidTest.TEST_LOCATION + "(Temp)";
                         break;
                     case "Randburg, Gauteng":
                         Data = Data + "Location : " + covidTest.TEST_LOCATION + "(67 Dundalk Avenue, Parkview, Randburg, Gauteng)";
                         break;
 
                     case "Midrand, Gauteng":
-                        Data = Data + "Location : " + covidTest.TEST_LOCATION + "(67 Dundalk Avenue, Parkview, Randburg, Gauteng)";
+                        Data = Data + "Location : " + covidTest.TEST_LOCATION + "(Temp)";
                         break;
                 }
                 Data = Data + "\n" + "Type: " + covidTest.TEST_TYPE + "\n" + "Date: " + covidTest.TEST_DATE + "\n"
