@@ -516,8 +516,39 @@ namespace Epicentre.Controllers
                 mail.From = new MailAddress("noreplyepicentertest@gmail.com", "Epicentre");
                 mail.To.Add(new MailAddress(UserActions.UserEmail));
                 mail.Subject = "COVID-19 Vaccination Details";
-                Data = "First Name: " + UserInformationDetails.FirstName + "\n" + "Last Name: " + UserInformationDetails.LastName + "\n" +
-                    "Location : " + covidVaccination.VACCINATION_LOCATION + "\n" + "Type: " + covidVaccination.VACCINATION_TYPE + "\n" + "Date: " + covidVaccination.VACCINATION_DATE + "\n"
+                Data = "First Name: " + UserInformationDetails.FirstName + "\n" + "Last Name: " + UserInformationDetails.LastName + "\n";
+
+                switch (covidVaccination.VACCINATION_LOCATION)
+                {
+                    case "Stellenbosch, Western Cape":
+                        Data = Data + "Location : " + covidVaccination.VACCINATION_LOCATION + "(2 Groeneweide Rd, Stellenbosch, Cape Town, 7800)";
+                        break;
+                    case "Bellville, Western Cape":
+                        Data = Data + "Location : " + covidVaccination.VACCINATION_LOCATION+ "(8 Zinnia Rd, Bloemhof, Cape Town, 7530)";
+                        break;
+
+                    case "Rondebosch, Western Cape":
+                        Data = Data + "Location : " + covidVaccination.VACCINATION_LOCATION + "(5 Duke Avenue, Rondebosch, Cape Town, Western Cape)";
+                        break;
+
+                    case "Hillcrest, KwaZulu-Natal":
+                        Data = Data + "Location : " + covidVaccination.VACCINATION_LOCATION + "(43a Old Main Rd, Hillcrest)";
+                        break;
+                    case "Pietermaritzburg, KwaZulu-Natal":
+                        Data = Data + "Location : " + covidVaccination.VACCINATION_LOCATION+ "(43a Old Main Rd, Hillcrest)";
+                        break;
+                    case "Durban Central, KwaZulu-Natal":
+                        Data = Data + "Location : " + covidVaccination.VACCINATION_LOCATION + "(43a Old Main Rd, Hillcrest)";
+                        break;
+                    case "Randburg, Gauteng":
+                        Data = Data + "Location : " + covidVaccination.VACCINATION_LOCATION+ "(67 Dundalk Avenue, Parkview, Randburg, Gauteng)";
+                        break;
+
+                    case "Midrand, Gauteng":
+                        Data = Data + "Location : " + covidVaccination.VACCINATION_LOCATION + "(67 Dundalk Avenue, Parkview, Randburg, Gauteng)";
+                        break;
+                }
+                Data = Data + "\n" + "Type: " + covidVaccination.VACCINATION_TYPE+ "\n" + "Date: " + covidVaccination.VACCINATION_DATE+ "\n"
                     + "Time: " + covidVaccination.VACCINATION_TIME;
                 mail.Body = Data;
                 smtpClient.Send(mail);
