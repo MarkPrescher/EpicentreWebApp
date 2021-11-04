@@ -29,8 +29,6 @@ namespace Epicentre.Controllers
             id = user.ID.ToString();
             id = id.ToUpper();
             var covidVaccination = _context.CovidVaccination.Where(m => m.USER_ID == id).ToList();
-
-
             return View(covidVaccination);
         }
 
