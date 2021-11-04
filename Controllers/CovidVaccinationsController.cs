@@ -24,7 +24,14 @@ namespace Epicentre.Controllers
         // GET: CovidVaccinations
         public async Task<IActionResult> Index()
         {
-            return View(await _context.CovidVaccination.ToListAsync());
+            var user = await _context.UserDetail.FirstOrDefaultAsync(m => m.EMAIL_ADDRESS == UserActions.UserEmail);
+            string id;
+            id = user.ID.ToString();
+            id = id.ToUpper();
+            var covidVaccination = _context.CovidVaccination.Where(m => m.USER_ID == id).ToList();
+
+
+            return View(covidVaccination);
         }
 
         // GET: CovidVaccinations/Details/5
