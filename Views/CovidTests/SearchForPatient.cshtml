@@ -1,0 +1,84 @@
+﻿@model IEnumerable<Epicentre.Models.CovidTest>
+
+@{
+    ViewData["Title"] = "SearchForPatient";
+}
+
+<div style="padding-left: 5%; padding-right: 5%; padding-bottom: 3%; margin-top: 0%;" class="content">
+    <h1 style="padding-left: 2%;">Patient Tests</h1>
+
+    <div style="margin-bottom: -2%; margin-top: 3%; padding-left: 2%;" class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="bmd-label-floating">ID Number</label>
+                <input id="idNumber" type="text" class="form-control">
+            </div>
+            <span id="id-validation" style="color: red; font-weight: bold; visibility: hidden;" class="text-danger">Please enter your first name</span>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <button onclick="search()" type="button" style="background-color: red;" class="btn btn-primary">Search</button>
+            </div>
+        </div>
+    </div>
+
+    <table style="margin-top: 3%;" class="table">
+        <thead>
+            <tr>
+                <th style="font-weight: bold;" class="text-center">Test Date</th>
+                <th style="font-weight: bold;" class="text-center">Test Time</th>
+                <th style="font-weight: bold;" class="text-center">Test Type</th>
+                <th style="font-weight: bold;" class="text-center">Test Location</th>
+                <th style="font-weight: bold;" class="text-center">Email Address</th>
+                <th style="font-weight: bold;" class="text-center">ID Number</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="text-center">23/09/2021</td>
+                <td class="text-center">08:30</td>
+                <td class="text-center">PCR Swab Test</td>
+                <td class="text-center">Hillcrest, KwaZulu-Natal</td>
+                <td class="text-center">msprescher@gmail.com</td>
+                <td class="text-center">0003245086081</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<script type="text/javascript">
+
+    function search() {
+
+        document.getElementById('id-validation').style.visibility = "hidden";
+
+        var idNumber = document.getElementById('idNumber').value;
+        var isNumberCorrect = true;
+
+        String.prototype.isNumber = function () { return /^\d+$/.test(this); }
+        if (!idNumber.isNumber() && document.getElementById('idNumber').value.length == 0) {
+            document.getElementById('id-validation').textContent = "Invalid ID";
+            document.getElementById('id-validation').style.visibility = "visible";
+            idNumberCorrect = false;
+        } else if (!idNumber.isNumber()) {
+            document.getElementById('id-validation').textContent = "Invalid ID";
+            document.getElementById('id-validation').style.visibility = "visible";
+            idNumberCorrect = false;
+        } else if (idNumber.isNumber()) {
+            var id = idNumber.toString();
+            if (id.length == 13) {
+                idNumberCorrect = true;
+            } else {
+                document.getElementById('id-validation').textContent = "Invalid ID";
+                document.getElementById('id-validation').style.visibility = "visible";
+                idNumberCorrect = false;
+            }
+        }
+
+        if (isNumberCorrect) {
+            window.location.href = '@Url.Action("SearchForPatient", "CovidTests")' + '?idNumber=' + idNumber;
+        }
+    }
+
+
+</script>
