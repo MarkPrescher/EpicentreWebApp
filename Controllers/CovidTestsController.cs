@@ -13,7 +13,8 @@ using System.Net.Mail;
 
 namespace Epicentre.Controllers
 {
-    [Authorize]
+    // Add throughout
+    //[Authorize(Roles = "User")]
     public class CovidTestsController : Controller
     {
         private readonly EpicentreDataContext _context;
@@ -533,6 +534,24 @@ namespace Epicentre.Controllers
 
         public IActionResult FailedBooking()
         {
+            return View();
+        }
+
+        public async Task<IActionResult> SearchForPatient()
+        {
+            return View(await _context.CovidTest.ToListAsync());
+        }
+
+        [HttpPost]
+        public IActionResult SearchForPatient(string idNumber)
+        {
+            if (idNumber == null)
+            {
+                return NotFound();
+            }
+
+            // query here, where ID = XXX in db
+
             return View();
         }
     }

@@ -30,7 +30,8 @@ namespace Epicentre.Controllers
 
         public IActionResult Index()
         {
-            if (!UserActions.UserExists(_context))
+            // This needs to be done throughout
+            if (!UserActions.UserExists(_context) && !User.IsInRole("Nurse"))
             {
                 return RedirectToAction("Index", "UserDetails");
             }
