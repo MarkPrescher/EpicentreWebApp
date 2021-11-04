@@ -529,6 +529,7 @@ namespace Epicentre.Controllers
                         Data = Data + "Location : " + covidVaccination.VACCINATION_LOCATION + "(2 Groeneweide Rd, Stellenbosch, Cape Town, 7800)";
                         break;
                     case "Bellville, Western Cape":
+
                         Data = Data + "Location : " + covidVaccination.VACCINATION_LOCATION+ "(8 Zinnia Rd, Bloemhof, Cape Town, 7530)";
                         break;
 
@@ -540,6 +541,7 @@ namespace Epicentre.Controllers
                         Data = Data + "Location : " + covidVaccination.VACCINATION_LOCATION + "(43a Old Main Rd, Hillcrest)";
                         break;
                     case "Pietermaritzburg, KwaZulu-Natal":
+
                         Data = Data + "Location : " + covidVaccination.VACCINATION_LOCATION+ "(Temp)";
                         break;
                     case "Durban Central, KwaZulu-Natal":
@@ -553,8 +555,10 @@ namespace Epicentre.Controllers
                         Data = Data + "Location : " + covidVaccination.VACCINATION_LOCATION + "(Temp)";
                         break;
                 }
+
                 Data = Data + "\n" + "Type: " + covidVaccination.VACCINATION_TYPE+ "\n" + "Date: " + covidVaccination.VACCINATION_DATE+ "\n"
                     + "Time: " + covidVaccination.VACCINATION_TIME;
+
                 mail.Body = Data;
                 smtpClient.Send(mail);
                 return RedirectToAction(nameof(SuccessfulBookingVaccination));
