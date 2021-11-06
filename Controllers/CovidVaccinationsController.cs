@@ -28,7 +28,7 @@ namespace Epicentre.Controllers
             string id;
             id = user.ID.ToString();
             id = id.ToUpper();
-            var covidVaccination = _context.CovidVaccination.Where(m => m.USER_ID == id).ToList();
+            var covidVaccination = _context.CovidVaccination.Where(m => m.USER_EMAIL == id).ToList();
             return View(covidVaccination);
         }
 
@@ -503,7 +503,7 @@ namespace Epicentre.Controllers
             covidVaccination.VACCINATION_NEXT_DATE = "Temp";
             covidVaccination.VACCINATION_STATUS = "Temp";
             covidVaccination.VACCINATION_TYPE = "Unknown";
-            covidVaccination.USER_ID = "1"; // must eventually get user id
+            covidVaccination.USER_EMAIL = UserActions.UserEmail; // must eventually get user id
 
 
             try

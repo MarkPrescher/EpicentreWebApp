@@ -26,11 +26,7 @@ namespace Epicentre.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var user = await _context.UserDetail.FirstOrDefaultAsync(m => m.EMAIL_ADDRESS == UserActions.UserEmail);
-            string id;
-            id = user.ID.ToString();
-            id = id.ToUpper();
-            var covidTest =  _context.CovidTest.Where(m => m.USER_ID == id).ToList();
+            var covidTest = await _context.CovidTest.Where(c => c.USER_EMAIL == UserActions.UserEmail).ToListAsync();
             return View(covidTest);
         }
 
@@ -499,7 +495,7 @@ namespace Epicentre.Controllers
             covidTest.TEST_LOCATION = CovidTestDetails.TestLocation;
             covidTest.TEST_STATUS = "Awaiting...";
             covidTest.TEST_RESULT = "Awaiting...";
-            covidTest.USER_ID = "1"; // must eventually get user id
+            covidTest.USER_EMAIL = UserActions.UserEmail;
 
             try
             {

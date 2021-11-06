@@ -1,5 +1,80 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
+    ViewData["Title"] = "Contact";
 }
+
+<div style="padding-left: 5%; padding-right: 5%; padding-bottom: 3%; margin-top: 0%;" class="content">
+    <h1>Contact Epicentre</h1>
+
+    <div class="card">
+        <div class="card-header card-header-primary">
+            <h4 class="card-title">Please fill out the form below, and we'll get back to you as soon as possible!</h4>
+            <p class="card-category">Don't worry, we've got your contact details stored safely on hand.</p>
+        </div>
+        <div style="padding-top: 3.5%;" class="card-body">
+                <div id="dropdown" style="margin-top: -2.5%; text-align: center;" class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <div class="btn-group">
+                                <button id="button-value" style="background-color: red;" type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Topic
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a onclick="clickedTopic('General enquiry')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">General enquiry</a>
+                                    <a onclick="clickedTopic('Covid testing')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">Covid testing</a>
+                                    <a onclick="clickedTopic('Covid vaccination')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">Covid vaccination</a>
+                                    <a onclick="clickedTopic('Tech support')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">Tech support</a>
+                                </div>
+                            </div>
+                            <br />
+                            <span id="topic-validation" style="color: red; font-weight: bold; visibility: hidden;" class="text-danger">Please select a topic</span>
+                        </div>
+                    </div>
+                </div>
+                <div style="margin-top: 0%;" class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="bmd-label-floating">Speak to us...</label>
+                            <input id="speak" type="text" class="form-control">
+                        </div>
+                        <span id="speak-validation" style="margin-top: -1%; color: red; font-weight: bold; visibility: hidden;" class="text-danger">Please speak to us about something so that we can address it</span>
+                    </div>
+                </div>
+                <center><button onclick="submit()" type="button" style="background-color: red; margin-top: 3%;" class="btn btn-primary">Submit</button></center>
+                <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    var speakFlag = true;
+    var topic = "";
+    var topicChosen = false;
+
+    function clickedTopic(topic) {
+        var display = document.getElementById('button-value');
+        display.innerText = topic;
+        topicChosen = true;
+        document.getElementById('topic-validation').style.visibility = "hidden";
+        topic = topic;
+    }
+
+    function submit() {
+
+        document.getElementById('speak-validation').style.visibility = "hidden";
+        document.getElementById('topic-validation').style.visibility = "hidden";
+
+        if (document.getElementById('speak').value.length == 0) {
+            speakFlag = false;
+            document.getElementById('speak-validation').style.visibility = "visible";
+        }
+        if (!topicChosen) {
+            document.getElementById('topic-validation').style.visibility = "visible";
+        }
+        if (speakFlag && topicChosen) {
+            var message = document.getElementById('speak').value;
+            window.location.href = '@Url.Action("ContactHelper", "Home")' + '?topic=' + topic + '&message=' + message;
+        }
+    }
+
+</script>

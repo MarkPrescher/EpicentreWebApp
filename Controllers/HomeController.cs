@@ -48,6 +48,26 @@ namespace Epicentre.Controllers
             return View();
         }
 
+        public IActionResult ContactHelper(string topic, string message)
+        {
+            // Send email here
+
+            // If successful, then redirect to successful contact
+            // Otherwise redirect to failed contact
+
+            return View();
+        }
+
+        public IActionResult SuccessfulContact()
+        {
+            return View();
+        }
+
+        public IActionResult FailedContact()
+        {
+            return View()
+;        }
+
         public async Task<IActionResult> Logout()
         {
             await signInManager.SignOutAsync();
