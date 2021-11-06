@@ -36,7 +36,7 @@ namespace Epicentre.Models
         [DisplayName("Vaccination Status")]
         public string VACCINATION_STATUS { get; set; }
 
-        public string USER_ID { get; set; }
+        public string USER_EMAIL { get; set; }
 
     }
 }

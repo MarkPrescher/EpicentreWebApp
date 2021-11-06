@@ -25,7 +25,7 @@
                 @Html.DisplayNameFor(model => model.TEST_RESULT)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.USER_ID)
+                @Html.DisplayNameFor(model => model.USER_EMAIL)
             </th>
             <th></th>
         </tr>
@@ -46,7 +46,7 @@
                 @Html.DisplayFor(modelItem => item.TEST_RESULT)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.USER_ID)
+                @Html.DisplayFor(modelItem => item.USER_EMAIL)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.TEST_ID">Edit</a> |
