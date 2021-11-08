@@ -35,6 +35,10 @@ namespace Epicentre.Controllers
             {
                 return RedirectToAction("Index", "UserDetails");
             }
+            else if (User.IsInRole("Nurse"))
+            {
+                return RedirectToAction("SearchForPatient", "CovidTests");
+            }
             return View();
         }
 

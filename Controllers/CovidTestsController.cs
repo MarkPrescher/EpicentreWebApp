@@ -672,7 +672,7 @@ namespace Epicentre.Controllers
             covidTest.TEST_DATE = CovidTestDetails.TestDate;
             covidTest.TEST_TIME = CovidTestDetails.TestTime;
             covidTest.TEST_LOCATION = CovidTestDetails.TestLocation;
-            covidTest.TEST_STATUS = "Awaiting...";
+            covidTest.TEST_STATUS = "Waiting for test...";
             covidTest.TEST_RESULT = "Awaiting...";
             covidTest.USER_EMAIL = UserActions.UserEmail;
 
@@ -709,18 +709,8 @@ namespace Epicentre.Controllers
                     case "Hillcrest, KwaZulu-Natal":
                         Data = Data + "Location : " + covidTest.TEST_LOCATION + "(43a Old Main Rd, Hillcrest)";
                         break;
-                    case "Pietermaritzburg, KwaZulu-Natal":
-                        Data = Data + "Location : " + covidTest.TEST_LOCATION + "(Temp)";
-                        break;
-                    case "Durban Central, KwaZulu-Natal":
-                        Data = Data + "Location : " + covidTest.TEST_LOCATION + "(Temp)";
-                        break;
                     case "Randburg, Gauteng":
                         Data = Data + "Location : " + covidTest.TEST_LOCATION + "(67 Dundalk Avenue, Parkview, Randburg, Gauteng)";
-                        break;
-
-                    case "Midrand, Gauteng":
-                        Data = Data + "Location : " + covidTest.TEST_LOCATION + "(Temp)";
                         break;
                 }
                 Data = Data + "\n" + "Type: " + covidTest.TEST_TYPE + "\n" + "Date: " + covidTest.TEST_DATE + "\n"
@@ -755,17 +745,76 @@ namespace Epicentre.Controllers
             return View(await _context.CovidTest.ToListAsync());
         }
 
-        [HttpPost]
-        public IActionResult SearchForPatient(string idNumber)
+        public async Task<IActionResult> Patients(string idNumber)
         {
             if (idNumber == null)
             {
                 return NotFound();
             }
 
-            // query here, where ID = XXX in db
+            ViewBag.ID = idNumber;
+            var userDetails = await _context.UserDetail.Where(u => u.ID_NUMBER == idNumber).FirstOrDefaultAsync();
+            var covidTest = await _context.CovidTest.Where(c => c.USER_EMAIL == userDetails.EMAIL_ADDRESS).ToListAsync();
+            return View(covidTest);
+        }
 
-            return View();
+        public async Task<IActionResult> UpdateStatus(string testId)
+        {
+            if (testId == null)
+            {
+                return NotFound();
+            }
+
+            var covidTest = await _context.CovidTest.Where(c => c.TEST_ID == Guid.Parse(testId)).FirstOrDefaultAsync();
+            var userDetails = await _context.UserDetail.Where(u => u.EMAIL_ADDRESS == covidTest.USER_EMAIL).FirstOrDefaultAsync();
+
+            string testStatus = covidTest.TEST_STATUS;
+            switch (testStatus)
+            {
+                case "Waiting for test...":
+                    covidTest.TEST_STATUS = "Sample taken";
+                    break;
+                case "Sample taken":
+                    covidTest.TEST_STATUS = "Sample collected";
+                    break;
+                case "Sample collected":
+                    covidTest.TEST_STATUS = "Analyzing sample...";
+                    break;
+                case "Analyzing sample...":
+                    covidTest.TEST_STATUS = "Completed";
+                    break;
+                default: return NotFound();
+            }
+
+            _context.Update(covidTest);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Patients", "CovidTests", new { idNumber = userDetails.ID_NUMBER });
+        }
+
+        public async Task<IActionResult> UpdateResult(string testId, string result)
+        {
+            if (testId == null)
+            {
+                return NotFound();
+            }
+
+            var covidTest = await _context.CovidTest.Where(c => c.TEST_ID == Guid.Parse(testId)).FirstOrDefaultAsync();
+            var userDetails = await _context.UserDetail.Where(u => u.EMAIL_ADDRESS == covidTest.USER_EMAIL).FirstOrDefaultAsync();
+
+            if (result == "Positive")
+            {
+                covidTest.TEST_RESULT = "Positive";
+            }
+            else
+            {
+                covidTest.TEST_RESULT = "Negative";
+            }
+
+            _context.Update(covidTest);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Patients", "CovidTests", new { idNumber = userDetails.ID_NUMBER });
         }
     }
 }
