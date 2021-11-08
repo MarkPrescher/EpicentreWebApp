@@ -3,60 +3,54 @@
 }
 
 <div style="padding-left: 5%; padding-right: 5%; padding-bottom: 3%; margin-top: 0%;" class="content">
-    <h1>COVID-19 Test Booking</h1>
+    <h1 style="color: black; font-weight: bold;">COVID-19 Test Booking</h1>
 
     <div class="card">
         <div class="card-header card-header-primary">
-            <h4 class="card-title">Register for a COVID-19 Test</h4>
-            <p class="card-category">Please fill out the form below to book for a COVID-19 Test</p>
+            <h4 style="font-weight: bold;" class="card-title">Register for a COVID-19 Test</h4>
+            <p style="color: white;" class="card-category">Please fill out the form below to book for a COVID-19 Test.</p>
         </div>
         <div style="padding-top: 3.5%;" class="card-body">
             <form>
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
-                            @* Get value from user table *@
-                            <label class="bmd-label-floating">First Name</label>
-                            <input value= @ViewBag.FirstName type="text" class="form-control" disabled>
+                            <label style="color: black;" class="bmd-label-floating">First Name</label>
+                            <input style="color: black;" value= @ViewBag.FirstName type="text" class="form-control" disabled>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            @* Get value from user table *@
-                            <label class="bmd-label-floating">Last Name</label>
-                            <input value=@ViewBag.LastName type="text" class="form-control" disabled>
+                            <label style="color: black;" class="bmd-label-floating">Last Name</label>
+                            <input style="color: black;" value=@ViewBag.LastName type="text" class="form-control" disabled>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            @* Get value from user table *@
-                            <label class="bmd-label-floating">RSA Identification Number</label>
-                            <input value=@ViewBag.ID type="text" class="form-control" disabled>
+                            <label style="color: black;" class="bmd-label-floating">RSA Identification Number</label>
+                            <input style="color: black;" value=@ViewBag.ID type="text" class="form-control" disabled>
                         </div>
                     </div>
                 </div>
                 <div style="padding-top: 1%;" class="row">
                     <div class="col-md-4">
                         <div class="form-group">
-                            @* Get value from user table *@
-                            <label class="bmd-label-floating">Contact Number</label>
-                            <input value=@ViewBag.Contact type="text" class="form-control" disabled>
+                            <label style="color: black;" class="bmd-label-floating">Contact Number</label>
+                            <input style="color: black;" value=@ViewBag.Contact type="text" class="form-control" disabled>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            @* Get value from user table *@
-                            <label class="bmd-label-floating">Email Address</label>
-                            <input value=@ViewBag.Email type="text" class="form-control" disabled>
+                            <label style="color: black;" class="bmd-label-floating">Email Address</label>
+                            <input style="color: black;" value=@ViewBag.Email type="text" class="form-control" disabled>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            @* Get value from user table - use if statement to display correct gender *@
                             @if (ViewBag.Gender == "Male")
                             {
                                 <div style="padding-left: 20%;" class="form-check form-check-radio form-check-inline disabled">
-                                    <label class="form-check-label">
+                                    <label style="color: black;" class="form-check-label">
                                         <input class="form-check-input" type="radio" id="inlineRadio1" value="Male" checked> Male
                                         <span class="circle">
                                             <span class="check"></span>
@@ -64,7 +58,7 @@
                                     </label>
                                 </div>
                                 <div style="padding-left: 10%;" class="form-check form-check-radio form-check-inline disabled">
-                                    <label class="form-check-label">
+                                    <label style="color: black;" class="form-check-label">
                                         <input class="form-check-input" type="radio" id="inlineRadio2" value="Female" disabled> Female
                                         <span class="circle">
                                             <span class="check"></span>
@@ -97,20 +91,20 @@
                 <div style="padding-top: 1%;" class="row">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label class="bmd-label-floating">Medical Aid</label>
-                            <input value=@ViewBag.Medical type="text" class="form-control" disabled>
+                            <label style="color: black;" class="bmd-label-floating">Medical Aid</label>
+                            <input style="color: black;" value=@ViewBag.Medical type="text" class="form-control" disabled>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label class="bmd-label-floating">Membership Number</label>
-                            <input value=@ViewBag.Membership  type="text" class="form-control" disabled>
+                            <label style="color: black;" class="bmd-label-floating">Membership Number</label>
+                            <input style="color: black;" value=@ViewBag.Membership  type="text" class="form-control" disabled>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label class="bmd-label-floating">Authorization Number</label>
-                            <input value=@ViewBag.Auth type="text" class="form-control" disabled>
+                            <label style="color: black;" class="bmd-label-floating">Authorization Number</label>
+                            <input style="color: black;" value=@ViewBag.Auth type="text" class="form-control" disabled>
                         </div>
                     </div>
                 </div>
@@ -118,7 +112,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <div class="form-check form-check-radio form-check-inline">
-                                <label class="form-check-label">
+                                <label style="color: black;" class="form-check-label">
                                     <input onclick="testTypeClicked()" class="form-check-input" type="radio" name="inlineRadioOptions" id="pcr-swab-test" value="Male"> PCR Swab Test
                                     <span class="circle">
                                         <span class="check"></span>
@@ -126,7 +120,7 @@
                                 </label>
                             </div>
                             <div style="padding-left: 10%;" class="form-check form-check-radio form-check-inline">
-                                <label class="form-check-label">
+                                <label style="color: black;" class="form-check-label">
                                     <input onclick="testTypeClicked()" class="form-check-input" type="radio" name="inlineRadioOptions" id="rapid-antigen-test" value="Female"> Rapid Antigen Test
                                     <span class="circle">
                                         <span class="check"></span>
@@ -134,7 +128,7 @@
                                 </label>
                             </div>
                             <div style="padding-left: 10%;" class="form-check form-check-radio form-check-inline">
-                                <label class="form-check-label">
+                                <label style="color: black;" class="form-check-label">
                                     <input onclick="testTypeClicked()" class="form-check-input" type="radio" name="inlineRadioOptions" id="antibody-test" value="Female"> Antibody Test
                                     <span class="circle">
                                         <span class="check"></span>
@@ -172,7 +166,7 @@
                 <div id="test-date" style="margin-top: -2.5%; text-align: center;" class="row">
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label class="label-control">Test Date</label>
+                            <label style="color: black;" class="label-control">Test Date</label>
                             <br />
                             <input onclick="clickedDate()" type="date" id="booking-date">
                             <br />

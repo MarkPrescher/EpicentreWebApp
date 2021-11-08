@@ -1,22 +1,3 @@
-/*!
-
- =========================================================
- * Material Dashboard - v2.1.2
- =========================================================
-
- * Product Page: https://www.creative-tim.com/product/material-dashboard
- * Copyright 2020 Creative Tim (http://www.creative-tim.com)
-
- * Designed by www.invisionapp.com Coded by www.creative-tim.com
-
- =========================================================
-
- * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
- */
-
-
-
 var breakCards = true;
 
 var searchVisible = 0;
@@ -47,15 +28,12 @@ $(document).ready(function() {
 
   window_width = $(window).width();
 
-  // check if there is an image set for the sidebar's background
   md.checkSidebarImage();
 
-  //    Activate bootstrap-select
   if ($(".selectpicker").length != 0) {
     $(".selectpicker").selectpicker();
   }
 
-  //  Activate the tooltips
   $('[rel="tooltip"]').tooltip();
 
   $('.form-control').on("focus", function() {
@@ -64,7 +42,6 @@ $(document).ready(function() {
     $(this).parent(".input-group").removeClass("input-group-focus");
   });
 
-  // remove class has-error for checkbox validation
   $('input[type="checkbox"][required="true"], input[type="radio"][required="true"]').on('click', function() {
     if ($(this).hasClass('error')) {
       $(this).closest('div').removeClass('has-error');
@@ -123,11 +100,11 @@ $(document).on('click', '.navbar-toggler', function() {
 
 });
 
-// activate collapse right menu when the windows is resized
+// Activate collapse right menu when the windows is resized
 $(window).resize(function() {
   md.initSidebarsCheck();
 
-  // reset the seq for charts drawing animations
+  // Reset the seq for charts drawing animations
   seq = seq2 = 0;
 
   setTimeout(function() {
@@ -171,8 +148,6 @@ md = {
 
   initDocumentationCharts: function() {
     if ($('#dailySalesChart').length != 0 && $('#websiteViewsChart').length != 0) {
-      /* ----------==========     Daily Sales Chart initialization For Documentation    ==========---------- */
-
       dataDailySalesChart = {
         labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
         series: [
@@ -185,7 +160,7 @@ md = {
           tension: 0
         }),
         low: 0,
-        high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
+        high: 50,
         chartPadding: {
           top: 0,
           right: 0,
@@ -232,8 +207,7 @@ md = {
     });
 
     $('.timepicker').datetimepicker({
-      //          format: 'H:mm',    // use this format if you want the 24hours timepicker
-      format: 'h:mm A', //use this format if you want the 12hours timpiecker with AM/PM toggle
+      format: 'h:mm A', // Use this format if you want the 12hours timpiecker with AM/PM toggle
       icons: {
         time: "fa fa-clock-o",
         date: "fa fa-calendar",
@@ -251,7 +225,6 @@ md = {
 
 
   initSliders: function() {
-    // Sliders for demo purpose
     var slider = document.getElementById('sliderRegular');
 
     noUiSlider.create(slider, {
@@ -296,8 +269,6 @@ md = {
   initDashboardPageCharts: function() {
 
     if ($('#dailySalesChart').length != 0 || $('#completedTasksChart').length != 0 || $('#websiteViewsChart').length != 0) {
-      /* ----------==========     Daily Sales Chart initialization    ==========---------- */
-
       dataDailySalesChart = {
         labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
         series: [
@@ -310,7 +281,7 @@ md = {
           tension: 0
         }),
         low: 0,
-        high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
+        high: 50,
         chartPadding: {
           top: 0,
           right: 0,
@@ -322,10 +293,6 @@ md = {
       var dailySalesChart = new Chartist.Line('#dailySalesChart', dataDailySalesChart, optionsDailySalesChart);
 
       md.startAnimationForLineChart(dailySalesChart);
-
-
-
-      /* ----------==========     Completed Tasks Chart initialization    ==========---------- */
 
       dataCompletedTasksChart = {
         labels: ['12p', '3p', '6p', '9p', '12p', '3a', '6a', '9a'],
@@ -339,7 +306,7 @@ md = {
           tension: 0
         }),
         low: 0,
-        high: 1000, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
+        high: 1000,
         chartPadding: {
           top: 0,
           right: 0,
@@ -350,11 +317,7 @@ md = {
 
       var completedTasksChart = new Chartist.Line('#completedTasksChart', dataCompletedTasksChart, optionsCompletedTasksChart);
 
-      // start animation for the Completed Tasks Chart - Line Chart
       md.startAnimationForLineChart(completedTasksChart);
-
-
-      /* ----------==========     Emails Subscription Chart initialization    ==========---------- */
 
       var dataWebsiteViewsChart = {
         labels: ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'],
@@ -387,8 +350,6 @@ md = {
         }]
       ];
       var websiteViewsChart = Chartist.Bar('#websiteViewsChart', dataWebsiteViewsChart, optionsWebsiteViewsChart, responsiveOptions);
-
-      //start animation for the Emails Subscription Chart
       md.startAnimationForBarChart(websiteViewsChart);
     }
   },
@@ -406,12 +367,10 @@ md = {
         md.misc.sidebar_mini_active = true;
       }
 
-      // we simulate the window Resize so the charts will get updated in realtime.
       var simulateWindowResize = setInterval(function() {
         window.dispatchEvent(new Event('resize'));
       }, 180);
 
-      // we stop the simulation of Window Resize after the animations are completed
       setTimeout(function() {
         clearInterval(simulateWindowResize);
       }, 1000);
@@ -449,7 +408,6 @@ md = {
 
       $sidebar_nav = $sidebar_wrapper.find(' > .nav');
 
-      // insert the navbar form before the sidebar list
       $nav_content = $(nav_content);
       $navbar_form = $(navbar_form);
       $nav_content.insertBefore($sidebar_nav);
@@ -460,13 +418,11 @@ md = {
 
       });
 
-      // simulate resize so all the charts/maps will be redrawn
       window.dispatchEvent(new Event('resize'));
 
       mobile_menu_initialized = true;
     } else {
       if ($(window).width() > 991) {
-        // reset all the additions that we made for the sidebar wrapper only if the screen is bigger than 991px
         $sidebar_wrapper.find('.navbar-form').remove();
         $sidebar_wrapper.find('.nav-mobile-menu').remove();
 
@@ -535,7 +491,6 @@ md = {
 
     $calendar.fullCalendar({
       viewRender: function(view, element) {
-        // We make sure that we activate the perfect scrollbar when the view isn't on Month
         if (view.name != 'month') {
           $(element).find('.fc-scroller').perfectScrollbar();
         }
@@ -549,9 +504,8 @@ md = {
       selectable: true,
       selectHelper: true,
       views: {
-        month: { // name of view
+        month: {
           titleFormat: 'MMMM YYYY'
-          // other view-specific options here
         },
         week: {
           titleFormat: " MMMM D YYYY"
@@ -563,7 +517,6 @@ md = {
 
       select: function(start, end) {
 
-        // on select we show the Sweet Alert modal with an input
         swal({
             title: 'Create an Event',
             html: '<div class="form-group">' +
@@ -584,7 +537,7 @@ md = {
                 start: start,
                 end: end
               };
-              $calendar.fullCalendar('renderEvent', eventData, true); // stick? = true
+              $calendar.fullCalendar('renderEvent', eventData, true);
             }
 
             $calendar.fullCalendar('unselect');
@@ -593,10 +546,8 @@ md = {
           .catch(swal.noop);
       },
       editable: true,
-      eventLimit: true, // allow "more" link when too many events
+      eventLimit: true,
 
-
-      // color classes: [ event-blue | event-azure | event-green | event-orange | event-red ]
       events: [{
           title: 'All Day Event',
           start: new Date(y, m, 1),
@@ -643,17 +594,17 @@ md = {
           className: 'event-azure'
         },
         {
-          title: 'Click for Creative Tim',
+          title: '',
           start: new Date(y, m, 21),
           end: new Date(y, m, 22),
-          url: 'http://www.creative-tim.com/',
+          url: '',
           className: 'event-orange'
         },
         {
           title: 'Click for Google',
           start: new Date(y, m, 21),
           end: new Date(y, m, 22),
-          url: 'http://www.creative-tim.com/',
+          url: '',
           className: 'event-orange'
         }
       ]
@@ -699,11 +650,6 @@ md = {
     });
   }
 }
-
-// Returns a function, that, as long as it continues to be invoked, will not
-// be triggered. The function will be called after it stops being called for
-// N milliseconds. If `immediate` is passed, trigger the function on the
-// leading edge, instead of the trailing.
 
 function debounce(func, wait, immediate) {
   var timeout;
