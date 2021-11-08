@@ -190,13 +190,13 @@ namespace Epicentre.Controllers
             CovidTestDetails.TestDate = testDate; // we can use the parameter because its not jumbled
 
             // Checks to see if it is weekday or weekend for the test date to filter time slots
-            bool isWeekDay = TimeSlots.CheckIfWeekDay(date);
+            string day = TimeSlots.CheckDay(date);
             Booking booking = new Booking(_context);
             int timeSlotCounter = TimeSlots.timeSlotCounter;
 
-            if (isWeekDay)
+            if (day.Equals("Weekday"))
             {
-                //Used to determine what timeslots are shown to user
+                // Used to determine what timeslots are shown to user
                 ViewBag.Day = "Weekday";
                 // Time slots - these need to be finished! 
                 // DONE!!!
@@ -241,9 +241,8 @@ namespace Epicentre.Controllers
                 ViewBag.TS1545 = Booking.AVAILABLE;
 
                 ViewBag.TS1600 = Booking.AVAILABLE;
-              
-
-                // times finish at 16:00 (ViewBag.TS1600)
+                ViewBag.TS1615 = Booking.AVAILABLE;
+                ViewBag.TS1630 = Booking.AVAILABLE;
 
                 if (await booking.CheckBookingAvailability(TimeSlots.WEEKDAY_TIME_SLOTS[timeSlotCounter]))
                     ViewBag.TS0800 = Booking.FULLY_BOOKED;
@@ -296,7 +295,6 @@ namespace Epicentre.Controllers
                 if (await booking.CheckBookingAvailability(TimeSlots.WEEKDAY_TIME_SLOTS[timeSlotCounter]))
                     ViewBag.TS1145 = Booking.FULLY_BOOKED;
                 timeSlotCounter++;
-
 
                 if (await booking.CheckBookingAvailability(TimeSlots.WEEKDAY_TIME_SLOTS[timeSlotCounter]))
                     ViewBag.TS1200 = Booking.FULLY_BOOKED;
@@ -352,116 +350,297 @@ namespace Epicentre.Controllers
 
                 if (await booking.CheckBookingAvailability(TimeSlots.WEEKDAY_TIME_SLOTS[timeSlotCounter]))
                     ViewBag.TS1600 = Booking.FULLY_BOOKED;
+                timeSlotCounter++;
 
-                // finish as well please
-                // DONE!!!
+                if (await booking.CheckBookingAvailability(TimeSlots.WEEKDAY_TIME_SLOTS[timeSlotCounter]))
+                    ViewBag.TS1615 = Booking.FULLY_BOOKED;
+                timeSlotCounter++;
+
+                if (await booking.CheckBookingAvailability(TimeSlots.WEEKDAY_TIME_SLOTS[timeSlotCounter]))
+                    ViewBag.TS1630 = Booking.FULLY_BOOKED;
+            }
+            else if (day.Equals("Saturday"))
+            {
+                ViewBag.Day = "Saturday";
+                ViewBag.TestLocation = CovidTestDetails.TestLocation;
+
+                if (CovidTestDetails.TestLocation.Equals("Hillcrest, KwaZulu-Natal"))
+                {
+                    ViewBag.TS0800 = Booking.AVAILABLE;
+                    ViewBag.TS0815 = Booking.AVAILABLE;
+                    ViewBag.TS0830 = Booking.AVAILABLE;
+                    ViewBag.TS0845 = Booking.AVAILABLE;
+
+                    ViewBag.TS0900 = Booking.AVAILABLE;
+                    ViewBag.TS0915 = Booking.AVAILABLE;
+                    ViewBag.TS0930 = Booking.AVAILABLE;
+                    ViewBag.TS0945 = Booking.AVAILABLE;
+
+                    ViewBag.TS1000 = Booking.AVAILABLE;
+                    ViewBag.TS1015 = Booking.AVAILABLE;
+                    ViewBag.TS1030 = Booking.AVAILABLE;
+                    ViewBag.TS1045 = Booking.AVAILABLE;
+
+                    ViewBag.TS1100 = Booking.AVAILABLE;
+                    ViewBag.TS1115 = Booking.AVAILABLE;
+                    ViewBag.TS1130 = Booking.AVAILABLE;
+                    ViewBag.TS1145 = Booking.AVAILABLE;
+
+                    ViewBag.TS1200 = Booking.AVAILABLE;
+
+                    if (await booking.CheckBookingAvailability(TimeSlots.HILLCREST_SATURDAY_TIME_SLOTS[timeSlotCounter]))
+                        ViewBag.TS0800 = Booking.FULLY_BOOKED;
+                    timeSlotCounter++;
+                    if (await booking.CheckBookingAvailability(TimeSlots.HILLCREST_SATURDAY_TIME_SLOTS[timeSlotCounter]))
+                        ViewBag.TS0815 = Booking.FULLY_BOOKED;
+                    timeSlotCounter++;
+                    if (await booking.CheckBookingAvailability(TimeSlots.HILLCREST_SATURDAY_TIME_SLOTS[timeSlotCounter]))
+                        ViewBag.TS0830 = Booking.FULLY_BOOKED;
+                    timeSlotCounter++;
+                    if (await booking.CheckBookingAvailability(TimeSlots.HILLCREST_SATURDAY_TIME_SLOTS[timeSlotCounter]))
+                        ViewBag.TS0845 = Booking.FULLY_BOOKED;
+                    timeSlotCounter++;
+
+                    if (await booking.CheckBookingAvailability(TimeSlots.HILLCREST_SATURDAY_TIME_SLOTS[timeSlotCounter]))
+                        ViewBag.TS0900 = Booking.FULLY_BOOKED;
+                    timeSlotCounter++;
+                    if (await booking.CheckBookingAvailability(TimeSlots.HILLCREST_SATURDAY_TIME_SLOTS[timeSlotCounter]))
+                        ViewBag.TS0915 = Booking.FULLY_BOOKED;
+                    timeSlotCounter++;
+                    if (await booking.CheckBookingAvailability(TimeSlots.HILLCREST_SATURDAY_TIME_SLOTS[timeSlotCounter]))
+                        ViewBag.TS0930 = Booking.FULLY_BOOKED;
+                    timeSlotCounter++;
+                    if (await booking.CheckBookingAvailability(TimeSlots.HILLCREST_SATURDAY_TIME_SLOTS[timeSlotCounter]))
+                        ViewBag.TS0945 = Booking.FULLY_BOOKED;
+                    timeSlotCounter++;
+
+                    if (await booking.CheckBookingAvailability(TimeSlots.HILLCREST_SATURDAY_TIME_SLOTS[timeSlotCounter]))
+                        ViewBag.TS1000 = Booking.FULLY_BOOKED;
+                    timeSlotCounter++;
+                    if (await booking.CheckBookingAvailability(TimeSlots.HILLCREST_SATURDAY_TIME_SLOTS[timeSlotCounter]))
+                        ViewBag.TS1015 = Booking.FULLY_BOOKED;
+                    timeSlotCounter++;
+                    if (await booking.CheckBookingAvailability(TimeSlots.HILLCREST_SATURDAY_TIME_SLOTS[timeSlotCounter]))
+                        ViewBag.TS1030 = Booking.FULLY_BOOKED;
+                    timeSlotCounter++;
+                    if (await booking.CheckBookingAvailability(TimeSlots.HILLCREST_SATURDAY_TIME_SLOTS[timeSlotCounter]))
+                        ViewBag.TS1045 = Booking.FULLY_BOOKED;
+                    timeSlotCounter++;
+
+                    if (await booking.CheckBookingAvailability(TimeSlots.HILLCREST_SATURDAY_TIME_SLOTS[timeSlotCounter]))
+                        ViewBag.TS1100 = Booking.FULLY_BOOKED;
+                    timeSlotCounter++;
+                    if (await booking.CheckBookingAvailability(TimeSlots.HILLCREST_SATURDAY_TIME_SLOTS[timeSlotCounter]))
+                        ViewBag.TS1115 = Booking.FULLY_BOOKED;
+                    timeSlotCounter++;
+                    if (await booking.CheckBookingAvailability(TimeSlots.HILLCREST_SATURDAY_TIME_SLOTS[timeSlotCounter]))
+                        ViewBag.TS1130 = Booking.FULLY_BOOKED;
+                    timeSlotCounter++;
+                    if (await booking.CheckBookingAvailability(TimeSlots.HILLCREST_SATURDAY_TIME_SLOTS[timeSlotCounter]))
+                        ViewBag.TS1145 = Booking.FULLY_BOOKED;
+                    timeSlotCounter++;
+
+                    if (await booking.CheckBookingAvailability(TimeSlots.HILLCREST_SATURDAY_TIME_SLOTS[timeSlotCounter]))
+                        ViewBag.TS1200 = Booking.FULLY_BOOKED;
+                }
+
+                else if (CovidTestDetails.TestLocation.Equals("Randburg, Gauteng"))
+                {
+                    ViewBag.TS0800 = Booking.AVAILABLE;
+                    ViewBag.TS0815 = Booking.AVAILABLE;
+                    ViewBag.TS0830 = Booking.AVAILABLE;
+                    ViewBag.TS0845 = Booking.AVAILABLE;
+
+                    ViewBag.TS0900 = Booking.AVAILABLE;
+                    ViewBag.TS0915 = Booking.AVAILABLE;
+                    ViewBag.TS0930 = Booking.AVAILABLE;
+                    ViewBag.TS0945 = Booking.AVAILABLE;
+
+                    ViewBag.TS1000 = Booking.AVAILABLE;
+                    ViewBag.TS1015 = Booking.AVAILABLE;
+                    ViewBag.TS1030 = Booking.AVAILABLE;
+                    ViewBag.TS1045 = Booking.AVAILABLE;
+
+                    ViewBag.TS1100 = Booking.AVAILABLE;
+                    ViewBag.TS1115 = Booking.AVAILABLE;
+                    ViewBag.TS1130 = Booking.AVAILABLE;
+                    ViewBag.TS1145 = Booking.AVAILABLE;
+
+                    ViewBag.TS1200 = Booking.AVAILABLE;
+                    ViewBag.TS1215 = Booking.AVAILABLE;
+                    ViewBag.TS1230 = Booking.AVAILABLE;
+                    ViewBag.TS1245 = Booking.AVAILABLE;
+
+                    ViewBag.TS1300 = Booking.AVAILABLE;
+                    ViewBag.TS1315 = Booking.AVAILABLE;
+                    ViewBag.TS1330 = Booking.AVAILABLE;
+                    ViewBag.TS1345 = Booking.AVAILABLE;
+
+                    ViewBag.TS1400 = Booking.AVAILABLE;
+                    ViewBag.TS1415 = Booking.AVAILABLE;
+                    ViewBag.TS1430 = Booking.AVAILABLE;
+
+                    if (await booking.CheckBookingAvailability(TimeSlots.RANDBURG_SATURDAY_TIME_SLOTS[timeSlotCounter]))
+                        ViewBag.TS0800 = Booking.FULLY_BOOKED;
+                    timeSlotCounter++;
+                    if (await booking.CheckBookingAvailability(TimeSlots.RANDBURG_SATURDAY_TIME_SLOTS[timeSlotCounter]))
+                        ViewBag.TS0815 = Booking.FULLY_BOOKED;
+                    timeSlotCounter++;
+                    if (await booking.CheckBookingAvailability(TimeSlots.RANDBURG_SATURDAY_TIME_SLOTS[timeSlotCounter]))
+                        ViewBag.TS0830 = Booking.FULLY_BOOKED;
+                    timeSlotCounter++;
+                    if (await booking.CheckBookingAvailability(TimeSlots.RANDBURG_SATURDAY_TIME_SLOTS[timeSlotCounter]))
+                        ViewBag.TS0845 = Booking.FULLY_BOOKED;
+                    timeSlotCounter++;
+
+                    if (await booking.CheckBookingAvailability(TimeSlots.RANDBURG_SATURDAY_TIME_SLOTS[timeSlotCounter]))
+                        ViewBag.TS0900 = Booking.FULLY_BOOKED;
+                    timeSlotCounter++;
+                    if (await booking.CheckBookingAvailability(TimeSlots.RANDBURG_SATURDAY_TIME_SLOTS[timeSlotCounter]))
+                        ViewBag.TS0915 = Booking.FULLY_BOOKED;
+                    timeSlotCounter++;
+                    if (await booking.CheckBookingAvailability(TimeSlots.RANDBURG_SATURDAY_TIME_SLOTS[timeSlotCounter]))
+                        ViewBag.TS0930 = Booking.FULLY_BOOKED;
+                    timeSlotCounter++;
+                    if (await booking.CheckBookingAvailability(TimeSlots.RANDBURG_SATURDAY_TIME_SLOTS[timeSlotCounter]))
+                        ViewBag.TS0945 = Booking.FULLY_BOOKED;
+                    timeSlotCounter++;
+
+                    if (await booking.CheckBookingAvailability(TimeSlots.RANDBURG_SATURDAY_TIME_SLOTS[timeSlotCounter]))
+                        ViewBag.TS1000 = Booking.FULLY_BOOKED;
+                    timeSlotCounter++;
+                    if (await booking.CheckBookingAvailability(TimeSlots.RANDBURG_SATURDAY_TIME_SLOTS[timeSlotCounter]))
+                        ViewBag.TS1015 = Booking.FULLY_BOOKED;
+                    timeSlotCounter++;
+                    if (await booking.CheckBookingAvailability(TimeSlots.RANDBURG_SATURDAY_TIME_SLOTS[timeSlotCounter]))
+                        ViewBag.TS1030 = Booking.FULLY_BOOKED;
+                    timeSlotCounter++;
+                    if (await booking.CheckBookingAvailability(TimeSlots.RANDBURG_SATURDAY_TIME_SLOTS[timeSlotCounter]))
+                        ViewBag.TS1045 = Booking.FULLY_BOOKED;
+                    timeSlotCounter++;
+
+                    if (await booking.CheckBookingAvailability(TimeSlots.RANDBURG_SATURDAY_TIME_SLOTS[timeSlotCounter]))
+                        ViewBag.TS1100 = Booking.FULLY_BOOKED;
+                    timeSlotCounter++;
+                    if (await booking.CheckBookingAvailability(TimeSlots.RANDBURG_SATURDAY_TIME_SLOTS[timeSlotCounter]))
+                        ViewBag.TS1115 = Booking.FULLY_BOOKED;
+                    timeSlotCounter++;
+                    if (await booking.CheckBookingAvailability(TimeSlots.RANDBURG_SATURDAY_TIME_SLOTS[timeSlotCounter]))
+                        ViewBag.TS1130 = Booking.FULLY_BOOKED;
+                    timeSlotCounter++;
+                    if (await booking.CheckBookingAvailability(TimeSlots.RANDBURG_SATURDAY_TIME_SLOTS[timeSlotCounter]))
+                        ViewBag.TS1145 = Booking.FULLY_BOOKED;
+                    timeSlotCounter++;
+
+                    if (await booking.CheckBookingAvailability(TimeSlots.RANDBURG_SATURDAY_TIME_SLOTS[timeSlotCounter]))
+                        ViewBag.TS1200 = Booking.FULLY_BOOKED;
+                    timeSlotCounter++;
+                    if (await booking.CheckBookingAvailability(TimeSlots.RANDBURG_SATURDAY_TIME_SLOTS[timeSlotCounter]))
+                        ViewBag.TS1215 = Booking.FULLY_BOOKED;
+                    timeSlotCounter++;
+                    if (await booking.CheckBookingAvailability(TimeSlots.RANDBURG_SATURDAY_TIME_SLOTS[timeSlotCounter]))
+                        ViewBag.TS1230 = Booking.FULLY_BOOKED;
+                    timeSlotCounter++;
+                    if (await booking.CheckBookingAvailability(TimeSlots.RANDBURG_SATURDAY_TIME_SLOTS[timeSlotCounter]))
+                        ViewBag.TS1245 = Booking.FULLY_BOOKED;
+                    timeSlotCounter++;
+
+                    if (await booking.CheckBookingAvailability(TimeSlots.RANDBURG_SATURDAY_TIME_SLOTS[timeSlotCounter]))
+                        ViewBag.TS1300 = Booking.FULLY_BOOKED;
+                    timeSlotCounter++;
+                    if (await booking.CheckBookingAvailability(TimeSlots.RANDBURG_SATURDAY_TIME_SLOTS[timeSlotCounter]))
+                        ViewBag.TS1315 = Booking.FULLY_BOOKED;
+                    timeSlotCounter++;
+                    if (await booking.CheckBookingAvailability(TimeSlots.RANDBURG_SATURDAY_TIME_SLOTS[timeSlotCounter]))
+                        ViewBag.TS1330 = Booking.FULLY_BOOKED;
+                    timeSlotCounter++;
+                    if (await booking.CheckBookingAvailability(TimeSlots.RANDBURG_SATURDAY_TIME_SLOTS[timeSlotCounter]))
+                        ViewBag.TS1345 = Booking.FULLY_BOOKED;
+                    timeSlotCounter++;
+
+                    if (await booking.CheckBookingAvailability(TimeSlots.RANDBURG_SATURDAY_TIME_SLOTS[timeSlotCounter]))
+                        ViewBag.TS1400 = Booking.FULLY_BOOKED;
+                    timeSlotCounter++;
+                    if (await booking.CheckBookingAvailability(TimeSlots.RANDBURG_SATURDAY_TIME_SLOTS[timeSlotCounter]))
+                        ViewBag.TS1415 = Booking.FULLY_BOOKED;
+                    timeSlotCounter++;
+                    if (await booking.CheckBookingAvailability(TimeSlots.RANDBURG_SATURDAY_TIME_SLOTS[timeSlotCounter]))
+                        ViewBag.TS1430 = Booking.FULLY_BOOKED;
+                }
+
+                else if (CovidTestDetails.TestLocation.Equals("Rondebosch, Western Cape"))
+                {
+                    ViewBag.TS0800 = Booking.AVAILABLE;
+                    ViewBag.TS0815 = Booking.AVAILABLE;
+                    ViewBag.TS0830 = Booking.AVAILABLE;
+                    ViewBag.TS0845 = Booking.AVAILABLE;
+
+                    ViewBag.TS0900 = Booking.AVAILABLE;
+                    ViewBag.TS0915 = Booking.AVAILABLE;
+                    ViewBag.TS0930 = Booking.AVAILABLE;
+                    ViewBag.TS0945 = Booking.AVAILABLE;
+
+                    ViewBag.TS1000 = Booking.AVAILABLE;
+                    ViewBag.TS1015 = Booking.AVAILABLE;
+                    ViewBag.TS1030 = Booking.AVAILABLE;
+                    ViewBag.TS1045 = Booking.AVAILABLE;
+
+                    ViewBag.TS1100 = Booking.AVAILABLE;
+                    ViewBag.TS1115 = Booking.AVAILABLE;
+                    ViewBag.TS1130 = Booking.AVAILABLE;
+
+                    if (await booking.CheckBookingAvailability(TimeSlots.RONDEBOSCH_SATURDAY_TIME_SLOTS[timeSlotCounter]))
+                        ViewBag.TS0800 = Booking.FULLY_BOOKED;
+                    timeSlotCounter++;
+                    if (await booking.CheckBookingAvailability(TimeSlots.RONDEBOSCH_SATURDAY_TIME_SLOTS[timeSlotCounter]))
+                        ViewBag.TS0815 = Booking.FULLY_BOOKED;
+                    timeSlotCounter++;
+                    if (await booking.CheckBookingAvailability(TimeSlots.RONDEBOSCH_SATURDAY_TIME_SLOTS[timeSlotCounter]))
+                        ViewBag.TS0830 = Booking.FULLY_BOOKED;
+                    timeSlotCounter++;
+                    if (await booking.CheckBookingAvailability(TimeSlots.RONDEBOSCH_SATURDAY_TIME_SLOTS[timeSlotCounter]))
+                        ViewBag.TS0845 = Booking.FULLY_BOOKED;
+                    timeSlotCounter++;
+
+                    if (await booking.CheckBookingAvailability(TimeSlots.RONDEBOSCH_SATURDAY_TIME_SLOTS[timeSlotCounter]))
+                        ViewBag.TS0900 = Booking.FULLY_BOOKED;
+                    timeSlotCounter++;
+                    if (await booking.CheckBookingAvailability(TimeSlots.RONDEBOSCH_SATURDAY_TIME_SLOTS[timeSlotCounter]))
+                        ViewBag.TS0915 = Booking.FULLY_BOOKED;
+                    timeSlotCounter++;
+                    if (await booking.CheckBookingAvailability(TimeSlots.RONDEBOSCH_SATURDAY_TIME_SLOTS[timeSlotCounter]))
+                        ViewBag.TS0930 = Booking.FULLY_BOOKED;
+                    timeSlotCounter++;
+                    if (await booking.CheckBookingAvailability(TimeSlots.RONDEBOSCH_SATURDAY_TIME_SLOTS[timeSlotCounter]))
+                        ViewBag.TS0945 = Booking.FULLY_BOOKED;
+                    timeSlotCounter++;
+
+                    if (await booking.CheckBookingAvailability(TimeSlots.RONDEBOSCH_SATURDAY_TIME_SLOTS[timeSlotCounter]))
+                        ViewBag.TS1000 = Booking.FULLY_BOOKED;
+                    timeSlotCounter++;
+                    if (await booking.CheckBookingAvailability(TimeSlots.RONDEBOSCH_SATURDAY_TIME_SLOTS[timeSlotCounter]))
+                        ViewBag.TS1015 = Booking.FULLY_BOOKED;
+                    timeSlotCounter++;
+                    if (await booking.CheckBookingAvailability(TimeSlots.RONDEBOSCH_SATURDAY_TIME_SLOTS[timeSlotCounter]))
+                        ViewBag.TS1030 = Booking.FULLY_BOOKED;
+                    timeSlotCounter++;
+                    if (await booking.CheckBookingAvailability(TimeSlots.RONDEBOSCH_SATURDAY_TIME_SLOTS[timeSlotCounter]))
+                        ViewBag.TS1045 = Booking.FULLY_BOOKED;
+                    timeSlotCounter++;
+
+                    if (await booking.CheckBookingAvailability(TimeSlots.RONDEBOSCH_SATURDAY_TIME_SLOTS[timeSlotCounter]))
+                        ViewBag.TS1100 = Booking.FULLY_BOOKED;
+                    timeSlotCounter++;
+                    if (await booking.CheckBookingAvailability(TimeSlots.RONDEBOSCH_SATURDAY_TIME_SLOTS[timeSlotCounter]))
+                        ViewBag.TS1115 = Booking.FULLY_BOOKED;
+                    timeSlotCounter++;
+                    if (await booking.CheckBookingAvailability(TimeSlots.RONDEBOSCH_SATURDAY_TIME_SLOTS[timeSlotCounter]))
+                        ViewBag.TS1130 = Booking.FULLY_BOOKED;
+                }
             }
             else
             {
-                //Used to determine what timeslots are shown to user
-                ViewBag.Day = "Weekend";
-
-                // Time slots - these need to be finished!
-                // DONE!!!
-                ViewBag.TS0800 = Booking.AVAILABLE;
-                ViewBag.TS0815 = Booking.AVAILABLE;
-                ViewBag.TS0830 = Booking.AVAILABLE;
-                ViewBag.TS0845 = Booking.AVAILABLE;
-
-                ViewBag.TS0900 = Booking.AVAILABLE;
-                ViewBag.TS0915 = Booking.AVAILABLE;
-                ViewBag.TS0930 = Booking.AVAILABLE;
-                ViewBag.TS0945 = Booking.AVAILABLE;
-
-                ViewBag.TS1000 = Booking.AVAILABLE;
-                ViewBag.TS1015 = Booking.AVAILABLE;
-                ViewBag.TS1030 = Booking.AVAILABLE;
-                ViewBag.TS1045 = Booking.AVAILABLE;
-
-                ViewBag.TS1100 = Booking.AVAILABLE;
-                ViewBag.TS1115 = Booking.AVAILABLE;
-                ViewBag.TS1130 = Booking.AVAILABLE;
-                ViewBag.TS1145 = Booking.AVAILABLE;
-
-                ViewBag.TS1200 = Booking.AVAILABLE;
-                ViewBag.TS1215 = Booking.AVAILABLE;
-                ViewBag.TS1230 = Booking.AVAILABLE;
-                ViewBag.TS1245 = Booking.AVAILABLE;
-
-                ViewBag.TS1300 = Booking.AVAILABLE;
-
-                // times finish at 13:00 (ViewBag.TS1300)
-
-                if (await booking.CheckBookingAvailability(TimeSlots.WEEKEND_TIME_SLOTS[timeSlotCounter]))
-                    ViewBag.TS0800 = Booking.FULLY_BOOKED;
-                timeSlotCounter++;
-                if (await booking.CheckBookingAvailability(TimeSlots.WEEKEND_TIME_SLOTS[timeSlotCounter]))
-                    ViewBag.TS0815 = Booking.FULLY_BOOKED;
-                timeSlotCounter++;
-                if (await booking.CheckBookingAvailability(TimeSlots.WEEKEND_TIME_SLOTS[timeSlotCounter]))
-                    ViewBag.TS0830 = Booking.FULLY_BOOKED;
-                timeSlotCounter++;
-                if (await booking.CheckBookingAvailability(TimeSlots.WEEKEND_TIME_SLOTS[timeSlotCounter]))
-                    ViewBag.TS0845 = Booking.FULLY_BOOKED;
-                timeSlotCounter++;
-
-                if (await booking.CheckBookingAvailability(TimeSlots.WEEKEND_TIME_SLOTS[timeSlotCounter]))
-                    ViewBag.TS0900 = Booking.FULLY_BOOKED;
-                timeSlotCounter++;
-                if (await booking.CheckBookingAvailability(TimeSlots.WEEKEND_TIME_SLOTS[timeSlotCounter]))
-                    ViewBag.TS0915 = Booking.FULLY_BOOKED;
-                timeSlotCounter++;
-                if (await booking.CheckBookingAvailability(TimeSlots.WEEKEND_TIME_SLOTS[timeSlotCounter]))
-                    ViewBag.TS0930 = Booking.FULLY_BOOKED;
-                timeSlotCounter++;
-                if (await booking.CheckBookingAvailability(TimeSlots.WEEKEND_TIME_SLOTS[timeSlotCounter]))
-                    ViewBag.TS0945 = Booking.FULLY_BOOKED;
-                timeSlotCounter++;
-
-                if (await booking.CheckBookingAvailability(TimeSlots.WEEKEND_TIME_SLOTS[timeSlotCounter]))
-                    ViewBag.TS1000 = Booking.FULLY_BOOKED;
-                timeSlotCounter++;
-                if (await booking.CheckBookingAvailability(TimeSlots.WEEKEND_TIME_SLOTS[timeSlotCounter]))
-                    ViewBag.TS1015 = Booking.FULLY_BOOKED;
-                timeSlotCounter++;
-                if (await booking.CheckBookingAvailability(TimeSlots.WEEKEND_TIME_SLOTS[timeSlotCounter]))
-                    ViewBag.TS1030 = Booking.FULLY_BOOKED;
-                timeSlotCounter++;
-                if (await booking.CheckBookingAvailability(TimeSlots.WEEKEND_TIME_SLOTS[timeSlotCounter]))
-                    ViewBag.TS1045 = Booking.FULLY_BOOKED;
-                timeSlotCounter++;
-
-                if (await booking.CheckBookingAvailability(TimeSlots.WEEKEND_TIME_SLOTS[timeSlotCounter]))
-                    ViewBag.TS1100 = Booking.FULLY_BOOKED;
-                timeSlotCounter++;
-                if (await booking.CheckBookingAvailability(TimeSlots.WEEKEND_TIME_SLOTS[timeSlotCounter]))
-                    ViewBag.TS1115 = Booking.FULLY_BOOKED;
-                timeSlotCounter++;
-                if (await booking.CheckBookingAvailability(TimeSlots.WEEKEND_TIME_SLOTS[timeSlotCounter]))
-                    ViewBag.TS1130 = Booking.FULLY_BOOKED;
-                timeSlotCounter++;
-                if (await booking.CheckBookingAvailability(TimeSlots.WEEKEND_TIME_SLOTS[timeSlotCounter]))
-                    ViewBag.TS1145 = Booking.FULLY_BOOKED;
-                timeSlotCounter++;
-
-
-                if (await booking.CheckBookingAvailability(TimeSlots.WEEKEND_TIME_SLOTS[timeSlotCounter]))
-                    ViewBag.TS1200 = Booking.FULLY_BOOKED;
-                timeSlotCounter++;
-                if (await booking.CheckBookingAvailability(TimeSlots.WEEKEND_TIME_SLOTS[timeSlotCounter]))
-                    ViewBag.TS1215 = Booking.FULLY_BOOKED;
-                timeSlotCounter++;
-                if (await booking.CheckBookingAvailability(TimeSlots.WEEKEND_TIME_SLOTS[timeSlotCounter]))
-                    ViewBag.TS1230 = Booking.FULLY_BOOKED;
-                timeSlotCounter++;
-                if (await booking.CheckBookingAvailability(TimeSlots.WEEKEND_TIME_SLOTS[timeSlotCounter]))
-                    ViewBag.TS1245 = Booking.FULLY_BOOKED;
-                timeSlotCounter++;
-
-                if (await booking.CheckBookingAvailability(TimeSlots.WEEKEND_TIME_SLOTS[timeSlotCounter]))
-                    ViewBag.TS1300 = Booking.FULLY_BOOKED;
-                // finish as well please
-                // DONE!!!
+                ViewBag.Day = "Sunday";
             }
 
             return View();

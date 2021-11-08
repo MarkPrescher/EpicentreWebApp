@@ -32,16 +32,7 @@ namespace Epicentre.Library
                 "WH2fbXxIdU", "Hillcrest, KwaZulu-Natal"
             },
             {
-                "UQLsvizNLJ", "Pietermaritzburg, KwaZulu-Natal"
-            },
-            {
-                "NmCGgsAEnZ", "Durban Central, KwaZulu-Natal"
-            },
-            {
                 "2464QfRQfc", "Randburg, Gauteng"
-            },
-            {
-                "gqoz3cT0jA", "Midrand, Gauteng"
             }
         };
 

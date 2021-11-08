@@ -152,10 +152,7 @@
                                     <a onclick="clickedLocation('Bellville, Western Cape')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">Bellville, Western Cape</a>
                                     <a onclick="clickedLocation('Rondebosch, Western Cape')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">Rondebosch, Western Cape</a>
                                     <a onclick="clickedLocation('Hillcrest, KwaZulu-Natal')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">Hillcrest, KwaZulu-Natal</a>
-                                    <a onclick="clickedLocation('Pietermaritzburg, KwaZulu-Natal')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">Pitermaritzburg, KwaZulu-Natal</a>
-                                    <a onclick="clickedLocation('Durban Central, KwaZulu-Natal')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">Durban Central, KwaZulu-Natal</a>
                                     <a onclick="clickedLocation('Randburg, Gauteng')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">Randburg, Gauteng</a>
-                                    <a onclick="clickedLocation('Midrand, Gauteng')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">Midrand, Gauteng</a>
                                 </div>
                             </div>
                             <br />
@@ -254,14 +251,8 @@
                 testLocationUrl = 'ABIf3LMQ4l';
             } if (testingLocation == 'Hillcrest, KwaZulu-Natal') {
                 testLocationUrl = 'WH2fbXxIdU';
-            } if (testingLocation == 'Pietermaritzburg, KwaZulu-Natal') {
-                testLocationUrl = 'UQLsvizNLJ';
-            } if (testingLocation == 'Durban Central, KwaZulu-Natal') {
-                testLocationUrl = 'NmCGgsAEnZ';
             } if (testingLocation == 'Randburg, Gauteng') {
                 testLocationUrl = '2464QfRQfc';
-            } if (testingLocation == 'Midrand, Gauteng') {
-                testLocationUrl = 'gqoz3cT0jA';
             }
             testDate = document.getElementById('booking-date').value;
             window.location.href = '@Url.Action("TimeBooking", "CovidTests")' + '?testType=' + testTypeUrl + '&testLocation=' + testLocationUrl + '&testDate=' + testDate;
