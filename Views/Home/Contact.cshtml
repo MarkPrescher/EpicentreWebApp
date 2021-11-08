@@ -51,12 +51,12 @@
     var topic = "";
     var topicChosen = false;
 
-    function clickedTopic(topic) {
+    function clickedTopic(topicText) {
         var display = document.getElementById('button-value');
-        display.innerText = topic;
+        display.innerText = topicText;
         topicChosen = true;
         document.getElementById('topic-validation').style.visibility = "hidden";
-        topic = topic;
+        topic = topicText;
     }
 
     function submit() {
