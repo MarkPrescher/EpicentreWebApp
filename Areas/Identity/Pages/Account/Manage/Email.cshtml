@@ -16,21 +16,21 @@ else
 }
 <div class="card">
     <div class="card-header card-header-primary">
-        <h4 class="card-title">@ViewData["Title"]</h4>
+        <h4 style="font-weight: bold;" class="card-title">@ViewData["Title"]</h4>
     </div>
     <div style="padding-top: 3.5%;" class="card-body">
         <form method="post">
             <div style="margin-bottom: -2%;" class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label class="bmd-label-floating">Email Address</label>
-                        <input disabled asp-for="Email" type="text" class="form-control">
+                        <label style="color: black;" class="bmd-label-floating">Email Address</label>
+                        <input style="color: black;" disabled asp-for="Email" type="text" class="form-control">
                     </div>
                 </div>
                 <div style="margin-bottom: 2%;" class="col-md-6">
                     <div class="form-group">
-                        <label class="bmd-label-floating">New Email Address</label>
-                        <input asp-for="Input.NewEmail" type="text" class="form-control">
+                        <label style="color: black;" class="bmd-label-floating">New Email Address</label>
+                        <input style="color: black;" asp-for="Input.NewEmail" type="text" class="form-control">
                     </div>
                     <span style="color: red; font-weight: bold;" class="text-danger" asp-validation-for="Input.NewEmail"></span>
                 </div>

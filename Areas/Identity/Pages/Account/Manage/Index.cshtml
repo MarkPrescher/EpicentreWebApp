@@ -17,29 +17,29 @@
     }
     <div class="card">
         <div class="card-header card-header-primary">
-            <h4 class="card-title">@ViewData["Title"]</h4>
+            <h4 style="font-weight: bold;" class="card-title">@ViewData["Title"]</h4>
         </div>
         <div style="padding-top: 3.5%;" class="card-body">
             <form>
                 <div id="first-row" style="margin-bottom: -2%;" class="row">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label class="bmd-label-floating">First Name</label>
-                            <input id="firstName" value=@ViewData["FirstName"] type="text" class="form-control">
+                            <label style="color: black;" class="bmd-label-floating">First Name</label>
+                            <input style="color: black;" id="firstName" value=@ViewData["FirstName"] type="text" class="form-control">
                         </div>
                         <span id="first-name-validation" style="color: red; font-weight: bold; visibility: hidden;" class="text-danger">Please enter your first name</span>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label class="bmd-label-floating">Last Name</label>
-                            <input id="lastName" value=@ViewData["LastName"] type="text" class="form-control">
+                            <label style="color: black;" class="bmd-label-floating">Last Name</label>
+                            <input style="color: black;" id="lastName" value=@ViewData["LastName"] type="text" class="form-control">
                         </div>
                         <span id="last-name-validation" style="color: red; font-weight: bold; visibility: hidden;" class="text-danger">Please enter your last name</span>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label class="bmd-label-floating">RSA Identification Number</label>
-                            <input id="idNumber" value=@ViewData["IDNumber"] type="text" class="form-control">
+                            <label style="color: black;" class="bmd-label-floating">RSA Identification Number</label>
+                            <input style="color: black;" id="idNumber" value=@ViewData["IDNumber"] type="text" class="form-control">
                         </div>
                         <span id="id-number-validation" style="color: red; font-weight: bold; visibility: hidden;" class="text-danger">Please enter your ID Number</span>
                     </div>
@@ -47,15 +47,15 @@
                 <div id="second-row" style="margin-bottom: -2%; padding-top: 1%;" class="row">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label class="bmd-label-floating">Contact Number</label>
-                            <input id="contactNumber" value=@ViewData["ContactNumber"] type="text" class="form-control">
+                            <label style="color: black;" class="bmd-label-floating">Contact Number</label>
+                            <input style="color: black;" id="contactNumber" value=@ViewData["ContactNumber"] type="text" class="form-control">
                         </div>
                         <span id="contact-number-validation" style="color: red; font-weight: bold; visibility: hidden;" class="text-danger">Please enter your contact number</span>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label class="bmd-label-floating">Email Address</label>
-                            <input disabled readonly value=@ViewData["EmailAddress"] type="text" class="form-control">
+                            <label style="color: black;" class="bmd-label-floating">Email Address</label>
+                            <input style="color: black;" disabled readonly value=@ViewData["EmailAddress"] type="text" class="form-control">
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -63,7 +63,7 @@
                             @if (ViewData["Gender"].ToString() == "Male")
                             {
                                 <div style="padding-left: 2%;" class="form-check form-check-radio form-check-inline">
-                                    <label class="form-check-label">
+                                    <label style="color: black;" class="form-check-label">
                                         <input class="form-check-input" name="radios" type="radio" id="male-radio" value="Male" checked> Male
                                         <span class="circle">
                                             <span class="check"></span>
@@ -71,7 +71,7 @@
                                     </label>
                                 </div>
                                 <div style="padding-left: 10%;" class="form-check form-check-radio form-check-inline">
-                                    <label class="form-check-label">
+                                    <label style="color: black;" class="form-check-label">
                                         <input class="form-check-input" name="radios" type="radio" id="female-radio" value="Female"> Female
                                         <span class="circle">
                                             <span class="check"></span>
@@ -82,7 +82,7 @@
                             else
                             {
                                 <div style="padding-left: 2%;" class="form-check form-check-radio form-check-inline">
-                                    <label class="form-check-label">
+                                    <label style="color: black;" class="form-check-label">
                                         <input class="form-check-input" name="radios" type="radio" id="male-radio" value="Male"> Male
                                         <span class="circle">
                                             <span class="check"></span>
@@ -90,7 +90,7 @@
                                     </label>
                                 </div>
                                 <div style="padding-left: 10%;" class="form-check form-check-radio form-check-inline">
-                                    <label class="form-check-label">
+                                    <label style="color: black;" class="form-check-label">
                                         <input class="form-check-input" name="radios" type="radio" id="female-radio" value="Female" checked> Female
                                         <span class="circle">
                                             <span class="check"></span>
@@ -105,22 +105,22 @@
                 <div id="third-row" style="margin-bottom: -2%; padding-top: 1%;" class="row">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label class="bmd-label-floating">Medical Aid</label>
-                            <input id="medicalAid" value=@ViewData["MedicalAid"] type="text" class="form-control">
+                            <label style="color: black;" class="bmd-label-floating">Medical Aid</label>
+                            <input style="color: black;" id="medicalAid" value=@ViewData["MedicalAid"] type="text" class="form-control">
                         </div>
                         <span id="medical-aid-validation" style="color: red; font-weight: bold; visibility: hidden;" class="text-danger">Please enter your medical aid</span>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label class="bmd-label-floating">Membership Number</label>
-                            <input id="membershipNumber" value=@ViewData["MembershipNumber"] type="text" class="form-control">
+                            <label style="color: black;" class="bmd-label-floating">Membership Number</label>
+                            <input style="color: black;" id="membershipNumber" value=@ViewData["MembershipNumber"] type="text" class="form-control">
                         </div>
                         <span id="membership-number-validation" style="color: red; font-weight: bold; visibility: hidden;" class="text-danger">Please enter your membership number</span>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label class="bmd-label-floating">Authorization Number</label>
-                            <input id="authorizationNumber" value=@ViewData["AuthorizationNumber"] type="text" class="form-control">
+                            <label style="color: black;" class="bmd-label-floating">Authorization Number</label>
+                            <input style="color: black;" id="authorizationNumber" value=@ViewData["AuthorizationNumber"] type="text" class="form-control">
                         </div>
                         <span id="authorization-number-validation" style="color: red; font-weight: bold; visibility: hidden;" class="text-danger">Please provide your authorization number</span>
                     </div>
