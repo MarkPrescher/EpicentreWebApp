@@ -202,11 +202,11 @@ namespace Epicentre.Controllers
             CovidVaccinationDetails.VaccinationDate = vaccinationDate; // we can use the parameter because its not jumbled
 
             // Checks to see if it is weekday or weekend for the test date to filter time slots
-            bool isWeekDay = TimeSlots.CheckIfWeekDay(date);
+            //bool isWeekDay = TimeSlots.CheckIfWeekDay(date);
             BookingVaccination booking = new BookingVaccination(_context);
             int timeSlotCounter = TimeSlots.timeSlotCounter;
 
-            if (isWeekDay)
+            if (true)//isWeekDay)
             {
                 //Used to determine what timeslots are shown to user
                 ViewBag.Day = "Weekday";
@@ -400,74 +400,74 @@ namespace Epicentre.Controllers
 
 
 
-                if (await booking.CheckBookingAvailability(TimeSlots.WEEKEND_TIME_SLOTS[timeSlotCounter]))
-                    ViewBag.TS0800 = BookingVaccination.FULLY_BOOKED;
-                timeSlotCounter++;
-                if (await booking.CheckBookingAvailability(TimeSlots.WEEKEND_TIME_SLOTS[timeSlotCounter]))
-                    ViewBag.TS0815 = BookingVaccination.FULLY_BOOKED;
-                timeSlotCounter++;
-                if (await booking.CheckBookingAvailability(TimeSlots.WEEKEND_TIME_SLOTS[timeSlotCounter]))
-                    ViewBag.TS0830 = BookingVaccination.FULLY_BOOKED;
-                timeSlotCounter++;
-                if (await booking.CheckBookingAvailability(TimeSlots.WEEKEND_TIME_SLOTS[timeSlotCounter]))
-                    ViewBag.TS0845 = BookingVaccination.FULLY_BOOKED;
-                timeSlotCounter++;
+                //if (await booking.CheckBookingAvailability(TimeSlots.WEEKEND_TIME_SLOTS[timeSlotCounter]))
+                //    ViewBag.TS0800 = BookingVaccination.FULLY_BOOKED;
+                //timeSlotCounter++;
+                //if (await booking.CheckBookingAvailability(TimeSlots.WEEKEND_TIME_SLOTS[timeSlotCounter]))
+                //    ViewBag.TS0815 = BookingVaccination.FULLY_BOOKED;
+                //timeSlotCounter++;
+                //if (await booking.CheckBookingAvailability(TimeSlots.WEEKEND_TIME_SLOTS[timeSlotCounter]))
+                //    ViewBag.TS0830 = BookingVaccination.FULLY_BOOKED;
+                //timeSlotCounter++;
+                //if (await booking.CheckBookingAvailability(TimeSlots.WEEKEND_TIME_SLOTS[timeSlotCounter]))
+                //    ViewBag.TS0845 = BookingVaccination.FULLY_BOOKED;
+                //timeSlotCounter++;
 
-                if (await booking.CheckBookingAvailability(TimeSlots.WEEKEND_TIME_SLOTS[timeSlotCounter]))
-                    ViewBag.TS0900 = BookingVaccination.FULLY_BOOKED;
-                timeSlotCounter++;
-                if (await booking.CheckBookingAvailability(TimeSlots.WEEKEND_TIME_SLOTS[timeSlotCounter]))
-                    ViewBag.TS0915 = BookingVaccination.FULLY_BOOKED;
-                timeSlotCounter++;
-                if (await booking.CheckBookingAvailability(TimeSlots.WEEKEND_TIME_SLOTS[timeSlotCounter]))
-                    ViewBag.TS0930 = BookingVaccination.FULLY_BOOKED;
-                timeSlotCounter++;
-                if (await booking.CheckBookingAvailability(TimeSlots.WEEKEND_TIME_SLOTS[timeSlotCounter]))
-                    ViewBag.TS0945 = BookingVaccination.FULLY_BOOKED;
-                timeSlotCounter++;
+                //if (await booking.CheckBookingAvailability(TimeSlots.WEEKEND_TIME_SLOTS[timeSlotCounter]))
+                //    ViewBag.TS0900 = BookingVaccination.FULLY_BOOKED;
+                //timeSlotCounter++;
+                //if (await booking.CheckBookingAvailability(TimeSlots.WEEKEND_TIME_SLOTS[timeSlotCounter]))
+                //    ViewBag.TS0915 = BookingVaccination.FULLY_BOOKED;
+                //timeSlotCounter++;
+                //if (await booking.CheckBookingAvailability(TimeSlots.WEEKEND_TIME_SLOTS[timeSlotCounter]))
+                //    ViewBag.TS0930 = BookingVaccination.FULLY_BOOKED;
+                //timeSlotCounter++;
+                //if (await booking.CheckBookingAvailability(TimeSlots.WEEKEND_TIME_SLOTS[timeSlotCounter]))
+                //    ViewBag.TS0945 = BookingVaccination.FULLY_BOOKED;
+                //timeSlotCounter++;
 
-                if (await booking.CheckBookingAvailability(TimeSlots.WEEKEND_TIME_SLOTS[timeSlotCounter]))
-                    ViewBag.TS1000 = BookingVaccination.FULLY_BOOKED;
-                timeSlotCounter++;
-                if (await booking.CheckBookingAvailability(TimeSlots.WEEKEND_TIME_SLOTS[timeSlotCounter]))
-                    ViewBag.TS1015 = BookingVaccination.FULLY_BOOKED;
-                timeSlotCounter++;
-                if (await booking.CheckBookingAvailability(TimeSlots.WEEKEND_TIME_SLOTS[timeSlotCounter]))
-                    ViewBag.TS1030 = BookingVaccination.FULLY_BOOKED;
-                timeSlotCounter++;
-                if (await booking.CheckBookingAvailability(TimeSlots.WEEKEND_TIME_SLOTS[timeSlotCounter]))
-                    ViewBag.TS1045 = BookingVaccination.FULLY_BOOKED;
-                timeSlotCounter++;
+                //if (await booking.CheckBookingAvailability(TimeSlots.WEEKEND_TIME_SLOTS[timeSlotCounter]))
+                //    ViewBag.TS1000 = BookingVaccination.FULLY_BOOKED;
+                //timeSlotCounter++;
+                //if (await booking.CheckBookingAvailability(TimeSlots.WEEKEND_TIME_SLOTS[timeSlotCounter]))
+                //    ViewBag.TS1015 = BookingVaccination.FULLY_BOOKED;
+                //timeSlotCounter++;
+                //if (await booking.CheckBookingAvailability(TimeSlots.WEEKEND_TIME_SLOTS[timeSlotCounter]))
+                //    ViewBag.TS1030 = BookingVaccination.FULLY_BOOKED;
+                //timeSlotCounter++;
+                //if (await booking.CheckBookingAvailability(TimeSlots.WEEKEND_TIME_SLOTS[timeSlotCounter]))
+                //    ViewBag.TS1045 = BookingVaccination.FULLY_BOOKED;
+                //timeSlotCounter++;
 
-                if (await booking.CheckBookingAvailability(TimeSlots.WEEKEND_TIME_SLOTS[timeSlotCounter]))
-                    ViewBag.TS1100 = BookingVaccination.FULLY_BOOKED;
-                timeSlotCounter++;
-                if (await booking.CheckBookingAvailability(TimeSlots.WEEKEND_TIME_SLOTS[timeSlotCounter]))
-                    ViewBag.TS1115 = BookingVaccination.FULLY_BOOKED;
-                timeSlotCounter++;
-                if (await booking.CheckBookingAvailability(TimeSlots.WEEKEND_TIME_SLOTS[timeSlotCounter]))
-                    ViewBag.TS1130 = BookingVaccination.FULLY_BOOKED;
-                timeSlotCounter++;
-                if (await booking.CheckBookingAvailability(TimeSlots.WEEKEND_TIME_SLOTS[timeSlotCounter]))
-                    ViewBag.TS1145 = BookingVaccination.FULLY_BOOKED;
-                timeSlotCounter++;
+                //if (await booking.CheckBookingAvailability(TimeSlots.WEEKEND_TIME_SLOTS[timeSlotCounter]))
+                //    ViewBag.TS1100 = BookingVaccination.FULLY_BOOKED;
+                //timeSlotCounter++;
+                //if (await booking.CheckBookingAvailability(TimeSlots.WEEKEND_TIME_SLOTS[timeSlotCounter]))
+                //    ViewBag.TS1115 = BookingVaccination.FULLY_BOOKED;
+                //timeSlotCounter++;
+                //if (await booking.CheckBookingAvailability(TimeSlots.WEEKEND_TIME_SLOTS[timeSlotCounter]))
+                //    ViewBag.TS1130 = BookingVaccination.FULLY_BOOKED;
+                //timeSlotCounter++;
+                //if (await booking.CheckBookingAvailability(TimeSlots.WEEKEND_TIME_SLOTS[timeSlotCounter]))
+                //    ViewBag.TS1145 = BookingVaccination.FULLY_BOOKED;
+                //timeSlotCounter++;
 
 
-                if (await booking.CheckBookingAvailability(TimeSlots.WEEKEND_TIME_SLOTS[timeSlotCounter]))
-                    ViewBag.TS1200 = BookingVaccination.FULLY_BOOKED;
-                timeSlotCounter++;
-                if (await booking.CheckBookingAvailability(TimeSlots.WEEKEND_TIME_SLOTS[timeSlotCounter]))
-                    ViewBag.TS1215 = BookingVaccination.FULLY_BOOKED;
-                timeSlotCounter++;
-                if (await booking.CheckBookingAvailability(TimeSlots.WEEKEND_TIME_SLOTS[timeSlotCounter]))
-                    ViewBag.TS1230 = BookingVaccination.FULLY_BOOKED;
-                timeSlotCounter++;
-                if (await booking.CheckBookingAvailability(TimeSlots.WEEKEND_TIME_SLOTS[timeSlotCounter]))
-                    ViewBag.TS1245 = BookingVaccination.FULLY_BOOKED;
-                timeSlotCounter++;
+                //if (await booking.CheckBookingAvailability(TimeSlots.WEEKEND_TIME_SLOTS[timeSlotCounter]))
+                //    ViewBag.TS1200 = BookingVaccination.FULLY_BOOKED;
+                //timeSlotCounter++;
+                //if (await booking.CheckBookingAvailability(TimeSlots.WEEKEND_TIME_SLOTS[timeSlotCounter]))
+                //    ViewBag.TS1215 = BookingVaccination.FULLY_BOOKED;
+                //timeSlotCounter++;
+                //if (await booking.CheckBookingAvailability(TimeSlots.WEEKEND_TIME_SLOTS[timeSlotCounter]))
+                //    ViewBag.TS1230 = BookingVaccination.FULLY_BOOKED;
+                //timeSlotCounter++;
+                //if (await booking.CheckBookingAvailability(TimeSlots.WEEKEND_TIME_SLOTS[timeSlotCounter]))
+                //    ViewBag.TS1245 = BookingVaccination.FULLY_BOOKED;
+                //timeSlotCounter++;
 
-                if (await booking.CheckBookingAvailability(TimeSlots.WEEKEND_TIME_SLOTS[timeSlotCounter]))
-                    ViewBag.TS1300 = BookingVaccination.FULLY_BOOKED;
+                //if (await booking.CheckBookingAvailability(TimeSlots.WEEKEND_TIME_SLOTS[timeSlotCounter]))
+                //    ViewBag.TS1300 = BookingVaccination.FULLY_BOOKED;
 
             }
 
