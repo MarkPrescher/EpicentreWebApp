@@ -4,46 +4,18 @@
     ViewData["Title"] = "SearchForPatient";
 }
 
-<div style="padding-left: 5%; padding-right: 5%; padding-bottom: 3%; margin-top: 0%;" class="content">
-    <h1 style="padding-left: 2%;">Patient Tests</h1>
-
-    <div style="margin-bottom: -2%; margin-top: 3%; padding-left: 2%;" class="row">
-        <div class="col-md-4">
-            <div class="form-group">
-                <label class="bmd-label-floating">ID Number</label>
-                <input id="idNumber" type="text" class="form-control">
-            </div>
-            <span id="id-validation" style="color: red; font-weight: bold; visibility: hidden;" class="text-danger">Please enter your first name</span>
+<div style="margin-top: 15%;" class="text-center">
+    <h1 style="color: black; font-weight: bold;">Search for Patient</h1>
+    <div style="margin-top: 4%; padding-left: 30%; padding-right: 30%">
+        <div style="text-align: center;" class="form-group">
+            <label style="color: black;" class="bmd-label-floating"></label>
+            <input style="color: black; font-size: 200%; text-align: center;" id="idNumber" type="text" class="form-control">
         </div>
-        <div class="col-md-4">
-            <div class="form-group">
-                <button onclick="search()" type="button" style="background-color: red;" class="btn btn-primary">Search</button>
-            </div>
-        </div>
+        <span id="id-validation" style="color: red; font-weight: bold; visibility: hidden;" class="text-danger">Invalid ID</span>
     </div>
-
-    <table style="margin-top: 3%;" class="table">
-        <thead>
-            <tr>
-                <th style="font-weight: bold;" class="text-center">Test Date</th>
-                <th style="font-weight: bold;" class="text-center">Test Time</th>
-                <th style="font-weight: bold;" class="text-center">Test Type</th>
-                <th style="font-weight: bold;" class="text-center">Test Location</th>
-                <th style="font-weight: bold;" class="text-center">Email Address</th>
-                <th style="font-weight: bold;" class="text-center">ID Number</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td class="text-center">23/09/2021</td>
-                <td class="text-center">08:30</td>
-                <td class="text-center">PCR Swab Test</td>
-                <td class="text-center">Hillcrest, KwaZulu-Natal</td>
-                <td class="text-center">msprescher@gmail.com</td>
-                <td class="text-center">0003245086081</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="form-group">
+        <button onclick="search()" type="button" style="background-color: red;" class="btn btn-primary">Search</button>
+    </div>
 </div>
 
 <script type="text/javascript">
@@ -53,17 +25,12 @@
         document.getElementById('id-validation').style.visibility = "hidden";
 
         var idNumber = document.getElementById('idNumber').value;
-        var isNumberCorrect = true;
+        var idNumberCorrect = false;
 
         String.prototype.isNumber = function () { return /^\d+$/.test(this); }
-        if (!idNumber.isNumber() && document.getElementById('idNumber').value.length == 0) {
+        if (!idNumber.isNumber() || document.getElementById('idNumber').value.length == 0) {
             document.getElementById('id-validation').textContent = "Invalid ID";
             document.getElementById('id-validation').style.visibility = "visible";
-            idNumberCorrect = false;
-        } else if (!idNumber.isNumber()) {
-            document.getElementById('id-validation').textContent = "Invalid ID";
-            document.getElementById('id-validation').style.visibility = "visible";
-            idNumberCorrect = false;
         } else if (idNumber.isNumber()) {
             var id = idNumber.toString();
             if (id.length == 13) {
@@ -71,12 +38,11 @@
             } else {
                 document.getElementById('id-validation').textContent = "Invalid ID";
                 document.getElementById('id-validation').style.visibility = "visible";
-                idNumberCorrect = false;
             }
         }
 
-        if (isNumberCorrect) {
-            window.location.href = '@Url.Action("SearchForPatient", "CovidTests")' + '?idNumber=' + idNumber;
+        if (idNumberCorrect) {
+            window.location.href = '@Url.Action("Patients", "CovidTests")' + '?idNumber=' + idNumber;
         }
     }
 
