@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text.Encodings.Web;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Epicentre.Areas.Identity.Data;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using System.Net.Mail;
 using System.Net;
-using System.Web;
 
 namespace Epicentre.Areas.Identity.Pages.Account
 {
@@ -21,12 +16,10 @@ namespace Epicentre.Areas.Identity.Pages.Account
     public class ForgotPasswordModel : PageModel
     {
         private readonly UserManager<EpicentreUser> _userManager;
-        private readonly IEmailSender _emailSender;
 
-        public ForgotPasswordModel(UserManager<EpicentreUser> userManager, IEmailSender emailSender)
+        public ForgotPasswordModel(UserManager<EpicentreUser> userManager)
         {
             _userManager = userManager;
-            _emailSender = emailSender;
         }
 
         [BindProperty]

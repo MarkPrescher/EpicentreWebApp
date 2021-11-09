@@ -1,18 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
 using Epicentre.Areas.Identity.Data;
 using Epicentre.Library;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 namespace Epicentre.Areas.Identity.Pages.Account.Manage
 {
+    [Authorize(Roles = "User")]
     public class ChangePasswordModel : PageModel
     {
         private readonly UserManager<EpicentreUser> _userManager;
