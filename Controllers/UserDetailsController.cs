@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Epicentre.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "User")]
     public class UserDetailsController : Controller
     {
         private readonly EpicentreDataContext _context;
