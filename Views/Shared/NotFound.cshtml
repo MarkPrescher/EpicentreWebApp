@@ -1,13 +1,11 @@
-﻿@page
-@model ForgotPasswordConfirmation
-@{
+﻿@{
     Layout = null;
 }
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Forgot Password - Epicentre COVID-19 Portal</title>
+    <title>Page Not Found - Epicentre COVID-19 Portal</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/png" href="~/img/icon.png" />
@@ -23,9 +21,15 @@
 
     <div class="limiter">
         <div>
-            <h1>We have sent you an email to reset your password.</h1>
+            <header>
+                <h1>404, Page Not Found!</h1>
+                <br />
+                <h5>@ViewBag.ErrorMessage</h5>
+            </header>
+            <a href="/Home" class="btn" style="color: white; margin-top: 5%; font-size: 175%; cursor: pointer;">Go Home</a>
         </div>
     </div>
+
     <script src="~/vendor/jquery/jquery-3.2.1.min.js"></script>
     <script src="~/vendor/bootstrap/js/popper.js"></script>
     <script src="~/vendor/bootstrap/js/bootstrap.min.js"></script>
