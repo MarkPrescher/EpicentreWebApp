@@ -1,20 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using Epicentre.Areas.Identity.Data;
 using Epicentre.Data;
-using Epicentre.Models;
 using Epicentre.Library;
-
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Epicentre.Controllers;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Epicentre.Areas.Identity.Pages.Account.Manage
 {
+    [Authorize(Roles = "User")]
     public partial class IndexModel : PageModel
     {
         private readonly EpicentreDataContext _context;

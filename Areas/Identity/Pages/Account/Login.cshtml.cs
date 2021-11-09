@@ -2,13 +2,11 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Epicentre.Areas.Identity.Data;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
@@ -19,15 +17,11 @@ namespace Epicentre.Areas.Identity.Pages.Account
     [AllowAnonymous]
     public class LoginModel : PageModel
     {
-        private readonly UserManager<EpicentreUser> _userManager;
         private readonly SignInManager<EpicentreUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
 
-        public LoginModel(SignInManager<EpicentreUser> signInManager, 
-            ILogger<LoginModel> logger,
-            UserManager<EpicentreUser> userManager)
+        public LoginModel(SignInManager<EpicentreUser> signInManager, ILogger<LoginModel> logger)
         {
-            _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
         }

@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Text;
-using System.Text.Encodings.Web;
-using System.Linq;
 using System.Threading.Tasks;
 using Epicentre.Areas.Identity.Data;
 using Microsoft.AspNetCore.Identity;
@@ -14,9 +10,11 @@ using Microsoft.AspNetCore.WebUtilities;
 using System.Net.Mail;
 using System.Net;
 using Epicentre.Library;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Epicentre.Areas.Identity.Pages.Account.Manage
 {
+    [Authorize(Roles = "User")]
     public partial class EmailModel : PageModel
     {
         private readonly UserManager<EpicentreUser> _userManager;
