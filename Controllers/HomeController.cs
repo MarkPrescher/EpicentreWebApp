@@ -5,11 +5,7 @@ using Epicentre.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Epicentre.Controllers
@@ -18,13 +14,11 @@ namespace Epicentre.Controllers
     public class HomeController : Controller
     {
         private readonly EpicentreDataContext _context;
-        private readonly UserManager<EpicentreUser> userManager;
         private readonly SignInManager<EpicentreUser> signInManager;
 
-        public HomeController(UserManager<EpicentreUser> userManager, SignInManager<EpicentreUser> signInManager, EpicentreDataContext context)
+        public HomeController(SignInManager<EpicentreUser> signInManager, EpicentreDataContext context)
         {
             _context = context;
-            this.userManager = userManager;
             this.signInManager = signInManager;
         }
 
@@ -42,16 +36,19 @@ namespace Epicentre.Controllers
             return View();
         }
 
+        [Authorize(Roles = "User")]
         public IActionResult About()
         {
             return View();
         }
 
+        [Authorize(Roles = "User")]
         public IActionResult Contact()
         {
             return View();
         }
 
+        [Authorize(Roles = "User")]
         public IActionResult ContactHelper(string topic, string message)
         {
             // Send email here
@@ -62,11 +59,13 @@ namespace Epicentre.Controllers
             return View();
         }
 
+        [Authorize(Roles = "User")]
         public IActionResult SuccessfulContact()
         {
             return View();
         }
 
+        [Authorize(Roles = "User")]
         public IActionResult FailedContact()
         {
             return View()

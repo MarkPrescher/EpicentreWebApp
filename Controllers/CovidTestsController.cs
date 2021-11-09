@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Epicentre.Data;
 using Epicentre.Models;
@@ -13,8 +11,7 @@ using System.Net.Mail;
 
 namespace Epicentre.Controllers
 {
-    // Add throughout
-    //[Authorize(Roles = "User")]
+    [Authorize]
     public class CovidTestsController : Controller
     {
         private readonly EpicentreDataContext _context;
@@ -24,129 +21,14 @@ namespace Epicentre.Controllers
             _context = context;
         }
 
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> Index()
         {
             var covidTest = await _context.CovidTest.Where(c => c.USER_EMAIL == UserActions.UserEmail).ToListAsync();
             return View(covidTest);
         }
 
-        public async Task<IActionResult> Details(Guid? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-            
-            var covidTest = await _context.CovidTest
-                .FirstOrDefaultAsync(m => m.TEST_ID == id);
-            if (covidTest == null)
-            {
-                return NotFound();
-            }
-            return View(covidTest);
-        }
-
-        // !!! *** OBSOLETE *** !!!
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        // !!! *** OBSOLETE *** !!!
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("TEST_ID,TEST_TYPE,TEST_DATE,TEST_STATUS,TEST_RESULT,USER_ID")] CovidTest covidTest)
-        {
-            if (ModelState.IsValid)
-            {
-                covidTest.TEST_ID = Guid.NewGuid();
-                _context.Add(covidTest);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(covidTest);
-        }
-
-        public async Task<IActionResult> Edit(Guid? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var covidTest = await _context.CovidTest.FindAsync(id);
-            if (covidTest == null)
-            {
-                return NotFound();
-            }
-            return View(covidTest);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("TEST_ID,TEST_TYPE,TEST_DATE,TEST_STATUS,TEST_RESULT,USER_ID")] CovidTest covidTest)
-        {
-            if (id != covidTest.TEST_ID)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(covidTest);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!CovidTestExists(covidTest.TEST_ID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(covidTest);
-        }
-
-        public async Task<IActionResult> Delete(Guid? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var covidTest = await _context.CovidTest
-                .FirstOrDefaultAsync(m => m.TEST_ID == id);
-            if (covidTest == null)
-            {
-                return NotFound();
-            }
-
-            return View(covidTest);
-        }
-
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(Guid id)
-        {
-            var covidTest = await _context.CovidTest.FindAsync(id);
-            _context.CovidTest.Remove(covidTest);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool CovidTestExists(Guid id)
-        {
-            return _context.CovidTest.Any(e => e.TEST_ID == id);
-        }
-
-        // The original "Create" method - not inserting into database though - only inserts in the Book() method.
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> RegisterCovidTest()
         {
             var details = await _context.UserDetail.FirstOrDefaultAsync(m => m.EMAIL_ADDRESS == UserActions.UserEmail);
@@ -166,7 +48,7 @@ namespace Epicentre.Controllers
             return View();
         }
 
-        // !!!!!!!! Check to see if these can be passed as hidden parameter using POST, instead of JavaScript !!!!!!!!
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> TimeBooking(string testType, string testLocation, string testDate)
         {
             // If there are no params, we need to throw not found, otherwise user can bypass booking stage
@@ -646,8 +528,7 @@ namespace Epicentre.Controllers
             return View();
         }
 
-
-        // Displaying all the final details. Insertion to the database does NOT happen here, this action method will call the Book() method which will run the code to insert into database
+        [Authorize(Roles = "User")]
         public IActionResult ConfirmBooking(string time)
         {
             if (time == null)
@@ -664,6 +545,7 @@ namespace Epicentre.Controllers
             return View();
         }
 
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> Book()
         {
             CovidTest covidTest = new CovidTest();
@@ -725,6 +607,7 @@ namespace Epicentre.Controllers
             }
         }
 
+        [Authorize(Roles = "User")]
         public IActionResult SuccessfulBooking()
         {
             ViewBag.TestType = CovidTestDetails.TestType;
@@ -735,16 +618,19 @@ namespace Epicentre.Controllers
             return View();
         }
 
+        [Authorize(Roles = "User")]
         public IActionResult FailedBooking()
         {
             return View();
         }
 
+        [Authorize(Roles = "Nurse")]
         public async Task<IActionResult> SearchForPatient()
         {
             return View(await _context.CovidTest.ToListAsync());
         }
 
+        [Authorize(Roles = "Nurse")]
         public async Task<IActionResult> Patients(string idNumber)
         {
             if (idNumber == null)
@@ -758,6 +644,7 @@ namespace Epicentre.Controllers
             return View(covidTest);
         }
 
+        [Authorize(Roles = "Nurse")]
         public async Task<IActionResult> UpdateStatus(string testId)
         {
             if (testId == null)
@@ -792,6 +679,7 @@ namespace Epicentre.Controllers
             return RedirectToAction("Patients", "CovidTests", new { idNumber = userDetails.ID_NUMBER });
         }
 
+        [Authorize(Roles = "Nurse")]
         public async Task<IActionResult> UpdateResult(string testId, string result)
         {
             if (testId == null)
