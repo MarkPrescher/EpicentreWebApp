@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Epicentre.Controllers
@@ -33,6 +34,19 @@ namespace Epicentre.Controllers
             {
                 return RedirectToAction("SearchForPatient", "CovidTests");
             }
+
+            var firstName = _context.UserDetail.Where(u => u.EMAIL_ADDRESS == UserActions.UserEmail).Select(u => u.FIRST_NAME).FirstOrDefault();
+            ViewBag.FirstName = firstName;
+
+            var numberOfCovidTests = _context.CovidTest.Where(c => c.USER_EMAIL == UserActions.UserEmail).Count(c => c.USER_EMAIL == UserActions.UserEmail);
+            ViewBag.NumberOfTests = numberOfCovidTests;
+
+            var numberOfPositiveCovidTests = _context.CovidTest.Where(c => c.USER_EMAIL == UserActions.UserEmail).Count(c => c.TEST_RESULT == "Positive");
+            ViewBag.NumberOfPositiveTests = numberOfPositiveCovidTests;
+
+            var numberOfNegativeCovidTests = _context.CovidTest.Where(c => c.USER_EMAIL == UserActions.UserEmail).Count(c => c.TEST_RESULT == "Negative");
+            ViewBag.NumberOfNegativeTests = numberOfNegativeCovidTests;
+
             return View();
         }
 

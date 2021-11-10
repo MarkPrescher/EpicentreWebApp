@@ -9,4 +9,4 @@ Password: Xbcad-123
 Login Details (Roles):
 User - XXX, XXX
 Nurse - nurse@epicentre.co.za, nurse1
-Admin - XXX, XXX
+Admin - admin@epicentre.co.za, admin1

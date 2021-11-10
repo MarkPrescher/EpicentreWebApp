@@ -36,12 +36,6 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a style="color: black;" class="nav-link" asp-controller="CovidVaccinations" asp-action="Index">
-                                <i class="material-icons">vaccines</i>
-                                <p>Vaccinations</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
                             <a style="color: black;" class="nav-link" href="/Identity/Account/Manage">
                                 <i class="material-icons">person</i>
                                 <p>My Profile</p>
@@ -60,6 +54,15 @@
                             </a>
                         </li>
                     </ul>
+                    <div style="font-size: 80%; margin-top: 110%;" class="text-center">
+                        Version 1.0.0
+                    </div>
+                    <div style="font-size: 85%;" class="copyright text-center">
+                        &copy;
+                        <script>
+                            document.write(new Date().getFullYear())
+                        </script>. Developed by TechGravity.
+                    </div>
                 </div>
             }
             else if (User.IsInRole("Nurse"))
@@ -73,6 +76,15 @@
                             </a>
                         </li>
                     </ul>
+                    <div style="font-size: 80%; margin-top: 195%;" class="text-center">
+                        Version 1.0.0
+                    </div>
+                    <div style="font-size: 85%;" class="copyright text-center">
+                        &copy;
+                        <script>
+                            document.write(new Date().getFullYear())
+                        </script>. Developed by TechGravity.
+                    </div>
                 </div>
             }
         </div>
@@ -126,7 +138,7 @@
                 </div>
             </nav>
             @RenderBody()
-            <footer style="color: red; font-weight: bold;" class="footer">
+            @*<footer style="color: red; font-weight: bold;" class="footer">
                 <div class="container-fluid">
                     <div class="copyright float-right">
                         &copy;
@@ -135,7 +147,7 @@
                         </script>. Developed by TechGravity.
                     </div>
                 </div>
-            </footer>
+            </footer>*@
         </div>
     </div>
     <script src="~/js/core/jquery.min.js"></script>

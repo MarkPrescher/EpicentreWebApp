@@ -1,7 +1,193 @@
 ﻿@{
     ViewData["Title"] = "Home";
 }
+<div style="padding-left: 1%; padding-right: 2%; padding-bottom: 3%; margin-top: 0%;" class="content">
+    <h1 style="padding-bottom: 1%; padding-left: 4%; color: black; font-size: 250%;">Welcome back, <span style="font-weight: bold; color: red;">@ViewBag.FirstName</span>!</h1>
+    <div style="margin-top: 2%; margin-left: -2.2%;" class="container-fluid">
+        <div style="margin-left: 3%;" class="row">
+            <div class="col-lg-4 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-warning card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">coronavirus</i>
+                        </div>
+                        <p style="color: black;" class="card-category">Number of Covid Tests</p>
+                        <h3 style="color: black;" class="card-title">
+                            @ViewBag.NumberOfTests
+                        </h3>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons text-danger">coronavirus</i>
+                            <a style="color: red;" asp-controller="CovidTests" asp-action="Index">View your Covid Tests</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-success card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">thumb_up_alt</i>
+                        </div>
+                        <p style="color: black;" class="card-category">Positive Covid Tests</p>
+                        <h3 style="color: black;" class="card-title">@ViewBag.NumberOfPositiveTests</h3>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons text-danger">coronavirus</i>
+                            <a style="color: red;" asp-controller="CovidTests" asp-action="RegisterCovidTest">Register for Covid Test</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-danger card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">thumb_down_alt</i>
+                        </div>
+                        <p style="color: black;" class="card-category">Negative Covid Tests</p>
+                        <h3 style="color: black;" class="card-title">@ViewBag.NumberOfNegativeTests</h3>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons text-danger">coronavirus</i>
+                            <a style="color: red;" asp-controller="CovidTests" asp-action="RegisterCovidTest">Register for Covid Test</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="margin-left: 4%;" class="text-center">
+            <img src="~/img/epicentre-work.png" />
+        </div>
+        </div>
+    </div>
 
-<div class="content">
-    <h1>Layout</h1>
-</div>
+@*<div style="padding-left: 1%; padding-right: 2%; padding-bottom: 3%; margin-top: 0%;" class="content">
+        <h1 style="padding-bottom: 1%; padding-left: 4%; color: black; font-size: 250%;">Welcome back, <span style="font-weight: bold;">_firstname_</span></h1>
+        <div style="margin-top: 2%;" class="container-fluid">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="card card-stats">
+                        <div class="card-header card-header-warning card-header-icon">
+                            <div class="card-icon">
+                                <i class="material-icons">coronavirus</i>
+                            </div>
+                            <p style="color: black;" class="card-category">Number of Covid Tests</p>
+                            <h3 class="card-title">
+                                _number_
+                            </h3>
+                        </div>
+                        <div class="card-footer">
+                            <div class="stats">
+                                <i class="material-icons text-danger">coronavirus</i>
+                                <a style="color: red;" href="#">Register for Covid Test</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="card card-stats">
+                        <div class="card-header card-header-success card-header-icon">
+                            <div class="card-icon">
+                                <i class="material-icons">store</i>
+                            </div>
+                            <p class="card-category">Revenue</p>
+                            <h3 class="card-title">$34,245</h3>
+                        </div>
+                        <div class="card-footer">
+                            <div class="stats">
+                                <i class="material-icons">date_range</i> Last 24 Hours
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="card card-stats">
+                        <div class="card-header card-header-danger card-header-icon">
+                            <div class="card-icon">
+                                <i class="material-icons">info_outline</i>
+                            </div>
+                            <p class="card-category">Fixed Issues</p>
+                            <h3 class="card-title">75</h3>
+                        </div>
+                        <div class="card-footer">
+                            <div class="stats">
+                                <i class="material-icons">local_offer</i> Tracked from Github
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="card card-stats">
+                        <div class="card-header card-header-info card-header-icon">
+                            <div class="card-icon">
+                                <i class="fa fa-twitter"></i>
+                            </div>
+                            <p class="card-category">Followers</p>
+                            <h3 class="card-title">+245</h3>
+                        </div>
+                        <div class="card-footer">
+                            <div class="stats">
+                                <i class="material-icons">update</i> Just Updated
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card card-chart">
+                        <div class="card-header card-header-success">
+                            <div class="ct-chart" id="dailySalesChart"></div>
+                        </div>
+                        <div class="card-body">
+                            <h4 class="card-title">Daily Sales</h4>
+                            <p class="card-category">
+                                <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> increase in today sales.
+                            </p>
+                        </div>
+                        <div class="card-footer">
+                            <div class="stats">
+                                <i class="material-icons">access_time</i> updated 4 minutes ago
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card card-chart">
+                        <div class="card-header card-header-warning">
+                            <div class="ct-chart" id="websiteViewsChart"></div>
+                        </div>
+                        <div class="card-body">
+                            <h4 class="card-title">Email Subscriptions</h4>
+                            <p class="card-category">Last Campaign Performance</p>
+                        </div>
+                        <div class="card-footer">
+                            <div class="stats">
+                                <i class="material-icons">access_time</i> campaign sent 2 days ago
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card card-chart">
+                        <div class="card-header card-header-danger">
+                            <div class="ct-chart" id="completedTasksChart"></div>
+                        </div>
+                        <div class="card-body">
+                            <h4 class="card-title">Completed Tasks</h4>
+                            <p class="card-category">Last Campaign Performance</p>
+                        </div>
+                        <div class="card-footer">
+                            <div class="stats">
+                                <i class="material-icons">access_time</i> campaign sent 2 days ago
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>*@
