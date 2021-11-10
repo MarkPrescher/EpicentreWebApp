@@ -15,7 +15,6 @@ namespace Epicentre.Data
         }
 
         public DbSet<CovidTest> CovidTest { get; set; }
-        public DbSet<CovidVaccination> CovidVaccination { get; set; }
         public DbSet<UserDetail> UserDetail { get; set; }
     }
 }
