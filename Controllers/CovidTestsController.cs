@@ -624,13 +624,13 @@ namespace Epicentre.Controllers
             return View();
         }
 
-        [Authorize(Roles = "Nurse")]
+        [Authorize(Roles = "Nurse, Admin")]
         public async Task<IActionResult> SearchForPatient()
         {
             return View(await _context.CovidTest.ToListAsync());
         }
 
-        [Authorize(Roles = "Nurse")]
+        [Authorize(Roles = "Nurse, Admin")]
         public async Task<IActionResult> Patients(string idNumber)
         {
             if (idNumber == null)
@@ -644,7 +644,7 @@ namespace Epicentre.Controllers
             return View(covidTest);
         }
 
-        [Authorize(Roles = "Nurse")]
+        [Authorize(Roles = "Nurse, Admin")]
         public async Task<IActionResult> UpdateStatus(string testId)
         {
             if (testId == null)
@@ -679,7 +679,7 @@ namespace Epicentre.Controllers
             return RedirectToAction("Patients", "CovidTests", new { idNumber = userDetails.ID_NUMBER });
         }
 
-        [Authorize(Roles = "Nurse")]
+        [Authorize(Roles = "Nurse, Admin")]
         public async Task<IActionResult> UpdateResult(string testId, string result)
         {
             if (testId == null)
@@ -703,6 +703,12 @@ namespace Epicentre.Controllers
             await _context.SaveChangesAsync();
 
             return RedirectToAction("Patients", "CovidTests", new { idNumber = userDetails.ID_NUMBER });
+        }
+
+        [Authorize(Roles = "Admin")]
+        public IActionResult Dashboard()
+        {
+            return View();
         }
     }
 }

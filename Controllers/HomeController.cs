@@ -26,11 +26,11 @@ namespace Epicentre.Controllers
         public IActionResult Index()
         {
             // This needs to be done throughout
-            if (!UserActions.UserExists(_context) && !User.IsInRole("Nurse"))
+            if (!UserActions.UserExists(_context) && !User.IsInRole("Nurse") && !User.IsInRole("Admin"))
             {
                 return RedirectToAction("Index", "UserDetails");
             }
-            else if (User.IsInRole("Nurse"))
+            else if (User.IsInRole("Nurse") || User.IsInRole("Admin"))
             {
                 return RedirectToAction("SearchForPatient", "CovidTests");
             }
