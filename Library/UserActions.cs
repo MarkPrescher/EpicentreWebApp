@@ -5,8 +5,8 @@ namespace Epicentre.Library
 {
     public static class UserActions
     {
-        //public static string UserEmail { get; set; }
-        public static string UserEmail = "varshen1234@gmail.com";
+        public static string UserEmail { get; set; }
+        //public static string UserEmail = "varshen1234@gmail.com";
 
         public static bool UserExists(EpicentreDataContext context)
         {

@@ -55,18 +55,30 @@ namespace Epicentre.Controllers
         [Authorize(Roles = "User")]
         public IActionResult About()
         {
+            if (!UserActions.UserExists(_context) && !User.IsInRole("Nurse"))
+            {
+                return RedirectToAction("Index", "UserDetails");
+            }
             return View();
         }
 
         [Authorize(Roles = "User")]
         public IActionResult Contact()
         {
+            if (!UserActions.UserExists(_context) && !User.IsInRole("Nurse"))
+            {
+                return RedirectToAction("Index", "UserDetails");
+            }
             return View();
         }
 
         [Authorize(Roles = "User")]
         public IActionResult ContactHelper(string topic, string message)
         {
+            if (!UserActions.UserExists(_context) && !User.IsInRole("Nurse"))
+            {
+                return RedirectToAction("Index", "UserDetails");
+            }
             try
             {
                 // Send email here
@@ -98,12 +110,21 @@ namespace Epicentre.Controllers
         [Authorize(Roles = "User")]
         public IActionResult SuccessfulContact()
         {
+            if (!UserActions.UserExists(_context) && !User.IsInRole("Nurse"))
+            {
+                return RedirectToAction("Index", "UserDetails");
+            }
+
             return View();
         }
 
         [Authorize(Roles = "User")]
         public IActionResult FailedContact()
         {
+            if (!UserActions.UserExists(_context) && !User.IsInRole("Nurse"))
+            {
+                return RedirectToAction("Index", "UserDetails");
+            }
             return View()
 ;        }
 
