@@ -5,8 +5,10 @@ using Epicentre.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Diagnostics;
 using System.Linq;
+using System.Net.Mail;
 using System.Threading.Tasks;
 
 namespace Epicentre.Controllers
@@ -53,35 +55,76 @@ namespace Epicentre.Controllers
         [Authorize(Roles = "User")]
         public IActionResult About()
         {
+            if (!UserActions.UserExists(_context) && !User.IsInRole("Nurse"))
+            {
+                return RedirectToAction("Index", "UserDetails");
+            }
             return View();
         }
 
         [Authorize(Roles = "User")]
         public IActionResult Contact()
         {
+            if (!UserActions.UserExists(_context) && !User.IsInRole("Nurse"))
+            {
+                return RedirectToAction("Index", "UserDetails");
+            }
             return View();
         }
 
         [Authorize(Roles = "User")]
         public IActionResult ContactHelper(string topic, string message)
         {
-            // Send email here
+            if (!UserActions.UserExists(_context) && !User.IsInRole("Nurse"))
+            {
+                return RedirectToAction("Index", "UserDetails");
+            }
+            try
+            {
+                // Send email here
+                string Data;
+                SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
+                smtpClient.Credentials = new System.Net.NetworkCredential("noreplyepicentertest@gmail.com", "TestingPassword1");
+                smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+                smtpClient.EnableSsl = true;
+                MailMessage mail = new MailMessage();
 
+                mail.From = new MailAddress("noreplyepicentertest@gmail.com", "Epicentre");
+                mail.To.Add("noreplyepicentertest@gmail.com");
+                mail.Subject = topic;
+                Data = "User: " + UserActions.UserEmail + "\n" + "Message: " + message;
+
+                mail.Body = Data;
+                smtpClient.Send(mail);
+                return RedirectToAction(nameof(SuccessfulContact));
+            }
+            catch(Exception exception)
+            {
+                return RedirectToAction(nameof(FailedContact));
+            }
             // If successful, then redirect to successful contact
             // Otherwise redirect to failed contact
 
-            return View();
         }
 
         [Authorize(Roles = "User")]
         public IActionResult SuccessfulContact()
         {
+            if (!UserActions.UserExists(_context) && !User.IsInRole("Nurse"))
+            {
+                return RedirectToAction("Index", "UserDetails");
+            }
+
             return View();
         }
 
         [Authorize(Roles = "User")]
         public IActionResult FailedContact()
         {
+            if (!UserActions.UserExists(_context) && !User.IsInRole("Nurse"))
+            {
+                return RedirectToAction("Index", "UserDetails");
+            }
             return View()
 ;        }
 

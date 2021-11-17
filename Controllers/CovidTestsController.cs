@@ -24,6 +24,11 @@ namespace Epicentre.Controllers
         [Authorize(Roles = "User")]
         public async Task<IActionResult> Index()
         {
+            if (!UserActions.UserExists(_context) && !User.IsInRole("Nurse"))
+            {
+                return RedirectToAction("Index", "UserDetails");
+            }
+           
             var covidTest = await _context.CovidTest.Where(c => c.USER_EMAIL == UserActions.UserEmail).ToListAsync();
             return View(covidTest);
         }
@@ -31,6 +36,10 @@ namespace Epicentre.Controllers
         [Authorize(Roles = "User")]
         public async Task<IActionResult> RegisterCovidTest()
         {
+            if (!UserActions.UserExists(_context) && !User.IsInRole("Nurse"))
+            {
+                return RedirectToAction("Index", "UserDetails");
+            }
             var details = await _context.UserDetail.FirstOrDefaultAsync(m => m.EMAIL_ADDRESS == UserActions.UserEmail);
 
             ViewBag.FirstName = details.FIRST_NAME;
@@ -51,6 +60,10 @@ namespace Epicentre.Controllers
         [Authorize(Roles = "User")]
         public async Task<IActionResult> TimeBooking(string testType, string testLocation, string testDate)
         {
+            if (!UserActions.UserExists(_context) && !User.IsInRole("Nurse"))
+            {
+                return RedirectToAction("Index", "UserDetails");
+            }
             // If there are no params, we need to throw not found, otherwise user can bypass booking stage
             if (testType == null || testLocation == null || testDate == null)
             {
@@ -531,6 +544,10 @@ namespace Epicentre.Controllers
         [Authorize(Roles = "User")]
         public IActionResult ConfirmBooking(string time)
         {
+            if (!UserActions.UserExists(_context) && !User.IsInRole("Nurse"))
+            {
+                return RedirectToAction("Index", "UserDetails");
+            }
             if (time == null)
             {
                 return NotFound();
@@ -548,6 +565,10 @@ namespace Epicentre.Controllers
         [Authorize(Roles = "User")]
         public async Task<IActionResult> Book()
         {
+            if (!UserActions.UserExists(_context) && !User.IsInRole("Nurse"))
+            {
+                return RedirectToAction("Index", "UserDetails");
+            }
             CovidTest covidTest = new CovidTest();
             covidTest.TEST_ID = Guid.NewGuid();
             covidTest.TEST_TYPE = CovidTestDetails.TestType;
@@ -610,6 +631,10 @@ namespace Epicentre.Controllers
         [Authorize(Roles = "User")]
         public IActionResult SuccessfulBooking()
         {
+            if (!UserActions.UserExists(_context) && !User.IsInRole("Nurse"))
+            {
+                return RedirectToAction("Index", "UserDetails");
+            }
             ViewBag.TestType = CovidTestDetails.TestType;
             ViewBag.TestLocation = CovidTestDetails.TestLocation;
             ViewBag.TestDate = CovidTestDetails.TestDate;
@@ -621,18 +646,31 @@ namespace Epicentre.Controllers
         [Authorize(Roles = "User")]
         public IActionResult FailedBooking()
         {
+            if (!UserActions.UserExists(_context) && !User.IsInRole("Nurse"))
+            {
+                return RedirectToAction("Index", "UserDetails");
+            }
             return View();
         }
 
         [Authorize(Roles = "Nurse")]
         public async Task<IActionResult> SearchForPatient()
         {
+            if (!User.IsInRole("Nurse"))
+            {
+                return RedirectToAction("Index", "UserDetails");
+            }
             return View(await _context.CovidTest.ToListAsync());
         }
 
         [Authorize(Roles = "Nurse")]
         public async Task<IActionResult> Patients(string idNumber)
         {
+            if (!User.IsInRole("Nurse"))
+            {
+                return RedirectToAction("Index", "UserDetails");
+            }
+
             if (idNumber == null)
             {
                 return NotFound();
@@ -647,6 +685,10 @@ namespace Epicentre.Controllers
         [Authorize(Roles = "Nurse")]
         public async Task<IActionResult> UpdateStatus(string testId)
         {
+            if (!User.IsInRole("Nurse"))
+            {
+                return RedirectToAction("Index", "UserDetails");
+            }
             if (testId == null)
             {
                 return NotFound();
@@ -682,6 +724,10 @@ namespace Epicentre.Controllers
         [Authorize(Roles = "Nurse")]
         public async Task<IActionResult> UpdateResult(string testId, string result)
         {
+            if (!User.IsInRole("Nurse"))
+            {
+                return RedirectToAction("Index", "UserDetails");
+            }
             if (testId == null)
             {
                 return NotFound();
