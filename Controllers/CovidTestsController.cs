@@ -706,8 +706,34 @@ namespace Epicentre.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        public IActionResult Dashboard()
+        public async Task<IActionResult> Dashboard()
         {
+            ViewBag.CompletedCovidTests = await _context.CovidTest.CountAsync();
+            ViewBag.OutstandingTests = await _context.CovidTest.Where(c => c.TEST_RESULT == "Awaiting...").CountAsync();
+            ViewBag.PositiveTests = await _context.CovidTest.Where(c => c.TEST_RESULT == "Positive").CountAsync();
+            ViewBag.NegativeTests = await _context.CovidTest.Where(c => c.TEST_RESULT == "Negative").CountAsync();
+            string tomorrowDate = DateTime.Today.AddDays(1).ToString("MM/dd/yyyy");
+            ViewBag.TestsTomorrow = await _context.CovidTest.Where(c => c.TEST_DATE == tomorrowDate).CountAsync();
+            var pcr = await _context.CovidTest.Where(c => c.TEST_TYPE == "PCR Swab Test").CountAsync();
+            var rapid = await _context.CovidTest.Where(c => c.TEST_TYPE == "Rapid Antigen Test").CountAsync();
+            var antibody = await _context.CovidTest.Where(c => c.TEST_TYPE == "Antibody Test").CountAsync();
+            if (pcr > rapid && pcr > antibody)
+            {
+                ViewBag.MostPopularTest = "PCR Swab Test";
+            }
+            else if (rapid > pcr && rapid > antibody)
+            {
+                ViewBag.MostPopularTest = "Rapid Antigen Test";
+            }
+            else
+            {
+                ViewBag.MostPopularTest = "Antibody Test";
+            }
+            //incorrect
+            ViewBag.MostPopularSite = await _context.CovidTest.OrderByDescending(c => c.TEST_LOCATION).Select(c => c.TEST_LOCATION).FirstOrDefaultAsync();
+            //incorrect
+            ViewBag.MostPopularTime = await _context.CovidTest.Where(c => c.TEST_RESULT == "Negative").CountAsync();
+
             return View();
         }
     }

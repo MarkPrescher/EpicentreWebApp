@@ -4,8 +4,51 @@
     ViewData["Title"] = "Patients";
 }
 
-<div style="padding-left: 1%; padding-right: 2%; padding-bottom: 3%; margin-top: 0%;" class="content">
+<div style="padding-left: 1%; padding-right: 2%; padding-bottom: 1%; margin-top: 0%;" class="content">
     <h1 style="padding-bottom: 1%; padding-left: 4%; color: black; font-weight: bold;">Patient Covid Tests</h1>
+
+    <table style="color: black; margin-left: 5%;">
+        <thead>
+            <tr>
+                <th style="font-weight: bold;" class="text-center">
+                    <button type="button" rel="tooltip" class="btn btn-info">
+                        <i class="material-icons">masks</i>
+                    </button>
+                </th>
+                <th style="font-weight: bold;" class="text-center">
+                    <button type="button" rel="tooltip" class="btn btn-info">
+                        <i class="material-icons">science</i>
+                    </button>
+                </th>
+                <th style="font-weight: bold;" class="text-center">
+                    <button type="button" rel="tooltip" class="btn btn-info">
+                        <i class="material-icons">biotech</i>
+                    </button>
+                </th>
+                <th style="font-weight: bold;" class="text-center">
+                    <button type="button" rel="tooltip" class="btn btn-info">
+                        <i class="material-icons">coronavirus</i>
+                    </button>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="text-center">
+                    Test Sample Taken |||
+                </td>
+                <td class="text-center">
+                    Test Sample Collected |||
+                </td>
+                <td class="text-center">
+                    Test Sample Being Analyzed |||
+                </td>
+                <td class="text-center">
+                    Test Result Received
+                </td>
+            </tr>
+        </tbody>
+    </table>
 
     @if (Model.Count() == 0)
     {
@@ -15,7 +58,7 @@
     }
     else
     {
-        <table style="color: black; margin-top: 2%;" class="table">
+        <table style="color: black; margin-top: 0%;" class="table">
             <thead>
                 <tr>
                     <th style="font-weight: bold;" class="text-center">

@@ -1,6 +1,8 @@
-﻿using Epicentre.Data;
+﻿using Epicentre.Areas.Identity.Data;
+using Epicentre.Data;
 using Epicentre.Library;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -13,9 +15,11 @@ namespace Epicentre.Controllers
     public class AccountHelperController : Controller
     {
         private readonly EpicentreDataContext _context;
-        public AccountHelperController(EpicentreDataContext context)
+        private readonly UserManager<EpicentreUser> _userManager;
+        public AccountHelperController(EpicentreDataContext context, UserManager<EpicentreUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
         public async Task<IActionResult> UpdateProfile(string firstName, string lastName, string idNumber, string contactNumber, string gender, string medicalAid, string membershipNumber, string authorizationNumber)
         {
@@ -38,6 +42,22 @@ namespace Epicentre.Controllers
                     protocol: Request.Scheme);
             Status.StatusCode = 1;
             return Redirect(url);
+        }
+
+        public async Task<IActionResult> AddNurse(string emailAddress, string password)
+        {
+            var user = new EpicentreUser { UserName = emailAddress, Email = emailAddress, EmailConfirmed = true };
+            var result = await _userManager.CreateAsync(user, password);
+            await _userManager.AddToRoleAsync(user, "Nurse");
+
+            if (result.Succeeded)
+            {
+                return RedirectToAction("Dashboard", "Home");
+            }
+            else
+            {
+                return RedirectToAction("AddNurse", "Home");
+            }
         }
     }
 }

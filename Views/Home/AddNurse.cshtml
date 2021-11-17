@@ -1,0 +1,75 @@
+﻿
+@{
+    ViewData["Title"] = "Add Nurse";
+}
+
+<div style="padding-left: 5%; padding-right: 5%; padding-bottom: 3%; margin-top: 0%;" class="content">
+    <h1 style="color: black; font-weight: bold;">Add Nurse</h1>
+    <div class="card">
+        <div style="padding-top: 3.5%;" class="card-body">
+            <form>
+                <div class="row text-center">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label style="color: black;" class="bmd-label-floating">Email Address</label>
+                            <input id="emailAddress" style="color: black;" type="text" class="form-control">
+                        </div>
+                        <span id="email-address-validation" style="color: red; font-weight: bold; visibility: hidden;" class="text-danger">Please enter an email address</span>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label style="color: black;" class="bmd-label-floating">Password</label>
+                            <input id="password" style="color: black;" type="password" class="form-control">
+                        </div>
+                        <span id="password-validation" style="color: red; font-weight: bold; visibility: hidden;" class="text-danger">Please enter a password</span>
+                    </div>
+                    </div>
+                <center><button onclick="addNurse()" type="button" style="background-color: red; margin-top: 2%;" class="btn btn-primary">Add Nurse</button></center>
+                <div class="clearfix"></div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    function addNurse() {
+
+        document.getElementById('email-address-validation').style.visibility = "hidden";
+        document.getElementById('password-validation').style.visibility = "hidden";
+        document.getElementById('email-address-validation').textContent = "Please enter an email address";
+        document.getElementById('password-validation').textContent = "Please enter a password";
+
+        var email = document.getElementById('emailAddress').value;
+        var password = document.getElementById('password').value;
+
+        var emailValid = true;
+        var passwordValid = true;
+
+        if (email.length == 0) {
+            emailValid = false;
+            document.getElementById('email-address-validation').style.visibility = "visible";
+        } else if (!validateEmail(email)) {
+            emailValid = false;
+            document.getElementById('email-address-validation').style.visibility = "visible";
+            document.getElementById('email-address-validation').textContent = "Please enter a valid email address";
+        } if (password.length == 0) {
+            passwordValid = false;
+            document.getElementById('password-validation').style.visibility = "visible";
+        } else if (password.length < 6) {
+            passwordValid = false;
+            document.getElementById('password-validation').style.visibility = "visible";
+            document.getElementById('password-validation').textContent = "Please enter a password greater than 6 characters";
+        }
+
+        if (emailValid && passwordValid) {
+            window.location.href = '@Url.Action("AddNurse", "AccountHelper")' + '?emailAddress=' + email + '&password=' + password;
+        }
+    }
+
+    function validateEmail(email) {
+        var re = /\S+\S+\.\S+/;
+        return re.test(email);
+    }
+
+</script>
