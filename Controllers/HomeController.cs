@@ -28,13 +28,17 @@ namespace Epicentre.Controllers
         public IActionResult Index()
         {
             // This needs to be done throughout
-            if (!UserActions.UserExists(_context) && !User.IsInRole("Nurse"))
+            if (!UserActions.UserExists(_context) && !User.IsInRole("Nurse") && !User.IsInRole("Admin"))
             {
                 return RedirectToAction("Index", "UserDetails");
             }
             else if (User.IsInRole("Nurse"))
             {
                 return RedirectToAction("SearchForPatient", "CovidTests");
+            }
+            else if (User.IsInRole("Admin"))
+            {
+                return RedirectToAction("Dashboard", "CovidTests");
             }
 
             var firstName = _context.UserDetail.Where(u => u.EMAIL_ADDRESS == UserActions.UserEmail).Select(u => u.FIRST_NAME).FirstOrDefault();
@@ -127,6 +131,12 @@ namespace Epicentre.Controllers
             }
             return View()
 ;        }
+
+        [Authorize(Roles = "Admin")]
+        public IActionResult AddNurse()
+        {
+            return View();
+        }
 
         public async Task<IActionResult> Logout()
         {
