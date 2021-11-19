@@ -27,7 +27,6 @@ namespace Epicentre.Controllers
 
         public IActionResult Index()
         {
-            // This needs to be done throughout
             if (!UserActions.UserExists(_context) && !User.IsInRole("Nurse") && !User.IsInRole("Admin"))
             {
                 return RedirectToAction("Index", "UserDetails");
@@ -85,7 +84,6 @@ namespace Epicentre.Controllers
             }
             try
             {
-                // Send email here
                 string Data;
                 SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
                 smtpClient.Credentials = new System.Net.NetworkCredential("noreplyepicentertest@gmail.com", "TestingPassword1");
@@ -102,7 +100,7 @@ namespace Epicentre.Controllers
                 smtpClient.Send(mail);
                 return RedirectToAction(nameof(SuccessfulContact));
             }
-            catch(Exception exception)
+            catch (Exception exception)
             {
                 return RedirectToAction(nameof(FailedContact));
             }
@@ -114,21 +112,12 @@ namespace Epicentre.Controllers
         [Authorize(Roles = "User")]
         public IActionResult SuccessfulContact()
         {
-            if (!UserActions.UserExists(_context) && !User.IsInRole("Nurse"))
-            {
-                return RedirectToAction("Index", "UserDetails");
-            }
-
             return View();
         }
 
         [Authorize(Roles = "User")]
         public IActionResult FailedContact()
         {
-            if (!UserActions.UserExists(_context) && !User.IsInRole("Nurse"))
-            {
-                return RedirectToAction("Index", "UserDetails");
-            }
             return View()
 ;        }
 

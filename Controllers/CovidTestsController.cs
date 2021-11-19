@@ -631,10 +631,6 @@ namespace Epicentre.Controllers
         [Authorize(Roles = "User")]
         public IActionResult SuccessfulBooking()
         {
-            if (!UserActions.UserExists(_context) && !User.IsInRole("Nurse"))
-            {
-                return RedirectToAction("Index", "UserDetails");
-            }
             ViewBag.TestType = CovidTestDetails.TestType;
             ViewBag.TestLocation = CovidTestDetails.TestLocation;
             ViewBag.TestDate = CovidTestDetails.TestDate;
@@ -646,31 +642,18 @@ namespace Epicentre.Controllers
         [Authorize(Roles = "User")]
         public IActionResult FailedBooking()
         {
-            if (!UserActions.UserExists(_context) && !User.IsInRole("Nurse"))
-            {
-                return RedirectToAction("Index", "UserDetails");
-            }
             return View();
         }
 
         [Authorize(Roles = "Nurse, Admin")]
         public async Task<IActionResult> SearchForPatient()
         {
-            if (!User.IsInRole("Nurse"))
-            {
-                return RedirectToAction("Index", "UserDetails");
-            }
             return View(await _context.CovidTest.ToListAsync());
         }
 
         [Authorize(Roles = "Nurse, Admin")]
         public async Task<IActionResult> Patients(string idNumber)
         {
-            if (!User.IsInRole("Nurse"))
-            {
-                return RedirectToAction("Index", "UserDetails");
-            }
-
             if (idNumber == null)
             {
                 return NotFound();
@@ -685,10 +668,6 @@ namespace Epicentre.Controllers
         [Authorize(Roles = "Nurse, Admin")]
         public async Task<IActionResult> UpdateStatus(string testId)
         {
-            if (!User.IsInRole("Nurse"))
-            {
-                return RedirectToAction("Index", "UserDetails");
-            }
             if (testId == null)
             {
                 return NotFound();
@@ -724,10 +703,6 @@ namespace Epicentre.Controllers
         [Authorize(Roles = "Nurse, Admin")]
         public async Task<IActionResult> UpdateResult(string testId, string result)
         {
-            if (!User.IsInRole("Nurse"))
-            {
-                return RedirectToAction("Index", "UserDetails");
-            }
             if (testId == null)
             {
                 return NotFound();
