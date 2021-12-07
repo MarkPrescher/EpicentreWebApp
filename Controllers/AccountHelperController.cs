@@ -52,7 +52,7 @@ namespace Epicentre.Controllers
 
             if (result.Succeeded)
             {
-                return RedirectToAction("Dashboard", "Home");
+                return RedirectToAction("Dashboard", "CovidTests");
             }
             else
             {
