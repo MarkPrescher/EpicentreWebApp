@@ -11,6 +11,8 @@ using System.Net.Mail;
 using System.Net;
 using Epicentre.Library;
 using Microsoft.AspNetCore.Authorization;
+using Epicentre.Data;
+using System.Linq;
 
 namespace Epicentre.Areas.Identity.Pages.Account.Manage
 {
@@ -19,16 +21,16 @@ namespace Epicentre.Areas.Identity.Pages.Account.Manage
     {
         private readonly UserManager<EpicentreUser> _userManager;
         private readonly SignInManager<EpicentreUser> _signInManager;
-        private readonly IEmailSender _emailSender;
+        private readonly EpicentreDataContext _context;
 
         public EmailModel(
             UserManager<EpicentreUser> userManager,
             SignInManager<EpicentreUser> signInManager,
-            IEmailSender emailSender)
+            EpicentreDataContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _emailSender = emailSender;
+            _context = context;
         }
 
         public string Username { get; set; }
@@ -55,11 +57,6 @@ namespace Epicentre.Areas.Identity.Pages.Account.Manage
         {
             var email = await _userManager.GetEmailAsync(user);
             Email = email;
-
-            //Input = new InputModel
-            //{
-            //    NewEmail = email,
-            //};
 
             IsEmailConfirmed = await _userManager.IsEmailConfirmedAsync(user);
 
@@ -118,6 +115,25 @@ namespace Epicentre.Areas.Identity.Pages.Account.Manage
                 await smtpClient.SendMailAsync(mailMessage);
 
                 Status.StatusCode = 1;
+
+                var oldUserCovidTests = _context.CovidTest.Where(u => u.USER_EMAIL == email).ToList();
+                var userCovidTests = oldUserCovidTests;
+
+                foreach (var userEntry in userCovidTests)
+                {
+                    userEntry.USER_EMAIL = Input.NewEmail;
+                }
+
+                _context.CovidTest.RemoveRange(oldUserCovidTests);
+                await _context.SaveChangesAsync();
+                await _context.CovidTest.AddRangeAsync(userCovidTests);
+                await _context.SaveChangesAsync();
+
+                var userDetails = _context.UserDetail.Where(u => u.EMAIL_ADDRESS == email).FirstOrDefault();
+                _context.UserDetail.Remove(userDetails);
+                userDetails.EMAIL_ADDRESS = Input.NewEmail;
+                await _context.AddAsync(userDetails);
+                await _context.SaveChangesAsync();
 
                 return RedirectToPage();
             }
