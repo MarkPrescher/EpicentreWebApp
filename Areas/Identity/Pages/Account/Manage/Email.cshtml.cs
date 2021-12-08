@@ -21,7 +21,6 @@ namespace Epicentre.Areas.Identity.Pages.Account.Manage
     {
         private readonly UserManager<EpicentreUser> _userManager;
         private readonly SignInManager<EpicentreUser> _signInManager;
-        private readonly EpicentreDataContext _context;
 
         public EmailModel(
             UserManager<EpicentreUser> userManager,
@@ -30,7 +29,6 @@ namespace Epicentre.Areas.Identity.Pages.Account.Manage
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _context = context;
         }
 
         public string Username { get; set; }
@@ -115,25 +113,6 @@ namespace Epicentre.Areas.Identity.Pages.Account.Manage
                 await smtpClient.SendMailAsync(mailMessage);
 
                 Status.StatusCode = 1;
-
-                var oldUserCovidTests = _context.CovidTest.Where(u => u.USER_EMAIL == email).ToList();
-                var userCovidTests = oldUserCovidTests;
-
-                foreach (var userEntry in userCovidTests)
-                {
-                    userEntry.USER_EMAIL = Input.NewEmail;
-                }
-
-                _context.CovidTest.RemoveRange(oldUserCovidTests);
-                await _context.SaveChangesAsync();
-                await _context.CovidTest.AddRangeAsync(userCovidTests);
-                await _context.SaveChangesAsync();
-
-                var userDetails = _context.UserDetail.Where(u => u.EMAIL_ADDRESS == email).FirstOrDefault();
-                _context.UserDetail.Remove(userDetails);
-                userDetails.EMAIL_ADDRESS = Input.NewEmail;
-                await _context.AddAsync(userDetails);
-                await _context.SaveChangesAsync();
 
                 return RedirectToPage();
             }
