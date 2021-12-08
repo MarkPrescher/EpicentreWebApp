@@ -101,25 +101,25 @@
                         <td class="td-actions text-center">
                             @if (item.TEST_STATUS == "Waiting for test...")
                             {
-                                <button onclick="updateStatus()" type="button" rel="tooltip" class="btn btn-info">
+                                <button onclick="updateStatus('@item.TEST_ID')" type="button" rel="tooltip" class="btn btn-info">
                                     <i class="material-icons">masks</i>
                                 </button>
                             }
                             else if (item.TEST_STATUS == "Sample taken")
                             {
-                                <button onclick="updateStatus()" type="button" rel="tooltip" class="btn btn-info">
+                                <button onclick="updateStatus('@item.TEST_ID')" type="button" rel="tooltip" class="btn btn-info">
                                     <i class="material-icons">science</i>
                                 </button>
                             }
                             else if (item.TEST_STATUS == "Sample collected")
                             {
-                                <button onclick="updateStatus()" type="button" rel="tooltip" class="btn btn-info">
+                                <button onclick="updateStatus('@item.TEST_ID')" type="button" rel="tooltip" class="btn btn-info">
                                     <i class="material-icons">biotech</i>
                                 </button>
                             }
                             else if (item.TEST_STATUS == "Analyzing sample...")
                             {
-                                <button onclick="updateStatus()" type="button" rel="tooltip" class="btn btn-info">
+                                <button onclick="updateStatus('@item.TEST_ID')" type="button" rel="tooltip" class="btn btn-info">
                                     <i class="material-icons">coronavirus</i>
                                 </button>
                             }
@@ -139,10 +139,10 @@
                             }
                             else
                             {
-                                <button onclick="updateResult('Positive')" type="button" rel="tooltip" class="btn btn-success">
+                                <button onclick="updateResult('@item.TEST_ID', 'Positive')" type="button" rel="tooltip" class="btn btn-success">
                                     <i class="material-icons">thumb_up_alt</i>
                                 </button>
-                                <button onclick="updateResult('Negative')" type="button" rel="tooltip" class="btn btn-danger">
+                                <button onclick="updateResult('@item.TEST_ID', 'Negative')" type="button" rel="tooltip" class="btn btn-danger">
                                     <i class="material-icons">thumb_down_alt</i>
                                 </button>
                             }
@@ -156,14 +156,12 @@
 
 <script type="text/javascript">
 
-    function updateStatus() {
-        var testId = document.getElementById('id').value;
-        window.location.href = '@Url.Action("UpdateStatus", "CovidTests")' + '?testId=' + testId;
+    function updateStatus(id) {
+        window.location.href = '@Url.Action("UpdateStatus", "CovidTests")' + '?testId=' + id;
     }
 
-    function updateResult(result) {
-        var testId = document.getElementById('id').value;
-        window.location.href = '@Url.Action("UpdateResult", "CovidTests")' + '?testId=' + testId + '&result=' + result;
+    function updateResult(id, result) {
+        window.location.href = '@Url.Action("UpdateResult", "CovidTests")' + '?testId=' + id + '&result=' + result;
     }
 
 </script>
