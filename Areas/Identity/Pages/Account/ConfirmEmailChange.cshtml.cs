@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Epicentre.Library;
+using Epicentre.Data;
+using System.Linq;
 
 namespace Epicentre.Areas.Identity.Pages.Account
 {
@@ -15,11 +17,13 @@ namespace Epicentre.Areas.Identity.Pages.Account
     {
         private readonly UserManager<EpicentreUser> _userManager;
         private readonly SignInManager<EpicentreUser> _signInManager;
+        private readonly EpicentreDataContext _context;
 
-        public ConfirmEmailChangeModel(UserManager<EpicentreUser> userManager, SignInManager<EpicentreUser> signInManager)
+        public ConfirmEmailChangeModel(UserManager<EpicentreUser> userManager, SignInManager<EpicentreUser> signInManager, EpicentreDataContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _context = context;
         }
 
         [TempData]
@@ -53,6 +57,7 @@ namespace Epicentre.Areas.Identity.Pages.Account
                 return Page();
             }
             UserActions.UserEmail = email.ToString();
+
             await _signInManager.RefreshSignInAsync(user);
             return Page();
         }
