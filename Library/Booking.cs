@@ -22,7 +22,7 @@ namespace Epicentre.Library
         {
             bool isFullyBooked = false;
 
-            if (await CheckNumberOfBookings(timeSlot) >= 4)
+            if (await CheckNumberOfBookings(timeSlot) >= 2)
                 isFullyBooked = true;
 
             return isFullyBooked;
