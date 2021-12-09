@@ -8,6 +8,7 @@ using Epicentre.Models;
 using Epicentre.Library;
 using Microsoft.AspNetCore.Authorization;
 using System.Net.Mail;
+using System.Collections.Generic;
 
 namespace Epicentre.Controllers
 {
@@ -750,10 +751,20 @@ namespace Epicentre.Controllers
             {
                 ViewBag.MostPopularTest = "Antibody Test";
             }
-            //incorrect
-            ViewBag.MostPopularSite = await _context.CovidTest.OrderByDescending(c => c.TEST_LOCATION).Select(c => c.TEST_LOCATION).FirstOrDefaultAsync();
-            //incorrect
-            ViewBag.MostPopularTime = await _context.CovidTest.Where(c => c.TEST_RESULT == "Negative").CountAsync();
+            List<int> counts = new List<int>();
+            List<string> names = new List<string>();
+            counts.Add(await _context.CovidTest.Where(c => c.TEST_LOCATION == "Hillcrest, KwaZulu-Natal").CountAsync());
+            names.Add("Hillcrest, KwaZulu-Natal");
+            counts.Add(await _context.CovidTest.Where(c => c.TEST_LOCATION == "Stellenbosch, Western Cape").CountAsync());
+            names.Add("Stellenbosch, Western Cape");
+            counts.Add(await _context.CovidTest.Where(c => c.TEST_LOCATION == "Bellville, Western Cape").CountAsync());
+            names.Add("Bellville, Western Cape");
+            counts.Add(await _context.CovidTest.Where(c => c.TEST_LOCATION == "Rondebosch, Western Cape").CountAsync());
+            names.Add("Rondebosch, Western Cape");
+            counts.Add(await _context.CovidTest.Where(c => c.TEST_LOCATION == "Randburg, Gauteng").CountAsync());
+            names.Add("Randburg, Gauteng");
+            var mostPopularSite = names[counts.IndexOf(counts.Max())];
+            ViewBag.MostPopularSite = mostPopularSite;
 
             return View();
         }
