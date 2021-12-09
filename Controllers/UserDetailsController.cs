@@ -127,9 +127,19 @@ namespace Epicentre.Controllers
             userDetail.CONTACT_NUMBER = UserInformationDetails.ContactNumber;
             userDetail.EMAIL_ADDRESS = UserInformationDetails.EmailAddress;
             userDetail.GENDER = UserInformationDetails.Gender;
-            userDetail.MEDICAL_AID = UserInformationDetails.MedicalAid;
-            userDetail.MEMBERSHIP_NUMBER = UserInformationDetails.MembershipNumber;
-            userDetail.AUTH_NUMBER = UserInformationDetails.AuthNumber;
+            
+            if (medicalAid.Equals("empty") && membershipNumber.Equals("empty") && authNumber.Equals("empty"))
+            {
+                userDetail.MEDICAL_AID = "No medical aid";
+                userDetail.MEMBERSHIP_NUMBER = "No medical aid";
+                userDetail.AUTH_NUMBER = "No medical aid";
+            }
+            else
+            {
+                userDetail.MEDICAL_AID = UserInformationDetails.MedicalAid;
+                userDetail.MEMBERSHIP_NUMBER = UserInformationDetails.MembershipNumber;
+                userDetail.AUTH_NUMBER = UserInformationDetails.AuthNumber;
+            }
 
             try
             {

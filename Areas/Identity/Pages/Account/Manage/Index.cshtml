@@ -106,21 +106,42 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label style="color: black;" class="bmd-label-floating">Medical Aid</label>
-                            <input style="color: black;" id="medicalAid" value=@ViewData["MedicalAid"] type="text" class="form-control">
+                            @if (@ViewData["MedicalAid"].Equals("No medical aid"))
+                            {
+                                <input style="color: black;" id="medicalAid" value="No medical aid" type="text" class="form-control">
+                            }
+                            else
+                            {
+                                <input style="color: black;" id="medicalAid" value=@ViewData["MedicalAid"] type="text" class="form-control">
+                            }
                         </div>
                         <span id="medical-aid-validation" style="color: red; font-weight: bold; visibility: hidden;" class="text-danger">Please enter your medical aid</span>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label style="color: black;" class="bmd-label-floating">Membership Number</label>
-                            <input style="color: black;" id="membershipNumber" value=@ViewData["MembershipNumber"] type="text" class="form-control">
+                            @if (@ViewData["MembershipNumber"].Equals("No medical aid"))
+                            {
+                                <input style="color: black;" id="membershipNumber" value="No medical aid" type="text" class="form-control">
+                            }
+                            else
+                            {
+                                <input style="color: black;" id="membershipNumber" value=@ViewData["MembershipNumber"] type="text" class="form-control">
+                            }
                         </div>
                         <span id="membership-number-validation" style="color: red; font-weight: bold; visibility: hidden;" class="text-danger">Please enter your membership number</span>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label style="color: black;" class="bmd-label-floating">Authorization Number</label>
-                            <input style="color: black;" id="authorizationNumber" value=@ViewData["AuthorizationNumber"] type="text" class="form-control">
+                            @if (ViewData["AuthorizationNumber"].Equals("No medical aid"))
+                            {
+                                <input style="color: black;" id="authorizationNumber" value="No medical aid" type="text" class="form-control">
+                            }
+                            else
+                            {
+                                <input style="color: black;" id="authorizationNumber" value=@ViewData["AuthorizationNumber"] type="text" class="form-control">
+                            }
                         </div>
                         <span id="authorization-number-validation" style="color: red; font-weight: bold; visibility: hidden;" class="text-danger">Please provide your authorization number</span>
                     </div>

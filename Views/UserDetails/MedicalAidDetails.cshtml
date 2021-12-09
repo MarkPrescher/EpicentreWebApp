@@ -42,7 +42,7 @@
                         </span>
                     </div>
 
-                    <div id="membership-number-div" style="text-align: center; margin-top: -5%;">
+                    <div id="membership-number-div" style="text-align: center; margin-top: -15%;">
                         <span id="membership-number-validation" style="color: red; visibility: hidden;">Please provide your membership number</span>
                     </div>
                     <div class="wrap-input100 validate-input">
@@ -53,7 +53,7 @@
                         </span>
                     </div>
 
-                    <div id="auth-number-div" style="text-align: center; margin-top: -5%;">
+                    <div id="auth-number-div" style="text-align: center; margin-top: -15%;">
                         <span id="auth-number-validation" style="color: red; visibility: hidden;">Please provide your authorization number</span>
                     </div>
                     <div class="wrap-input100 validate-input">
@@ -64,6 +64,11 @@
                         </span>
                     </div>
 
+                    <div class="container-login100-form-btn">
+                        <button onclick="clickedSkip()" type="button" class="login100-form-btn">
+                            Do Not Use Medical Aid
+                        </button>
+                    </div>
                     <div class="container-login100-form-btn">
                         <button onclick="clickedNext()" type="button" class="login100-form-btn">
                             Save
@@ -85,8 +90,8 @@
             document.getElementById('medical-aid-validation').style.visibility = "hidden";
             document.getElementById('membership-number-validation').style.visibility = "hidden";
             document.getElementById('auth-number-validation').style.visibility = "hidden";
-            document.getElementById('membership-number-div').style.marginTop = "-5%";
-            document.getElementById('auth-number-div').style.marginTop = "-5%";
+            document.getElementById('membership-number-div').style.marginTop = "-15%";
+            document.getElementById('auth-number-div').style.marginTop = "-15%";
 
             if (document.getElementById('medicalAid').value.length == 0) {
                 document.getElementById('medical-aid-validation').style.visibility = "visible";
@@ -134,6 +139,10 @@
                 var authNumber = document.getElementById('authNumber').value;
                 window.location.href = '@Url.Action("SaveUserDetails", "UserDetails")' + '?medicalAid=' + medicalAid + '&membershipNumber=' + membershipNumber + '&authNumber=' + authNumber;
              }
+        }
+
+        function clickedSkip() {
+            window.location.href = '@Url.Action("SaveUserDetails", "UserDetails")' + '?medicalAid=' + "empty" + '&membershipNumber=' + "empty" + '&authNumber=' + "empty";
         }
 
     </script>

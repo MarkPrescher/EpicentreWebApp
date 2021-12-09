@@ -48,7 +48,7 @@ namespace Epicentre.Areas.Identity.Pages.Account
             public string Email { get; set; }
 
             [Required(ErrorMessage = "Please enter a password")]
-            [StringLength(55, ErrorMessage = "Your password must be at least {2} and at {1} characters long", MinimumLength = 6)]
+            [StringLength(55, ErrorMessage = "Your password must be at least {2} and {1} characters long", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
             public string Password { get; set; }
