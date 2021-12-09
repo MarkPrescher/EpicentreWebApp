@@ -9,6 +9,7 @@ using Epicentre.Library;
 using Microsoft.AspNetCore.Authorization;
 using System.Net.Mail;
 using System.Collections.Generic;
+using System.Net;
 
 namespace Epicentre.Controllers
 {
@@ -723,6 +724,15 @@ namespace Epicentre.Controllers
 
             _context.Update(covidTest);
             await _context.SaveChangesAsync();
+
+            var userEmail = await _context.CovidTest.Where(c => c.TEST_ID == Guid.Parse(testId)).Select(c => c.USER_EMAIL).FirstOrDefaultAsync();
+            MailMessage mailMessage = new MailMessage("noreplyepicentertest@gmail.com", userEmail/*Recipient email*/, "COVID-19 Test Result", $"Your test result has been received.\n\nYou have tested {result} for COVID-19.");
+            SmtpClient smtpClient = new SmtpClient("smtp.gmail.com");
+            smtpClient.Port = 587;
+            smtpClient.EnableSsl = true;
+            smtpClient.UseDefaultCredentials = false;
+            smtpClient.Credentials = new NetworkCredential("noreplyepicentertest@gmail.com", "TestingPassword1");
+            await smtpClient.SendMailAsync(mailMessage);
 
             return RedirectToAction("Patients", "CovidTests", new { idNumber = userDetails.ID_NUMBER });
         }
