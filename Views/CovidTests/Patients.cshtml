@@ -139,6 +139,13 @@
                             }
                             else
                             {
+                                <form id="form" method="post" enctype="multipart/form-data" asp-controller="CovidTests" asp-action="SendFile">
+                                    <input style="width: 55%; margin-left: -10%;" type="file" name="file" id="file" />
+                                    <input value="@item.TEST_ID" hidden name="testId" id="testId" />
+                                    <button style="margin-left: 5%;" type="submit" rel="tooltip" class="btn btn-success">
+                                        SEND
+                                    </button>
+                                </form>
                                 <button onclick="updateResult('@item.TEST_ID', 'Positive')" type="button" rel="tooltip" class="btn btn-success">
                                     <i class="material-icons">thumb_up_alt</i>
                                 </button>

@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Authorization;
 using System.Net.Mail;
 using System.Collections.Generic;
 using System.Net;
+using Microsoft.AspNetCore.Http;
+using System.IO;
 
 namespace Epicentre.Controllers
 {
@@ -705,7 +707,7 @@ namespace Epicentre.Controllers
         [Authorize(Roles = "Nurse, Admin")]
         public async Task<IActionResult> UpdateResult(string testId, string result)
         {
-            if (testId == null)
+            if (testId == null || result == null)
             {
                 return NotFound();
             }
@@ -727,6 +729,34 @@ namespace Epicentre.Controllers
 
             var userEmail = await _context.CovidTest.Where(c => c.TEST_ID == Guid.Parse(testId)).Select(c => c.USER_EMAIL).FirstOrDefaultAsync();
             MailMessage mailMessage = new MailMessage("noreplyepicentertest@gmail.com", userEmail/*Recipient email*/, "COVID-19 Test Result", $"Your test result has been received.\n\nYou have tested {result} for COVID-19.");
+            SmtpClient smtpClient = new SmtpClient("smtp.gmail.com");
+            smtpClient.Port = 587;
+            smtpClient.EnableSsl = true;
+            smtpClient.UseDefaultCredentials = false;
+            smtpClient.Credentials = new NetworkCredential("noreplyepicentertest@gmail.com", "TestingPassword1");
+            await smtpClient.SendMailAsync(mailMessage);
+
+            return RedirectToAction("Patients", "CovidTests", new { idNumber = userDetails.ID_NUMBER });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SendFile(string testId, IFormFile file)
+        {
+            if (testId == null || file == null)
+            {
+                return NotFound();
+            }
+
+            var covidTest = await _context.CovidTest.Where(c => c.TEST_ID == Guid.Parse(testId)).FirstOrDefaultAsync();
+            var userDetails = await _context.UserDetail.Where(u => u.EMAIL_ADDRESS == covidTest.USER_EMAIL).FirstOrDefaultAsync();
+
+            MailMessage mailMessage = new MailMessage("noreplyepicentertest@gmail.com", userDetails.EMAIL_ADDRESS/*Recipient email*/, "COVID-19 Report", $"Please kindly see the attached document in this email.");
+
+            MemoryStream memoryStream = new MemoryStream();
+            file.CopyTo(memoryStream);
+            var fileBytes = memoryStream.ToArray();
+            Attachment attachment = new Attachment(new MemoryStream(fileBytes), file.FileName);
+            mailMessage.Attachments.Add(attachment);
             SmtpClient smtpClient = new SmtpClient("smtp.gmail.com");
             smtpClient.Port = 587;
             smtpClient.EnableSsl = true;
