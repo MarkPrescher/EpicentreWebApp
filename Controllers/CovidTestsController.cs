@@ -68,7 +68,7 @@ namespace Epicentre.Controllers
             {
                 return RedirectToAction("Index", "UserDetails");
             }
-            // If there are no params, we need to throw not found, otherwise user can bypass booking stage
+
             if (testType == null || testLocation == null || testDate == null)
             {
                 return NotFound();
@@ -97,13 +97,6 @@ namespace Epicentre.Controllers
             {
                 // Used to determine what timeslots are shown to user
                 ViewBag.Day = "Weekday";
-                // Time slots - these need to be finished! 
-                // DONE!!!
-                ViewBag.TS0800 = Booking.AVAILABLE;
-                ViewBag.TS0815 = Booking.AVAILABLE;
-                ViewBag.TS0830 = Booking.AVAILABLE;
-                ViewBag.TS0845 = Booking.AVAILABLE;
-
                 ViewBag.TS0900 = Booking.AVAILABLE;
                 ViewBag.TS0915 = Booking.AVAILABLE;
                 ViewBag.TS0930 = Booking.AVAILABLE;
@@ -140,21 +133,6 @@ namespace Epicentre.Controllers
                 ViewBag.TS1545 = Booking.AVAILABLE;
 
                 ViewBag.TS1600 = Booking.AVAILABLE;
-                ViewBag.TS1615 = Booking.AVAILABLE;
-                ViewBag.TS1630 = Booking.AVAILABLE;
-
-                if (await booking.CheckBookingAvailability(TimeSlots.WEEKDAY_TIME_SLOTS[timeSlotCounter]))
-                    ViewBag.TS0800 = Booking.FULLY_BOOKED;
-                timeSlotCounter++;
-                if (await booking.CheckBookingAvailability(TimeSlots.WEEKDAY_TIME_SLOTS[timeSlotCounter]))
-                    ViewBag.TS0815 = Booking.FULLY_BOOKED;
-                timeSlotCounter++;
-                if (await booking.CheckBookingAvailability(TimeSlots.WEEKDAY_TIME_SLOTS[timeSlotCounter]))
-                    ViewBag.TS0830 = Booking.FULLY_BOOKED;
-                timeSlotCounter++;
-                if (await booking.CheckBookingAvailability(TimeSlots.WEEKDAY_TIME_SLOTS[timeSlotCounter]))
-                    ViewBag.TS0845 = Booking.FULLY_BOOKED;
-                timeSlotCounter++;
 
                 if (await booking.CheckBookingAvailability(TimeSlots.WEEKDAY_TIME_SLOTS[timeSlotCounter]))
                     ViewBag.TS0900 = Booking.FULLY_BOOKED;
@@ -249,14 +227,6 @@ namespace Epicentre.Controllers
 
                 if (await booking.CheckBookingAvailability(TimeSlots.WEEKDAY_TIME_SLOTS[timeSlotCounter]))
                     ViewBag.TS1600 = Booking.FULLY_BOOKED;
-                timeSlotCounter++;
-
-                if (await booking.CheckBookingAvailability(TimeSlots.WEEKDAY_TIME_SLOTS[timeSlotCounter]))
-                    ViewBag.TS1615 = Booking.FULLY_BOOKED;
-                timeSlotCounter++;
-
-                if (await booking.CheckBookingAvailability(TimeSlots.WEEKDAY_TIME_SLOTS[timeSlotCounter]))
-                    ViewBag.TS1630 = Booking.FULLY_BOOKED;
             }
             else if (day.Equals("Saturday"))
             {
@@ -286,6 +256,8 @@ namespace Epicentre.Controllers
                     ViewBag.TS1145 = Booking.AVAILABLE;
 
                     ViewBag.TS1200 = Booking.AVAILABLE;
+                    ViewBag.TS1215 = Booking.AVAILABLE;
+                    ViewBag.TS1230 = Booking.AVAILABLE;
 
                     if (await booking.CheckBookingAvailability(TimeSlots.HILLCREST_SATURDAY_TIME_SLOTS[timeSlotCounter]))
                         ViewBag.TS0800 = Booking.FULLY_BOOKED;
@@ -341,15 +313,16 @@ namespace Epicentre.Controllers
 
                     if (await booking.CheckBookingAvailability(TimeSlots.HILLCREST_SATURDAY_TIME_SLOTS[timeSlotCounter]))
                         ViewBag.TS1200 = Booking.FULLY_BOOKED;
+                    timeSlotCounter++;
+                    if (await booking.CheckBookingAvailability(TimeSlots.HILLCREST_SATURDAY_TIME_SLOTS[timeSlotCounter]))
+                        ViewBag.TS1215 = Booking.FULLY_BOOKED;
+                    timeSlotCounter++;
+                    if (await booking.CheckBookingAvailability(TimeSlots.HILLCREST_SATURDAY_TIME_SLOTS[timeSlotCounter]))
+                        ViewBag.TS1230 = Booking.FULLY_BOOKED;
                 }
 
                 else if (CovidTestDetails.TestLocation.Equals("Randburg, Gauteng"))
                 {
-                    ViewBag.TS0800 = Booking.AVAILABLE;
-                    ViewBag.TS0815 = Booking.AVAILABLE;
-                    ViewBag.TS0830 = Booking.AVAILABLE;
-                    ViewBag.TS0845 = Booking.AVAILABLE;
-
                     ViewBag.TS0900 = Booking.AVAILABLE;
                     ViewBag.TS0915 = Booking.AVAILABLE;
                     ViewBag.TS0930 = Booking.AVAILABLE;
@@ -378,19 +351,6 @@ namespace Epicentre.Controllers
                     ViewBag.TS1400 = Booking.AVAILABLE;
                     ViewBag.TS1415 = Booking.AVAILABLE;
                     ViewBag.TS1430 = Booking.AVAILABLE;
-
-                    if (await booking.CheckBookingAvailability(TimeSlots.RANDBURG_SATURDAY_TIME_SLOTS[timeSlotCounter]))
-                        ViewBag.TS0800 = Booking.FULLY_BOOKED;
-                    timeSlotCounter++;
-                    if (await booking.CheckBookingAvailability(TimeSlots.RANDBURG_SATURDAY_TIME_SLOTS[timeSlotCounter]))
-                        ViewBag.TS0815 = Booking.FULLY_BOOKED;
-                    timeSlotCounter++;
-                    if (await booking.CheckBookingAvailability(TimeSlots.RANDBURG_SATURDAY_TIME_SLOTS[timeSlotCounter]))
-                        ViewBag.TS0830 = Booking.FULLY_BOOKED;
-                    timeSlotCounter++;
-                    if (await booking.CheckBookingAvailability(TimeSlots.RANDBURG_SATURDAY_TIME_SLOTS[timeSlotCounter]))
-                        ViewBag.TS0845 = Booking.FULLY_BOOKED;
-                    timeSlotCounter++;
 
                     if (await booking.CheckBookingAvailability(TimeSlots.RANDBURG_SATURDAY_TIME_SLOTS[timeSlotCounter]))
                         ViewBag.TS0900 = Booking.FULLY_BOOKED;
@@ -469,8 +429,6 @@ namespace Epicentre.Controllers
 
                 else if (CovidTestDetails.TestLocation.Equals("Rondebosch, Western Cape"))
                 {
-                    ViewBag.TS0800 = Booking.AVAILABLE;
-                    ViewBag.TS0815 = Booking.AVAILABLE;
                     ViewBag.TS0830 = Booking.AVAILABLE;
                     ViewBag.TS0845 = Booking.AVAILABLE;
 
@@ -488,12 +446,6 @@ namespace Epicentre.Controllers
                     ViewBag.TS1115 = Booking.AVAILABLE;
                     ViewBag.TS1130 = Booking.AVAILABLE;
 
-                    if (await booking.CheckBookingAvailability(TimeSlots.RONDEBOSCH_SATURDAY_TIME_SLOTS[timeSlotCounter]))
-                        ViewBag.TS0800 = Booking.FULLY_BOOKED;
-                    timeSlotCounter++;
-                    if (await booking.CheckBookingAvailability(TimeSlots.RONDEBOSCH_SATURDAY_TIME_SLOTS[timeSlotCounter]))
-                        ViewBag.TS0815 = Booking.FULLY_BOOKED;
-                    timeSlotCounter++;
                     if (await booking.CheckBookingAvailability(TimeSlots.RONDEBOSCH_SATURDAY_TIME_SLOTS[timeSlotCounter]))
                         ViewBag.TS0830 = Booking.FULLY_BOOKED;
                     timeSlotCounter++;

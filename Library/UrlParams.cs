@@ -20,9 +20,6 @@ namespace Epicentre.Library
         private readonly static Dictionary<string, string> TEST_LOCATIONS = new Dictionary<string, string>()
         {
             {
-                "JZjKyupGXO", "Stellenbosch, Western Cape"
-            },
-            {
                 "eC4LdaFsWu", "Bellville, Western Cape"
             },
             {
@@ -33,35 +30,6 @@ namespace Epicentre.Library
             },
             {
                 "2464QfRQfc", "Randburg, Gauteng"
-            }
-        };
-
-
-        private readonly static Dictionary<string, string> VACCINATION_LOCATIONS = new Dictionary<string, string>()
-        {
-            {
-                "JZjKyupGXO", "Stellenbosch, Western Cape"
-            },
-            {
-                "eC4LdaFsWu", "Bellville, Western Cape"
-            },
-            {
-                "ABIf3LMQ4l", "Rondebosch, Western Cape"
-            },
-            {
-                "WH2fbXxIdU", "Hillcrest, KwaZulu-Natal"
-            },
-            {
-                "UQLsvizNLJ", "Pietermaritzburg, KwaZulu-Natal"
-            },
-            {
-                "NmCGgsAEnZ", "Durban Central, KwaZulu-Natal"
-            },
-            {
-                "2464QfRQfc", "Randburg, Gauteng"
-            },
-            {
-                "gqoz3cT0jA", "Midrand, Gauteng"
             }
         };
 
@@ -73,11 +41,6 @@ namespace Epicentre.Library
         public static string GetTestLocation(string testLocationKey)
         {
             return TEST_LOCATIONS.FirstOrDefault(t => t.Key == testLocationKey).Value;
-        }
-
-        public static string GetVaccinationLocation(string vaccinationLocationKey)
-        {
-            return VACCINATION_LOCATIONS.FirstOrDefault(v => v.Key == vaccinationLocationKey).Value;
         }
     }
 }

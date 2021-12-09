@@ -148,7 +148,6 @@
                                     Testing Site
                                 </button>
                                 <div class="dropdown-menu">
-                                    <a onclick="clickedLocation('Stellenbosch, Western Cape')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">Stellenbosch, Western Cape</a>
                                     <a onclick="clickedLocation('Bellville, Western Cape')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">Bellville, Western Cape</a>
                                     <a onclick="clickedLocation('Rondebosch, Western Cape')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">Rondebosch, Western Cape</a>
                                     <a onclick="clickedLocation('Hillcrest, KwaZulu-Natal')" style="cursor: pointer;" href="javascript:void(0)" class="dropdown-item">Hillcrest, KwaZulu-Natal</a>
@@ -231,11 +230,12 @@
         } if (bookingDate < currentDate) {
             document.getElementById('test-date-validation').style.visibility = "visible";
             document.getElementById('booking-date').style.marginTop = "-1%";
+            document.getElementById('test-date-validation').textContent = "Please select a valid testing date";
             testDateFlag = false;
         } if (testTypeFlag && testSiteFlag && testDateFlag) {
             var testTypeUrl = null;
             var testLocationUrl = null;
-            var testDate = null;
+            var testDate = selectedDate;
 
             if (document.getElementById('pcr-swab-test').checked) {
                 testTypeUrl = 'dZr9RcABjq';
@@ -243,8 +243,6 @@
                 testTypeUrl = 'SkwFaATkYv';
             } if (document.getElementById('antibody-test').checked) {
                 testTypeUrl = 'hcYPmydyWZ';
-            } if (testingLocation == 'Stellenbosch, Western Cape') {
-                testLocationUrl = 'JZjKyupGXO';
             } if (testingLocation == 'Bellville, Western Cape') {
                 testLocationUrl = 'eC4LdaFsWu';
             } if (testingLocation == 'Rondebosch, Western Cape') {
@@ -254,8 +252,21 @@
             } if (testingLocation == 'Randburg, Gauteng') {
                 testLocationUrl = '2464QfRQfc';
             }
-            testDate = document.getElementById('booking-date').value;
-            window.location.href = '@Url.Action("TimeBooking", "CovidTests")' + '?testType=' + testTypeUrl + '&testLocation=' + testLocationUrl + '&testDate=' + testDate;
+            if (selectedDate == "2021-12-16" || selectedDate == "2021-12-24" || selectedDate == "2021-12-25" || selectedDate == "2021-12-26" || selectedDate == "2021-12-27" || selectedDate == "2021-12-31" || selectedDate == "2022-01-01") {
+                document.getElementById('test-date-validation').style.visibility = "visible";
+                document.getElementById('booking-date').style.marginTop = "-1%";
+                document.getElementById('test-date-validation').textContent = "We are closed during this date";
+            } else if (bookingDate.getDay() == 0) {
+                document.getElementById('test-date-validation').style.visibility = "visible";
+                document.getElementById('booking-date').style.marginTop = "-1%";
+                document.getElementById('test-date-validation').textContent = "We are closed on Sunday";
+            } else if (testingLocation == "Bellville, Western Cape" && bookingDate.getDay() == 6) {
+                document.getElementById('test-date-validation').style.visibility = "visible";
+                document.getElementById('booking-date').style.marginTop = "-1%";
+                document.getElementById('test-date-validation').textContent = "Bellville is closed on Saturday";
+            } else {
+                window.location.href = '@Url.Action("TimeBooking", "CovidTests")' + '?testType=' + testTypeUrl + '&testLocation=' + testLocationUrl + '&testDate=' + testDate;
+            }
         }
     }
 </script>
