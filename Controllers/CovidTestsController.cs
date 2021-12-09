@@ -620,8 +620,34 @@ namespace Epicentre.Controllers
                         Data = Data + "Location : " + covidTest.TEST_LOCATION + "(67 Dundalk Avenue, Parkview, Randburg, Gauteng)";
                         break;
                 }
+
                 Data = Data + "\n" + "Type: " + covidTest.TEST_TYPE + "\n" + "Date: " + covidTest.TEST_DATE + "\n"
                     + "Time: " + covidTest.TEST_TIME;
+
+                if (Data.Contains("Cape Town"))
+                {
+                //    mail.CC.Add(new MailAddress("aleciaa@epicentre.org.za"));
+                //    mail.CC.Add(new MailAddress("kmostert@epicentre.org.za"));
+                //    mail.CC.Add(new MailAddress("Ihanekom@epicentre.org.za"));
+                }
+                else
+                {
+                    if (Data.Contains("KwaZulu-Natal"))
+                    {
+                        //mail.CC.Add(new MailAddress("thobileb@epicentre.org.za"));
+                        //mail.CC.Add(new MailAddress("robyna@epicentre.org.za"));
+                        //mail.CC.Add(new MailAddress("zozukom@epicentre.org.za"));
+                    }
+                    else
+                    {
+                        if (Data.Contains("Gauteng"))
+                        {
+                            //mail.CC.Add(new MailAddress("emmanuelm@epicentre.org.za"));
+                            //mail.CC.Add(new MailAddress("salesjhb@epicentre.org.za"));
+                        }
+                    }
+                }
+
                 mail.Body = Data;
                 smtpClient.Send(mail);
                 return RedirectToAction(nameof(SuccessfulBooking));
