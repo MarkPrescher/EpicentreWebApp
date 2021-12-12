@@ -542,6 +542,7 @@ namespace Epicentre.Controllers
 
                 string Data;
                 SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
+                smtpClient.UseDefaultCredentials = false;
                 smtpClient.Credentials = new System.Net.NetworkCredential("noreplyepicentertest@gmail.com", "TestingPassword1");
                 smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
                 smtpClient.EnableSsl = true;
@@ -601,7 +602,7 @@ namespace Epicentre.Controllers
                 }
 
                 mail.Body = Data;
-                smtpClient.Send(mail);
+                await smtpClient.SendMailAsync(mail);
                 return RedirectToAction(nameof(SuccessfulBooking));
             }
             catch (Exception exception)
